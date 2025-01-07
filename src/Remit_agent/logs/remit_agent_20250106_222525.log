@@ -1,0 +1,2 @@
+[2025-01-06 22:25:25,627] INFO [Remit_agent.database.get_logger:77] Logger initialized: Remit_agent.database
+[2025-01-06 22:25:25,627] ERROR [Remit_agent.database.create_db_engine:42] Failed to create database engine: Unsupported database type: mssql# or postgresql

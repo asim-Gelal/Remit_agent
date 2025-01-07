@@ -1,0 +1,15 @@
+[2025-01-07 09:14:28,976] INFO [Remit_agent.database.get_logger:77] Logger initialized: Remit_agent.database
+[2025-01-07 09:14:29,073] INFO [Remit_agent.tools.tool_monitoring.get_logger:77] Logger initialized: Remit_agent.tools.tool_monitoring
+[2025-01-07 09:14:29,852] INFO [Remit_agent.tools.tools.get_logger:77] Logger initialized: Remit_agent.tools.tools
+[2025-01-07 09:14:30,444] INFO [Remit_agent.core.sql_agent.get_logger:77] Logger initialized: Remit_agent.core.sql_agent
+[2025-01-07 09:14:30,445] INFO [__main__.get_logger:77] Logger initialized: __main__
+[2025-01-07 09:14:31,099] INFO [Remit_agent.core.sql_agent.__init__:35] Initializing SQL Agent...
+[2025-01-07 09:14:32,873] INFO [Remit_agent.database.receive_connect:37] New database connection established
+[2025-01-07 09:14:32,976] INFO [Remit_agent.core.sql_agent.__init__:42] Database connection successful
+[2025-01-07 09:14:33,076] INFO [Remit_agent.core.sql_agent.__init__:47] SQL Agent initialized successfully
+[2025-01-07 09:14:55,478] INFO [__main__.main:239] Processing question: List me the details of 20 customers
+[2025-01-07 09:14:55,480] INFO [Remit_agent.core.sql_agent.run:165] Starting workflow with question: List me the details of 20 customers
+[2025-01-07 09:14:55,594] INFO [Remit_agent.tools.tools.check_relevance:30] Checking relevance for question: List me the details of 20 customers
+[2025-01-07 09:14:57,496] INFO [Remit_agent.tools.tools.check_relevance:59] Relevance check completed: {'relevant': True, 'tables': ['dbo.customers'], 'breakdown': {'intent': 'retrieve', 'entities': [], 'conditions': [], 'timeframe': 'all'}, 'explanation': 'Query is requesting to retrieve details of 20 customers from the customers table'}
+[2025-01-07 09:14:57,499] ERROR [Remit_agent.core.sql_agent._convert_to_sql:77] Error in SQL conversion: 'dict' object has no attribute 'parent_run_id'
+[2025-01-07 09:14:57,502] ERROR [Remit_agent.core.sql_agent._generate_human_readable:129] Error generating readable response: 'dict' object has no attribute 'parent_run_id'

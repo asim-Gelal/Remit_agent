@@ -1,0 +1,73 @@
+[2025-01-05 22:34:54,152] INFO [Remit_agent.database.get_logger:77] Logger initialized: Remit_agent.database
+[2025-01-05 22:34:54,200] INFO [Remit_agent.tools.tool_monitoring.get_logger:77] Logger initialized: Remit_agent.tools.tool_monitoring
+[2025-01-05 22:34:54,201] INFO [Remit_agent.tools.tools.get_logger:77] Logger initialized: Remit_agent.tools.tools
+[2025-01-05 22:34:54,829] INFO [Remit_agent.core.sql_agent.get_logger:77] Logger initialized: Remit_agent.core.sql_agent
+[2025-01-05 22:34:54,831] INFO [__main__.get_logger:77] Logger initialized: __main__
+[2025-01-05 22:35:05,353] INFO [__main__.main:249] Processing question: What is the current exchange rate between nepal and UAE
+[2025-01-05 22:35:05,365] INFO [Remit_agent.core.sql_agent.run:220] Starting workflow with question: What is the current exchange rate between nepal and UAE
+[2025-01-05 22:35:05,532] INFO [Remit_agent.database.get_database_schema:53] Retrieved database schema
+[2025-01-05 22:35:05,532] INFO [Remit_agent.database.get_database_schema:54] Schema:
+Table: currency
+- currency_code: VARCHAR(3)
+- currency_name: VARCHAR(50)
+
+Table: exchange_rates
+- exchange_rate_id: INTEGER
+- rate_date: DATE
+- base_currency_code: VARCHAR(3)
+- target_currency_code: VARCHAR(3)
+- exchange_rate: NUMERIC(20, 10)
+- unit: INTEGER
+
+[2025-01-05 22:35:06,633] INFO [Remit_agent.tools.tools.check_relevance:73] Relevance check completed with result: relevant
+[2025-01-05 22:35:06,634] INFO [Remit_agent.core.sql_agent._check_relevance:43] Relevance check result: relevant
+[2025-01-05 22:35:06,646] INFO [Remit_agent.database.get_database_schema:53] Retrieved database schema
+[2025-01-05 22:35:06,646] INFO [Remit_agent.database.get_database_schema:54] Schema:
+Table: currency
+- currency_code: VARCHAR(3)
+- currency_name: VARCHAR(50)
+
+Table: exchange_rates
+- exchange_rate_id: INTEGER
+- rate_date: DATE
+- base_currency_code: VARCHAR(3)
+- target_currency_code: VARCHAR(3)
+- exchange_rate: NUMERIC(20, 10)
+- unit: INTEGER
+
+[2025-01-05 22:35:07,658] INFO [Remit_agent.tools.tools.convert_to_sql:88] Generated SQL query: SELECT er.*
+FROM exchange_rates er
+WHERE er.base_currency_code = 'NPR'
+AND er.target_currency_code = 'AED'
+AND er.rate_date = (
+    SELECT MAX(rate_date)
+    FROM exchange_rates
+    WHERE base_currency_code = 'NPR'
+    AND target_currency_code = 'AED'
+);
+[2025-01-05 22:35:07,659] INFO [Remit_agent.core.sql_agent._convert_to_sql:54] Generated SQL query: SELECT er.*
+FROM exchange_rates er
+WHERE er.base_currency_code = 'NPR'
+AND er.target_currency_code = 'AED'
+AND er.rate_date = (
+    SELECT MAX(rate_date)
+    FROM exchange_rates
+    WHERE base_currency_code = 'NPR'
+    AND target_currency_code = 'AED'
+);
+[2025-01-05 22:35:07,663] INFO [Remit_agent.tools.tools.execute_sql_query:102] Executing query: SELECT er.*
+FROM exchange_rates er
+WHERE er.base_currency_code = 'NPR'
+AND er.target_currency_code = 'AED'
+AND er.rate_date = (
+    SELECT MAX(rate_date)
+    FROM exchange_rates
+    WHERE base_currency_code = 'NPR'
+    AND target_currency_code = 'AED'
+);
+[2025-01-05 22:35:07,666] INFO [Remit_agent.tools.tools.execute_sql_query:108] Query executed successfully. Fetched 1 rows.
+[2025-01-05 22:35:07,667] INFO [Remit_agent.core.sql_agent._execute_sql:76] Result from execute_sql_query: {'success': True, 'error': None, 'rows': [{'exchange_rate_id': 18591, 'rate_date': '2024-12-23', 'base_currency_code': 'NPR', 'target_currency_code': 'AED', 'exchange_rate': 0.0269396552, 'unit': 1}], 'columns': ['exchange_rate_id', 'rate_date', 'base_currency_code', 'target_currency_code', 'exchange_rate', 'unit']}
+[2025-01-05 22:35:07,667] INFO [Remit_agent.core.sql_agent._execute_sql:88] Query executed successfully. Processed 1 rows.
+[2025-01-05 22:35:07,669] ERROR [Remit_agent.core.sql_agent._generate_human_readable:109] Error generating readable response: BaseTool.invoke() missing 1 required positional argument: 'input'
+[2025-01-05 22:35:07,671] INFO [Remit_agent.core.sql_agent.run:222] Workflow completed successfully
+[2025-01-05 22:35:07,671] ERROR [__main__.main:270] Error processing question: `st.session_state.user_input` cannot be modified after the widget with key `user_input` is instantiated.

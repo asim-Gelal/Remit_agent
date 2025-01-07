@@ -1,0 +1,15 @@
+[2025-01-06 23:57:47,876] INFO [Remit_agent.database.get_logger:77] Logger initialized: Remit_agent.database
+[2025-01-06 23:57:47,900] INFO [Remit_agent.tools.tool_monitoring.get_logger:77] Logger initialized: Remit_agent.tools.tool_monitoring
+[2025-01-06 23:57:47,901] INFO [Remit_agent.tools.tools.get_logger:77] Logger initialized: Remit_agent.tools.tools
+[2025-01-06 23:57:48,452] INFO [Remit_agent.core.sql_agent.get_logger:77] Logger initialized: Remit_agent.core.sql_agent
+[2025-01-06 23:57:48,454] INFO [__main__.get_logger:77] Logger initialized: __main__
+[2025-01-06 23:57:49,116] INFO [Remit_agent.core.sql_agent.__init__:41] SQL Agent initialized successfully
+[2025-01-06 23:58:43,571] INFO [__main__.main:249] Processing question: give me the customer with highest transaction amount
+[2025-01-06 23:58:43,580] INFO [Remit_agent.core.sql_agent.run:239] Starting workflow with question: give me the customer with highest transaction amount
+[2025-01-06 23:58:43,721] ERROR [Remit_agent.core.sql_agent.run:264] Error running workflow: 2 validation errors for AgentState
+query_rows
+  Input should be a valid list [type=list_type, input_value=<class 'list'>, input_type=type]
+    For further information visit https://errors.pydantic.dev/2.10/v/list_type
+columns
+  Input should be a valid list [type=list_type, input_value=<class 'list'>, input_type=type]
+    For further information visit https://errors.pydantic.dev/2.10/v/list_type

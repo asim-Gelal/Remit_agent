@@ -1,0 +1,34 @@
+[2025-01-06 22:31:17,137] INFO [Remit_agent.database.get_logger:77] Logger initialized: Remit_agent.database
+[2025-01-06 22:31:17,158] INFO [Remit_agent.tools.tool_monitoring.get_logger:77] Logger initialized: Remit_agent.tools.tool_monitoring
+[2025-01-06 22:31:17,159] INFO [Remit_agent.tools.tools.get_logger:77] Logger initialized: Remit_agent.tools.tools
+[2025-01-06 22:31:17,739] INFO [Remit_agent.core.sql_agent.get_logger:77] Logger initialized: Remit_agent.core.sql_agent
+[2025-01-06 22:31:17,742] INFO [__main__.get_logger:77] Logger initialized: __main__
+[2025-01-06 22:31:17,743] INFO [__main__.main:103] === Starting Database Connection Tests ===
+[2025-01-06 22:31:17,743] INFO [__main__.main:104] Database Server: 103.9.51.160
+[2025-01-06 22:31:17,752] INFO [__main__.main:105] Database Name: CityRemitSystem
+[2025-01-06 22:31:17,752] INFO [__main__.main:106] Whitelisted Tables: dbo.remitTransaction, dbo.customer
+[2025-01-06 22:31:17,752] INFO [__main__.main:118] 
+=== Running Test: Basic Connection ===
+[2025-01-06 22:31:17,752] INFO [__main__.test_basic_connection:20] Testing basic database connection...
+[2025-01-06 22:31:19,188] INFO [Remit_agent.database.receive_connect:37] New database connection established
+[2025-01-06 22:31:19,274] INFO [__main__.test_basic_connection:29] SQL Server Version: Microsoft SQL Server 2016 (SP2) (KB4052908) - 13.0.5026.0 (X64) 
+	Mar 18 2018 09:11:49 
+	Copyright (...
+[2025-01-06 22:31:19,359] INFO [__main__.main:118] 
+=== Running Test: Session Management ===
+[2025-01-06 22:31:19,360] INFO [__main__.test_session_management:37] Testing database session management...
+[2025-01-06 22:31:19,611] INFO [__main__.main:118] 
+=== Running Test: Table Access ===
+[2025-01-06 22:31:19,612] INFO [__main__.test_table_access:52] Testing access to whitelisted tables...
+[2025-01-06 22:31:19,866] ERROR [Remit_agent.database.get_db:58] Database session error: (pyodbc.ProgrammingError) ('42S02', "[42S02] [Microsoft][ODBC SQL Server Driver][SQL Server]Invalid object name 'dbo.remitTransaction'. (208) (SQLExecDirectW)")
+[SQL: SELECT COUNT(*) FROM dbo.remitTransaction]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+[2025-01-06 22:31:19,880] INFO [__main__.main:118] 
+=== Running Test: Table Schema ===
+[2025-01-06 22:31:19,880] INFO [__main__.test_table_schema:69] Testing direct table schema retrieval...
+[2025-01-06 22:31:20,149] INFO [__main__.test_table_schema:91] 
+Table: dbo.remitTransaction
+[2025-01-06 22:31:20,335] INFO [__main__.test_table_schema:91] 
+Table: dbo.customer
+[2025-01-06 22:31:20,418] ERROR [__main__.main:129] 
+=== Some tests failed! Please check the logs for details ===

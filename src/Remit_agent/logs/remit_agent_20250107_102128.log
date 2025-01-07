@@ -1,0 +1,15 @@
+[2025-01-07 10:21:28,064] INFO [Remit_agent.database.get_logger:77] Logger initialized: Remit_agent.database
+[2025-01-07 10:21:28,176] INFO [Remit_agent.tools.tool_monitoring.get_logger:77] Logger initialized: Remit_agent.tools.tool_monitoring
+[2025-01-07 10:21:28,971] INFO [Remit_agent.tools.tools.get_logger:77] Logger initialized: Remit_agent.tools.tools
+[2025-01-07 10:21:29,598] INFO [Remit_agent.core.sql_agent.get_logger:77] Logger initialized: Remit_agent.core.sql_agent
+[2025-01-07 10:21:29,600] INFO [__main__.get_logger:77] Logger initialized: __main__
+[2025-01-07 10:21:30,285] INFO [Remit_agent.core.sql_agent.__init__:36] Initializing SQL Agent...
+[2025-01-07 10:21:31,709] INFO [Remit_agent.database.receive_connect:37] New database connection established
+[2025-01-07 10:21:31,796] INFO [Remit_agent.core.sql_agent.__init__:45] Database connection successful
+[2025-01-07 10:21:31,875] INFO [Remit_agent.core.sql_agent.__init__:50] SQL Agent initialized successfully
+[2025-01-07 10:21:35,235] INFO [__main__.main:239] Processing question: give me the customer with highest transaction amount
+[2025-01-07 10:21:35,235] INFO [Remit_agent.core.sql_agent.run:221] Starting workflow with question: give me the customer with highest transaction amount
+[2025-01-07 10:21:35,341] ERROR [Remit_agent.core.sql_agent._check_relevance:67] Error in relevance check: 1 validation error for check_relevance
+input_dict
+  Field required [type=missing, input_value={'question': 'give me the...est transaction amount'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.10/v/missing

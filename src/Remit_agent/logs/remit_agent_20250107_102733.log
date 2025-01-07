@@ -1,0 +1,19 @@
+[2025-01-07 10:27:33,191] INFO [Remit_agent.database.get_logger:77] Logger initialized: Remit_agent.database
+[2025-01-07 10:27:33,292] INFO [Remit_agent.tools.tool_monitoring.get_logger:77] Logger initialized: Remit_agent.tools.tool_monitoring
+[2025-01-07 10:27:34,225] INFO [Remit_agent.tools.tools.get_logger:77] Logger initialized: Remit_agent.tools.tools
+[2025-01-07 10:27:34,833] INFO [Remit_agent.core.sql_agent.get_logger:77] Logger initialized: Remit_agent.core.sql_agent
+[2025-01-07 10:27:34,834] INFO [__main__.get_logger:77] Logger initialized: __main__
+[2025-01-07 10:27:35,556] INFO [Remit_agent.core.sql_agent.__init__:36] Initializing SQL Agent...
+[2025-01-07 10:27:36,873] INFO [Remit_agent.database.receive_connect:37] New database connection established
+[2025-01-07 10:27:36,958] INFO [Remit_agent.core.sql_agent.__init__:45] Database connection successful
+[2025-01-07 10:27:37,032] INFO [Remit_agent.core.sql_agent.__init__:50] SQL Agent initialized successfully
+[2025-01-07 10:27:39,779] INFO [__main__.main:239] Processing question: give me the customer with highest transaction amount
+[2025-01-07 10:27:39,779] INFO [Remit_agent.core.sql_agent.run:231] Starting workflow with question: give me the customer with highest transaction amount
+[2025-01-07 10:27:39,882] INFO [Remit_agent.core.sql_agent._check_relevance:54] === SQL Agent _check_relevance ===
+[2025-01-07 10:27:39,882] INFO [Remit_agent.core.sql_agent._check_relevance:55] Processing question: give me the customer with highest transaction amount
+[2025-01-07 10:27:39,882] INFO [Remit_agent.core.sql_agent._check_relevance:65] Calling check_relevance with input: {'input_data': {'question': 'give me the customer with highest transaction amount'}}
+[2025-01-07 10:27:39,884] INFO [Remit_agent.tools.tools.check_relevance:31] === Tools check_relevance ===
+[2025-01-07 10:27:39,884] INFO [Remit_agent.tools.tools.check_relevance:32] Raw input data: {'question': 'give me the customer with highest transaction amount'}
+[2025-01-07 10:27:39,885] INFO [Remit_agent.tools.tools.check_relevance:39] Processing question: 
+[2025-01-07 10:27:41,949] INFO [Remit_agent.tools.tools.check_relevance:63] Relevance check completed: {'relevant': False, 'tables': [], 'breakdown': {'intent': 'unknown', 'entities': [], 'conditions': [], 'timeframe': 'none'}, 'explanation': 'No question was provided to analyze.'}
+[2025-01-07 10:27:41,950] INFO [Remit_agent.core.sql_agent._check_relevance:67] Relevance check result: {'relevant': False, 'tables': [], 'breakdown': {'intent': 'unknown', 'entities': [], 'conditions': [], 'timeframe': 'none'}, 'explanation': 'No question was provided to analyze.'}

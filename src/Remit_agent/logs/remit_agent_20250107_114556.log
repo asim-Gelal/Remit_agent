@@ -1,0 +1,6 @@
+[2025-01-07 11:45:56,705] INFO [Remit_agent.database.get_logger:77] Logger initialized: Remit_agent.database
+[2025-01-07 11:45:56,817] INFO [Remit_agent.tools.tool_monitoring.get_logger:77] Logger initialized: Remit_agent.tools.tool_monitoring
+[2025-01-07 11:45:58,138] INFO [Remit_agent.tools.tools.get_logger:77] Logger initialized: Remit_agent.tools.tools
+[2025-01-07 11:45:58,815] INFO [Remit_agent.core.sql_agent.get_logger:77] Logger initialized: Remit_agent.core.sql_agent
+[2025-01-07 11:45:58,819] INFO [__main__.get_logger:77] Logger initialized: __main__
+[2025-01-07 11:45:59,560] INFO [Remit_agent.core.sql_agent.__init__:24] Initializing SQL Agent...

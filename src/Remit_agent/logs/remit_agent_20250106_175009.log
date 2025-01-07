@@ -1,0 +1,207 @@
+[2025-01-06 17:50:09,286] INFO [Remit_agent.database.get_logger:77] Logger initialized: Remit_agent.database
+[2025-01-06 17:50:09,398] INFO [Remit_agent.tools.tool_monitoring.get_logger:77] Logger initialized: Remit_agent.tools.tool_monitoring
+[2025-01-06 17:50:09,400] INFO [Remit_agent.tools.tools.get_logger:77] Logger initialized: Remit_agent.tools.tools
+[2025-01-06 17:50:10,614] INFO [Remit_agent.core.sql_agent.get_logger:77] Logger initialized: Remit_agent.core.sql_agent
+[2025-01-06 17:50:10,622] INFO [__main__.get_logger:77] Logger initialized: __main__
+[2025-01-06 17:50:11,933] INFO [Remit_agent.core.sql_agent.__init__:56] SQL Agent initialized successfully
+[2025-01-06 17:50:20,324] INFO [__main__.main:249] Processing question: I want to send npr 1 lakh  to nepal from japan . How much shall i send from japan 
+[2025-01-06 17:50:20,335] INFO [Remit_agent.core.sql_agent.run:273] Starting workflow with question: I want to send npr 1 lakh  to nepal from japan . How much shall i send from japan 
+[2025-01-06 17:50:20,669] INFO [Remit_agent.database.get_database_schema:53] Retrieved database schema
+[2025-01-06 17:50:20,669] INFO [Remit_agent.database.get_database_schema:54] Schema:
+Table: currency
+- currency_code: VARCHAR(3)
+- currency_name: VARCHAR(50)
+
+Table: exchange_rates
+- exchange_rate_id: INTEGER
+- rate_date: DATE
+- base_currency_code: VARCHAR(3)
+- target_currency_code: VARCHAR(3)
+- exchange_rate: NUMERIC(20, 10)
+- unit: INTEGER
+
+[2025-01-06 17:50:21,822] INFO [Remit_agent.tools.tools.check_relevance:74] Relevance check completed with result: relevant
+[2025-01-06 17:50:21,822] INFO [Remit_agent.core.sql_agent._check_relevance:64] Relevance check result: relevant
+[2025-01-06 17:50:21,847] INFO [Remit_agent.database.get_database_schema:53] Retrieved database schema
+[2025-01-06 17:50:21,847] INFO [Remit_agent.database.get_database_schema:54] Schema:
+Table: currency
+- currency_code: VARCHAR(3)
+- currency_name: VARCHAR(50)
+
+Table: exchange_rates
+- exchange_rate_id: INTEGER
+- rate_date: DATE
+- base_currency_code: VARCHAR(3)
+- target_currency_code: VARCHAR(3)
+- exchange_rate: NUMERIC(20, 10)
+- unit: INTEGER
+
+[2025-01-06 17:50:23,278] INFO [Remit_agent.tools.tools.convert_to_sql:88] Generated SQL query: SELECT 
+    er.rate_date,
+    er.exchange_rate,
+    er.unit,
+    (100000 * er.unit / er.exchange_rate) as converted_amount
+FROM exchange_rates er
+WHERE er.base_currency_code = 'JPY'
+AND er.target_currency_code = 'NPR'
+AND er.rate_date = (
+    SELECT MAX(rate_date)
+    FROM exchange_rates
+    WHERE base_currency_code = 'JPY'
+    AND target_currency_code = 'NPR'
+);
+[2025-01-06 17:50:23,282] INFO [Remit_agent.core.sql_agent._convert_to_sql:77] Generated SQL query: SELECT 
+    er.rate_date,
+    er.exchange_rate,
+    er.unit,
+    (100000 * er.unit / er.exchange_rate) as converted_amount
+FROM exchange_rates er
+WHERE er.base_currency_code = 'JPY'
+AND er.target_currency_code = 'NPR'
+AND er.rate_date = (
+    SELECT MAX(rate_date)
+    FROM exchange_rates
+    WHERE base_currency_code = 'JPY'
+    AND target_currency_code = 'NPR'
+);
+[2025-01-06 17:50:23,286] INFO [Remit_agent.core.sql_agent._execute_sql:93] === SQL Agent _execute_sql ===
+[2025-01-06 17:50:23,288] INFO [Remit_agent.core.sql_agent._execute_sql:94] Input state: {
+  "question": "I want to send npr 1 lakh  to nepal from japan . How much shall i send from japan ",
+  "sql_query": "SELECT \n    er.rate_date,\n    er.exchange_rate,\n    er.unit,\n    (100000 * er.unit / er.exchange_rate) as converted_amount\nFROM exchange_rates er\nWHERE er.base_currency_code = 'JPY'\nAND er.target_currency_code = 'NPR'\nAND er.rate_date = (\n    SELECT MAX(rate_date)\n    FROM exchange_rates\n    WHERE base_currency_code = 'JPY'\n    AND target_currency_code = 'NPR'\n);",
+  "query_result": "",
+  "query_rows": [],
+  "columns": [],
+  "attempts": 0,
+  "relevance": "relevant",
+  "sql_error": false
+}
+[2025-01-06 17:50:23,288] INFO [Remit_agent.core.sql_agent._execute_sql:104] Calling execute_sql_query with query: SELECT 
+    er.rate_date,
+    er.exchange_rate,
+    er.unit,
+    (100000 * er.unit / er.exchange_rate) as converted_amount
+FROM exchange_rates er
+WHERE er.base_currency_code = 'JPY'
+AND er.target_currency_code = 'NPR'
+AND er.rate_date = (
+    SELECT MAX(rate_date)
+    FROM exchange_rates
+    WHERE base_currency_code = 'JPY'
+    AND target_currency_code = 'NPR'
+);
+[2025-01-06 17:50:23,293] INFO [Remit_agent.tools.tools.execute_sql_query:99] === Tools execute_sql_query ===
+[2025-01-06 17:50:23,293] INFO [Remit_agent.tools.tools.execute_sql_query:100] Input query: SELECT 
+    er.rate_date,
+    er.exchange_rate,
+    er.unit,
+    (100000 * er.unit / er.exchange_rate) as converted_amount
+FROM exchange_rates er
+WHERE er.base_currency_code = 'JPY'
+AND er.target_currency_code = 'NPR'
+AND er.rate_date = (
+    SELECT MAX(rate_date)
+    FROM exchange_rates
+    WHERE base_currency_code = 'JPY'
+    AND target_currency_code = 'NPR'
+);
+[2025-01-06 17:50:23,301] INFO [Remit_agent.tools.tools.execute_sql_query:110] Raw query result - Rows: 1, Columns: ['rate_date', 'exchange_rate', 'unit', 'converted_amount']
+[2025-01-06 17:50:23,301] INFO [Remit_agent.tools.tools.execute_sql_query:135] Number of rows in result: 1
+[2025-01-06 17:50:23,301] INFO [Remit_agent.tools.tools.execute_sql_query:136] Sample of first row: {'rate_date': '2024-12-23', 'exchange_rate': 8.68, 'unit': 1, 'converted_amount': 11520.73732718894}
+[2025-01-06 17:50:23,304] INFO [Remit_agent.core.sql_agent._execute_sql:106] Result from execute_sql_query: {'success': True, 'error': None, 'rows': [{'rate_date': '2024-12-23', 'exchange_rate': 8.68, 'unit': 1, 'converted_amount': 11520.73732718894}], 'columns': ['rate_date', 'exchange_rate', 'unit', 'converted_amount']}
+[2025-01-06 17:50:23,304] INFO [Remit_agent.core.sql_agent._execute_sql:120] Query executed successfully. Processed 1 rows.
+[2025-01-06 17:50:23,306] INFO [Remit_agent.core.sql_agent._execute_sql:129] Output state: {
+  "question": "I want to send npr 1 lakh  to nepal from japan . How much shall i send from japan ",
+  "sql_query": "SELECT \n    er.rate_date,\n    er.exchange_rate,\n    er.unit,\n    (100000 * er.unit / er.exchange_rate) as converted_amount\nFROM exchange_rates er\nWHERE er.base_currency_code = 'JPY'\nAND er.target_currency_code = 'NPR'\nAND er.rate_date = (\n    SELECT MAX(rate_date)\n    FROM exchange_rates\n    WHERE base_currency_code = 'JPY'\n    AND target_currency_code = 'NPR'\n);",
+  "query_result": "Query executed successfully",
+  "query_rows": [
+    {
+      "rate_date": "2024-12-23",
+      "exchange_rate": 8.68,
+      "unit": 1,
+      "converted_amount": 11520.73732718894
+    }
+  ],
+  "columns": [
+    "rate_date",
+    "exchange_rate",
+    "unit",
+    "converted_amount"
+  ],
+  "attempts": 0,
+  "relevance": "relevant",
+  "sql_error": false
+}
+[2025-01-06 17:50:23,306] INFO [Remit_agent.core.sql_agent._execute_sql:130] === End SQL Agent _execute_sql ===
+[2025-01-06 17:50:23,308] INFO [Remit_agent.core.sql_agent._generate_human_readable:135] === SQL Agent _generate_human_readable ===
+[2025-01-06 17:50:23,308] INFO [Remit_agent.core.sql_agent._generate_human_readable:136] Input state: {
+  "question": "I want to send npr 1 lakh  to nepal from japan . How much shall i send from japan ",
+  "sql_query": "SELECT \n    er.rate_date,\n    er.exchange_rate,\n    er.unit,\n    (100000 * er.unit / er.exchange_rate) as converted_amount\nFROM exchange_rates er\nWHERE er.base_currency_code = 'JPY'\nAND er.target_currency_code = 'NPR'\nAND er.rate_date = (\n    SELECT MAX(rate_date)\n    FROM exchange_rates\n    WHERE base_currency_code = 'JPY'\n    AND target_currency_code = 'NPR'\n);",
+  "query_result": "Query executed successfully",
+  "query_rows": [
+    {
+      "rate_date": "2024-12-23",
+      "exchange_rate": 8.68,
+      "unit": 1,
+      "converted_amount": 11520.73732718894
+    }
+  ],
+  "columns": [
+    "rate_date",
+    "exchange_rate",
+    "unit",
+    "converted_amount"
+  ],
+  "attempts": 0,
+  "relevance": "relevant",
+  "sql_error": false
+}
+[2025-01-06 17:50:23,313] INFO [Remit_agent.core.sql_agent._generate_human_readable:153] Calling generate_human_readable with input: {'input_data': {'sql': "SELECT \n    er.rate_date,\n    er.exchange_rate,\n    er.unit,\n    (100000 * er.unit / er.exchange_rate) as converted_amount\nFROM exchange_rates er\nWHERE er.base_currency_code = 'JPY'\nAND er.target_currency_code = 'NPR'\nAND er.rate_date = (\n    SELECT MAX(rate_date)\n    FROM exchange_rates\n    WHERE base_currency_code = 'JPY'\n    AND target_currency_code = 'NPR'\n);", 'result': {'rows': [{'rate_date': '2024-12-23', 'exchange_rate': 8.68, 'unit': 1, 'converted_amount': 11520.73732718894}], 'columns': ['rate_date', 'exchange_rate', 'unit', 'converted_amount'], 'success': True, 'error': None}}}
+[2025-01-06 17:50:23,313] INFO [Remit_agent.tools.tools.generate_human_readable:162] === Tools generate_human_readable ===
+[2025-01-06 17:50:23,313] INFO [Remit_agent.tools.tools.generate_human_readable:163] Raw input data: {'sql': "SELECT \n    er.rate_date,\n    er.exchange_rate,\n    er.unit,\n    (100000 * er.unit / er.exchange_rate) as converted_amount\nFROM exchange_rates er\nWHERE er.base_currency_code = 'JPY'\nAND er.target_currency_code = 'NPR'\nAND er.rate_date = (\n    SELECT MAX(rate_date)\n    FROM exchange_rates\n    WHERE base_currency_code = 'JPY'\n    AND target_currency_code = 'NPR'\n);", 'result': {'rows': [{'rate_date': '2024-12-23', 'exchange_rate': 8.68, 'unit': 1, 'converted_amount': 11520.73732718894}], 'columns': ['rate_date', 'exchange_rate', 'unit', 'converted_amount'], 'success': True, 'error': None}}
+[2025-01-06 17:50:23,313] INFO [Remit_agent.tools.tools.generate_human_readable:172] Processing query results: 1 rows, 4 columns
+[2025-01-06 17:50:23,319] INFO [Remit_agent.tools.tools.generate_human_readable:190] Chain input - SQL: SELECT 
+    er.rate_date,
+    er.exchange_rate,
+    er.unit,
+    (100000 * er.unit / er.exchange_rate) as converted_amount
+FROM exchange_rates er
+WHERE er.base_currency_code = 'JPY'
+AND er.target_currency_code = 'NPR'
+AND er.rate_date = (
+    SELECT MAX(rate_date)
+    FROM exchange_rates
+    WHERE base_currency_code = 'JPY'
+    AND target_currency_code = 'NPR'
+);
+[2025-01-06 17:50:23,319] INFO [Remit_agent.tools.tools.generate_human_readable:191] Chain input - First row sample: {'rate_date': '2024-12-23', 'exchange_rate': 8.68, 'unit': 1, 'converted_amount': 11520.73732718894}
+[2025-01-06 17:50:24,565] INFO [Remit_agent.tools.tools.generate_human_readable:194] Generated response: The exchange rate as of December 23, 2024, is 1 JPY = 8.68 NPR.
+
+Therefore, with the current exchange rate of 8.68, 100,000 JPY will be equal to NPR 11,520.74.
+[2025-01-06 17:50:24,565] INFO [Remit_agent.core.sql_agent._generate_human_readable:155] Response from generate_human_readable: The exchange rate as of December 23, 2024, is 1 JPY = 8.68 NPR.
+
+Therefore, with the current exchange rate of 8.68, 100,000 JPY will be equal to NPR 11,520.74.
+[2025-01-06 17:50:24,565] INFO [Remit_agent.core.sql_agent._generate_human_readable:158] Generated human-readable response
+[2025-01-06 17:50:24,565] INFO [Remit_agent.core.sql_agent._generate_human_readable:163] Output state: {
+  "question": "I want to send npr 1 lakh  to nepal from japan . How much shall i send from japan ",
+  "sql_query": "SELECT \n    er.rate_date,\n    er.exchange_rate,\n    er.unit,\n    (100000 * er.unit / er.exchange_rate) as converted_amount\nFROM exchange_rates er\nWHERE er.base_currency_code = 'JPY'\nAND er.target_currency_code = 'NPR'\nAND er.rate_date = (\n    SELECT MAX(rate_date)\n    FROM exchange_rates\n    WHERE base_currency_code = 'JPY'\n    AND target_currency_code = 'NPR'\n);",
+  "query_result": "The exchange rate as of December 23, 2024, is 1 JPY = 8.68 NPR.\n\nTherefore, with the current exchange rate of 8.68, 100,000 JPY will be equal to NPR 11,520.74.",
+  "query_rows": [
+    {
+      "rate_date": "2024-12-23",
+      "exchange_rate": 8.68,
+      "unit": 1,
+      "converted_amount": 11520.73732718894
+    }
+  ],
+  "columns": [
+    "rate_date",
+    "exchange_rate",
+    "unit",
+    "converted_amount"
+  ],
+  "attempts": 0,
+  "relevance": "relevant",
+  "sql_error": false
+}
+[2025-01-06 17:50:24,569] INFO [Remit_agent.core.sql_agent._generate_human_readable:164] === End SQL Agent _generate_human_readable ===
+[2025-01-06 17:50:24,572] INFO [Remit_agent.core.sql_agent.run:275] Workflow completed successfully

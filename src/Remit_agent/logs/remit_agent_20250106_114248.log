@@ -1,0 +1,9 @@
+[2025-01-06 11:42:48,778] INFO [Remit_agent.database.get_logger:77] Logger initialized: Remit_agent.database
+[2025-01-06 11:42:48,850] INFO [Remit_agent.tools.tool_monitoring.get_logger:77] Logger initialized: Remit_agent.tools.tool_monitoring
+[2025-01-06 11:42:48,852] INFO [Remit_agent.tools.tools.get_logger:77] Logger initialized: Remit_agent.tools.tools
+[2025-01-06 11:42:49,493] INFO [Remit_agent.core.sql_agent.get_logger:77] Logger initialized: Remit_agent.core.sql_agent
+[2025-01-06 11:42:49,498] INFO [__main__.get_logger:77] Logger initialized: __main__
+[2025-01-06 11:42:55,582] INFO [__main__.main:249] Processing question: What is the current exchange rate between nepal and UAE
+[2025-01-06 11:42:55,593] INFO [Remit_agent.core.sql_agent.run:251] Starting workflow with question: What is the current exchange rate between nepal and UAE
+[2025-01-06 11:42:55,701] ERROR [Remit_agent.core.sql_agent._check_relevance:55] Error in relevance check: 'AgentState' object is not subscriptable
+[2025-01-06 11:42:55,717] ERROR [Remit_agent.core.sql_agent.run:258] Error running workflow: 'AgentState' object does not support item assignment

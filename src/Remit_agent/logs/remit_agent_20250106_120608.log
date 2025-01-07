@@ -1,0 +1,44 @@
+[2025-01-06 12:06:08,690] INFO [Remit_agent.database.get_logger:77] Logger initialized: Remit_agent.database
+[2025-01-06 12:06:08,759] INFO [Remit_agent.tools.tool_monitoring.get_logger:77] Logger initialized: Remit_agent.tools.tool_monitoring
+[2025-01-06 12:06:08,760] INFO [Remit_agent.tools.tools.get_logger:77] Logger initialized: Remit_agent.tools.tools
+[2025-01-06 12:06:09,395] INFO [Remit_agent.core.sql_agent.get_logger:77] Logger initialized: Remit_agent.core.sql_agent
+[2025-01-06 12:06:09,397] INFO [__main__.get_logger:77] Logger initialized: __main__
+[2025-01-06 12:06:10,098] INFO [Remit_agent.core.sql_agent.__init__:46] SQL Agent initialized successfully
+[2025-01-06 12:06:13,984] INFO [__main__.main:249] Processing question: What is the current exchange rate between nepal and UAE
+[2025-01-06 12:06:13,993] INFO [Remit_agent.core.sql_agent.run:236] Starting workflow with question: What is the current exchange rate between nepal and UAE
+[2025-01-06 12:06:14,279] INFO [Remit_agent.database.get_database_schema:53] Retrieved database schema
+[2025-01-06 12:06:14,279] INFO [Remit_agent.database.get_database_schema:54] Schema:
+Table: currency
+- currency_code: VARCHAR(3)
+- currency_name: VARCHAR(50)
+
+Table: exchange_rates
+- exchange_rate_id: INTEGER
+- rate_date: DATE
+- base_currency_code: VARCHAR(3)
+- target_currency_code: VARCHAR(3)
+- exchange_rate: NUMERIC(20, 10)
+- unit: INTEGER
+
+[2025-01-06 12:06:14,279] ERROR [Remit_agent.tools.tools.check_relevance:61] Error in relevance check: name 'chain' is not defined
+[2025-01-06 12:06:14,280] INFO [Remit_agent.core.sql_agent._check_relevance:53] Relevance check result: not_relevant
+[2025-01-06 12:06:14,284] INFO [Remit_agent.core.sql_agent.run:238] Workflow completed successfully
+[2025-01-06 12:07:00,237] INFO [__main__.main:249] Processing question: I want to send 1000 npr to aed
+[2025-01-06 12:07:00,238] INFO [Remit_agent.core.sql_agent.run:236] Starting workflow with question: I want to send 1000 npr to aed
+[2025-01-06 12:07:00,254] INFO [Remit_agent.database.get_database_schema:53] Retrieved database schema
+[2025-01-06 12:07:00,256] INFO [Remit_agent.database.get_database_schema:54] Schema:
+Table: currency
+- currency_code: VARCHAR(3)
+- currency_name: VARCHAR(50)
+
+Table: exchange_rates
+- exchange_rate_id: INTEGER
+- rate_date: DATE
+- base_currency_code: VARCHAR(3)
+- target_currency_code: VARCHAR(3)
+- exchange_rate: NUMERIC(20, 10)
+- unit: INTEGER
+
+[2025-01-06 12:07:00,256] ERROR [Remit_agent.tools.tools.check_relevance:61] Error in relevance check: name 'chain' is not defined
+[2025-01-06 12:07:00,257] INFO [Remit_agent.core.sql_agent._check_relevance:53] Relevance check result: not_relevant
+[2025-01-06 12:07:00,263] INFO [Remit_agent.core.sql_agent.run:238] Workflow completed successfully

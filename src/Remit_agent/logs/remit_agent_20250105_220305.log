@@ -1,0 +1,3 @@
+[2025-01-05 22:03:05,684] INFO [Remit_agent.database.get_logger:77] Logger initialized: Remit_agent.database
+[2025-01-05 22:03:05,745] INFO [Remit_agent.tools.tool_monitoring.get_logger:77] Logger initialized: Remit_agent.tools.tool_monitoring
+[2025-01-05 22:03:05,746] INFO [Remit_agent.tools.tools.get_logger:77] Logger initialized: Remit_agent.tools.tools

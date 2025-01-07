@@ -1,0 +1,15 @@
+[2025-01-07 09:19:06,653] INFO [Remit_agent.database.get_logger:77] Logger initialized: Remit_agent.database
+[2025-01-07 09:19:06,741] INFO [Remit_agent.tools.tool_monitoring.get_logger:77] Logger initialized: Remit_agent.tools.tool_monitoring
+[2025-01-07 09:19:07,492] INFO [Remit_agent.tools.tools.get_logger:77] Logger initialized: Remit_agent.tools.tools
+[2025-01-07 09:19:08,065] INFO [Remit_agent.core.sql_agent.get_logger:77] Logger initialized: Remit_agent.core.sql_agent
+[2025-01-07 09:19:08,065] INFO [__main__.get_logger:77] Logger initialized: __main__
+[2025-01-07 09:19:08,705] INFO [Remit_agent.core.sql_agent.__init__:35] Initializing SQL Agent...
+[2025-01-07 09:19:10,019] INFO [Remit_agent.database.receive_connect:37] New database connection established
+[2025-01-07 09:19:10,105] INFO [Remit_agent.core.sql_agent.__init__:42] Database connection successful
+[2025-01-07 09:19:10,180] INFO [Remit_agent.core.sql_agent.__init__:47] SQL Agent initialized successfully
+[2025-01-07 09:19:26,499] INFO [__main__.main:239] Processing question: List the  detail of 20 customers
+[2025-01-07 09:19:26,499] INFO [Remit_agent.core.sql_agent.run:168] Starting workflow with question: List the  detail of 20 customers
+[2025-01-07 09:19:26,604] INFO [Remit_agent.tools.tools.check_relevance:30] Checking relevance for question: List the  detail of 20 customers
+[2025-01-07 09:19:28,371] INFO [Remit_agent.tools.tools.check_relevance:59] Relevance check completed: {'relevant': True, 'tables': ['dbo.customers'], 'breakdown': {'intent': 'retrieve', 'entities': [], 'conditions': [], 'timeframe': 'all'}, 'explanation': 'Query is requesting details of 20 customers from the customers table'}
+[2025-01-07 09:19:28,373] ERROR [Remit_agent.core.sql_agent._convert_to_sql:80] Error in SQL conversion: BaseTool.invoke() missing 1 required positional argument: 'input'
+[2025-01-07 09:19:28,376] ERROR [Remit_agent.core.sql_agent._generate_human_readable:132] Error generating readable response: BaseTool.invoke() missing 1 required positional argument: 'input'

@@ -1,0 +1,17 @@
+[2025-01-07 00:14:03,710] INFO [Remit_agent.database.get_logger:77] Logger initialized: Remit_agent.database
+[2025-01-07 00:14:04,517] INFO [Remit_agent.tools.tool_monitoring.get_logger:77] Logger initialized: Remit_agent.tools.tool_monitoring
+[2025-01-07 00:14:04,518] INFO [Remit_agent.tools.tools.get_logger:77] Logger initialized: Remit_agent.tools.tools
+[2025-01-07 00:14:05,092] INFO [Remit_agent.core.sql_agent.get_logger:77] Logger initialized: Remit_agent.core.sql_agent
+[2025-01-07 00:14:05,092] INFO [__main__.get_logger:77] Logger initialized: __main__
+[2025-01-07 00:14:05,729] INFO [Remit_agent.core.sql_agent.__init__:61] Initializing SQL Agent...
+[2025-01-07 00:14:07,125] INFO [Remit_agent.database.receive_connect:37] New database connection established
+[2025-01-07 00:14:07,212] INFO [Remit_agent.core.sql_agent.__init__:68] Database connection successful
+[2025-01-07 00:14:07,290] INFO [Remit_agent.core.sql_agent.__init__:73] SQL Agent initialized successfully
+[2025-01-07 00:14:14,408] INFO [__main__.main:249] Processing question: What is the current exchange rate between nepal and UAE
+[2025-01-07 00:14:14,409] INFO [Remit_agent.core.sql_agent.run:337] Starting workflow with question: What is the current exchange rate between nepal and UAE
+[2025-01-07 00:14:14,520] ERROR [Remit_agent.core.sql_agent.run:362] Error running workflow: Expected dict, got <Remit_agent.core.sql_agent.AgentState object at 0x000002C6B8F3B7A0>
+For troubleshooting, visit: https://python.langchain.com/docs/troubleshooting/errors/INVALID_GRAPH_NODE_RETURN_VALUE
+[2025-01-07 00:15:47,484] INFO [__main__.main:249] Processing question: Give me the list of 20 customers
+[2025-01-07 00:15:47,485] INFO [Remit_agent.core.sql_agent.run:337] Starting workflow with question: Give me the list of 20 customers
+[2025-01-07 00:15:47,490] ERROR [Remit_agent.core.sql_agent.run:362] Error running workflow: Expected dict, got <Remit_agent.core.sql_agent.AgentState object at 0x000002C6B91F25A0>
+For troubleshooting, visit: https://python.langchain.com/docs/troubleshooting/errors/INVALID_GRAPH_NODE_RETURN_VALUE

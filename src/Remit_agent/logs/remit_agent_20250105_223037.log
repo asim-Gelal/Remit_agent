@@ -1,0 +1,10 @@
+[2025-01-05 22:30:37,629] INFO [Remit_agent.database.get_logger:77] Logger initialized: Remit_agent.database
+[2025-01-05 22:30:37,679] INFO [Remit_agent.tools.tool_monitoring.get_logger:77] Logger initialized: Remit_agent.tools.tool_monitoring
+[2025-01-05 22:30:37,681] INFO [Remit_agent.tools.tools.get_logger:77] Logger initialized: Remit_agent.tools.tools
+[2025-01-05 22:30:38,269] INFO [Remit_agent.core.sql_agent.get_logger:77] Logger initialized: Remit_agent.core.sql_agent
+[2025-01-05 22:30:38,272] INFO [__main__.get_logger:77] Logger initialized: __main__
+[2025-01-05 22:30:45,483] INFO [__main__.main:249] Processing question: What is the current exchange rate between nepal and UAE
+[2025-01-05 22:30:45,492] INFO [Remit_agent.core.sql_agent.run:214] Starting workflow with question: What is the current exchange rate between nepal and UAE
+[2025-01-05 22:30:45,580] ERROR [Remit_agent.core.sql_agent._check_relevance:43] Error in relevance check: 'AgentState' object is not subscriptable
+[2025-01-05 22:30:45,585] ERROR [Remit_agent.core.sql_agent.run:222] Error running workflow: 'AgentState' object does not support item assignment
+[2025-01-05 22:30:45,585] ERROR [__main__.main:270] Error processing question: `st.session_state.user_input` cannot be modified after the widget with key `user_input` is instantiated.

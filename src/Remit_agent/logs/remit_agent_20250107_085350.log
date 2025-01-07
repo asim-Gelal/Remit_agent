@@ -1,0 +1,13 @@
+[2025-01-07 08:53:50,938] INFO [Remit_agent.database.get_logger:77] Logger initialized: Remit_agent.database
+[2025-01-07 08:53:51,816] INFO [Remit_agent.tools.tool_monitoring.get_logger:77] Logger initialized: Remit_agent.tools.tool_monitoring
+[2025-01-07 08:53:51,816] INFO [Remit_agent.tools.tools.get_logger:77] Logger initialized: Remit_agent.tools.tools
+[2025-01-07 08:53:52,440] INFO [Remit_agent.core.sql_agent.get_logger:77] Logger initialized: Remit_agent.core.sql_agent
+[2025-01-07 08:53:52,441] INFO [__main__.get_logger:77] Logger initialized: __main__
+[2025-01-07 08:53:53,137] INFO [Remit_agent.core.sql_agent.__init__:33] Initializing SQL Agent...
+[2025-01-07 08:53:54,467] INFO [Remit_agent.database.receive_connect:37] New database connection established
+[2025-01-07 08:53:54,550] INFO [Remit_agent.core.sql_agent.__init__:40] Database connection successful
+[2025-01-07 08:53:54,633] INFO [Remit_agent.core.sql_agent.__init__:45] SQL Agent initialized successfully
+[2025-01-07 08:54:09,004] INFO [__main__.main:249] Processing question: List me the 20 customers
+[2025-01-07 08:54:09,005] INFO [Remit_agent.core.sql_agent.run:169] Starting workflow with question: List me the 20 customers
+[2025-01-07 08:54:09,103] INFO [Remit_agent.tools.tools.check_relevance:35] Checking relevance for question: List me the 20 customers
+[2025-01-07 08:54:09,114] ERROR [Remit_agent.tools.tools.check_relevance:77] Error in relevance check: 'Input to ChatPromptTemplate is missing variables {\'\\n       "relevant"\', \'\\n    "relevant"\'}.  Expected: [\'\\n       "relevant"\', \'\\n    "relevant"\', \'question\'] Received: [\'question\']\nNote: if you intended {\n       "relevant"} to be part of the string and not a variable, please escape it with double curly braces like: \'{{\n       "relevant"}}\'.\nFor troubleshooting, visit: https://python.langchain.com/docs/troubleshooting/errors/INVALID_PROMPT_INPUT '

@@ -1,0 +1,32 @@
+[2025-01-06 22:28:40,370] INFO [Remit_agent.database.get_logger:77] Logger initialized: Remit_agent.database
+[2025-01-06 22:28:40,403] INFO [Remit_agent.tools.tool_monitoring.get_logger:77] Logger initialized: Remit_agent.tools.tool_monitoring
+[2025-01-06 22:28:40,404] INFO [Remit_agent.tools.tools.get_logger:77] Logger initialized: Remit_agent.tools.tools
+[2025-01-06 22:28:40,991] INFO [Remit_agent.core.sql_agent.get_logger:77] Logger initialized: Remit_agent.core.sql_agent
+[2025-01-06 22:28:40,995] INFO [__main__.get_logger:77] Logger initialized: __main__
+[2025-01-06 22:28:40,995] INFO [__main__.main:83] === Starting Database Connection Tests ===
+[2025-01-06 22:28:40,995] INFO [__main__.main:84] Database Server: 103.9.51.160
+[2025-01-06 22:28:41,005] INFO [__main__.main:85] Database Name: CityRemitSystem
+[2025-01-06 22:28:41,005] INFO [__main__.main:86] Whitelisted Tables: dbo.customer, dbo.remitTransaction
+[2025-01-06 22:28:41,005] INFO [__main__.main:98] 
+=== Running Test: Basic Connection ===
+[2025-01-06 22:28:41,005] INFO [__main__.test_basic_connection:19] Testing basic database connection...
+[2025-01-06 22:28:42,476] INFO [Remit_agent.database.receive_connect:37] New database connection established
+[2025-01-06 22:28:42,502] INFO [__main__.main:98] 
+=== Running Test: Session Management ===
+[2025-01-06 22:28:42,502] INFO [__main__.test_session_management:35] Testing database session management...
+[2025-01-06 22:28:42,503] ERROR [Remit_agent.database.get_db:58] Database session error: Textual SQL expression 'SELECT DB_NAME() as datab...' should be explicitly declared as text('SELECT DB_NAME() as datab...')
+[2025-01-06 22:28:42,522] INFO [__main__.main:98] 
+=== Running Test: Table Access ===
+[2025-01-06 22:28:42,523] INFO [__main__.test_table_access:49] Testing access to whitelisted tables...
+[2025-01-06 22:28:42,523] ERROR [Remit_agent.database.get_db:58] Database session error: Textual SQL expression 'SELECT COUNT(*) FROM dbo....' should be explicitly declared as text('SELECT COUNT(*) FROM dbo....')
+[2025-01-06 22:28:42,530] INFO [__main__.main:98] 
+=== Running Test: Schema Retrieval ===
+[2025-01-06 22:28:42,530] INFO [__main__.test_schema_retrieval:66] Testing schema retrieval...
+[2025-01-06 22:28:42,859] ERROR [Remit_agent.database.get_database_schema:137] Error retrieving database schema: (pyodbc.Error) ('HY104', '[HY104] [Microsoft][ODBC SQL Server Driver]Invalid precision value (0) (SQLBindParameter)')
+[SQL: SELECT [INFORMATION_SCHEMA].[TABLES].[TABLE_NAME] 
+FROM [INFORMATION_SCHEMA].[TABLES] 
+WHERE [INFORMATION_SCHEMA].[TABLES].[TABLE_SCHEMA] = CAST(? AS NVARCHAR(max)) AND [INFORMATION_SCHEMA].[TABLES].[TABLE_TYPE] = CAST(? AS NVARCHAR(max)) ORDER BY [INFORMATION_SCHEMA].[TABLES].[TABLE_NAME]]
+[parameters: ('dbo', 'BASE TABLE')]
+(Background on this error at: https://sqlalche.me/e/20/dbapi)
+[2025-01-06 22:28:42,864] ERROR [__main__.main:109] 
+=== Some tests failed! Please check the logs for details ===

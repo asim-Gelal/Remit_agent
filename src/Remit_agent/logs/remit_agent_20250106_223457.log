@@ -1,0 +1,165 @@
+[2025-01-06 22:34:57,207] INFO [Remit_agent.database.get_logger:77] Logger initialized: Remit_agent.database
+[2025-01-06 22:34:57,228] INFO [Remit_agent.tools.tool_monitoring.get_logger:77] Logger initialized: Remit_agent.tools.tool_monitoring
+[2025-01-06 22:34:57,229] INFO [Remit_agent.tools.tools.get_logger:77] Logger initialized: Remit_agent.tools.tools
+[2025-01-06 22:34:57,759] INFO [Remit_agent.core.sql_agent.get_logger:77] Logger initialized: Remit_agent.core.sql_agent
+[2025-01-06 22:34:57,762] INFO [__main__.get_logger:77] Logger initialized: __main__
+[2025-01-06 22:34:57,762] INFO [__main__.main:103] === Starting Database Connection Tests ===
+[2025-01-06 22:34:57,762] INFO [__main__.main:104] Database Server: 103.9.51.160
+[2025-01-06 22:34:57,772] INFO [__main__.main:105] Database Name: CityRemitSystem
+[2025-01-06 22:34:57,772] INFO [__main__.main:106] Whitelisted Tables: dbo.remitTransactions, dbo.customers
+[2025-01-06 22:34:57,772] INFO [__main__.main:118] 
+=== Running Test: Basic Connection ===
+[2025-01-06 22:34:57,772] INFO [__main__.test_basic_connection:20] Testing basic database connection...
+[2025-01-06 22:34:59,201] INFO [Remit_agent.database.receive_connect:37] New database connection established
+[2025-01-06 22:34:59,287] INFO [__main__.test_basic_connection:29] SQL Server Version: Microsoft SQL Server 2016 (SP2) (KB4052908) - 13.0.5026.0 (X64) 
+	Mar 18 2018 09:11:49 
+	Copyright (...
+[2025-01-06 22:34:59,371] INFO [__main__.main:118] 
+=== Running Test: Session Management ===
+[2025-01-06 22:34:59,371] INFO [__main__.test_session_management:37] Testing database session management...
+[2025-01-06 22:34:59,626] INFO [__main__.main:118] 
+=== Running Test: Table Access ===
+[2025-01-06 22:34:59,626] INFO [__main__.test_table_access:52] Testing access to whitelisted tables...
+[2025-01-06 22:34:59,962] INFO [__main__.main:118] 
+=== Running Test: Table Schema ===
+[2025-01-06 22:34:59,962] INFO [__main__.test_table_schema:69] Testing direct table schema retrieval...
+[2025-01-06 22:35:00,213] INFO [__main__.test_table_schema:91] 
+Table: dbo.remitTransactions
+[2025-01-06 22:35:00,213] INFO [__main__.test_table_schema:93] Column: id, Type: uniqueidentifier, Length: None, Nullable: NO
+[2025-01-06 22:35:00,213] INFO [__main__.test_table_schema:93] Column: remit_pin_number, Type: varchar, Length: 50, Nullable: YES
+[2025-01-06 22:35:00,214] INFO [__main__.test_table_schema:93] Column: send_country, Type: varchar, Length: 2, Nullable: YES
+[2025-01-06 22:35:00,214] INFO [__main__.test_table_schema:93] Column: send_agent_id, Type: uniqueidentifier, Length: None, Nullable: YES
+[2025-01-06 22:35:00,214] INFO [__main__.test_table_schema:93] Column: send_agent_name, Type: varchar, Length: 100, Nullable: YES
+[2025-01-06 22:35:00,214] INFO [__main__.test_table_schema:93] Column: payment_method, Type: varchar, Length: 50, Nullable: YES
+[2025-01-06 22:35:00,215] INFO [__main__.test_table_schema:93] Column: transaction_type, Type: varchar, Length: 3, Nullable: YES
+[2025-01-06 22:35:00,215] INFO [__main__.test_table_schema:93] Column: send_amount, Type: money, Length: None, Nullable: YES
+[2025-01-06 22:35:00,215] INFO [__main__.test_table_schema:93] Column: service_fee, Type: money, Length: None, Nullable: YES
+[2025-01-06 22:35:00,215] INFO [__main__.test_table_schema:93] Column: exchange_rate, Type: numeric, Length: None, Nullable: YES
+[2025-01-06 22:35:00,215] INFO [__main__.test_table_schema:93] Column: collect_amount, Type: money, Length: None, Nullable: YES
+[2025-01-06 22:35:00,215] INFO [__main__.test_table_schema:93] Column: send_currency, Type: varchar, Length: 3, Nullable: YES
+[2025-01-06 22:35:00,215] INFO [__main__.test_table_schema:93] Column: send_ccy_buy_rate, Type: numeric, Length: None, Nullable: YES
+[2025-01-06 22:35:00,216] INFO [__main__.test_table_schema:93] Column: send_ccy_sell_rate, Type: numeric, Length: None, Nullable: YES
+[2025-01-06 22:35:00,216] INFO [__main__.test_table_schema:93] Column: send_amount_usd, Type: money, Length: None, Nullable: YES
+[2025-01-06 22:35:00,216] INFO [__main__.test_table_schema:93] Column: service_fee_usd, Type: money, Length: None, Nullable: YES
+[2025-01-06 22:35:00,216] INFO [__main__.test_table_schema:93] Column: collect_amount_usd, Type: money, Length: None, Nullable: YES
+[2025-01-06 22:35:00,216] INFO [__main__.test_table_schema:93] Column: send_commission, Type: money, Length: None, Nullable: YES
+[2025-01-06 22:35:00,217] INFO [__main__.test_table_schema:93] Column: send_commission_currency, Type: varchar, Length: 3, Nullable: YES
+[2025-01-06 22:35:00,217] INFO [__main__.test_table_schema:93] Column: send_forex_gain, Type: money, Length: None, Nullable: YES
+[2025-01-06 22:35:00,217] INFO [__main__.test_table_schema:93] Column: receive_country, Type: varchar, Length: 2, Nullable: YES
+[2025-01-06 22:35:00,217] INFO [__main__.test_table_schema:93] Column: receive_agent_id, Type: uniqueidentifier, Length: None, Nullable: YES
+[2025-01-06 22:35:00,217] INFO [__main__.test_table_schema:93] Column: receive_agent_name, Type: varchar, Length: 100, Nullable: YES
+[2025-01-06 22:35:00,217] INFO [__main__.test_table_schema:93] Column: receive_amount, Type: money, Length: None, Nullable: YES
+[2025-01-06 22:35:00,217] INFO [__main__.test_table_schema:93] Column: receive_currency, Type: varchar, Length: 3, Nullable: YES
+[2025-01-06 22:35:00,217] INFO [__main__.test_table_schema:93] Column: receive_ccy_buy_rate, Type: numeric, Length: None, Nullable: YES
+[2025-01-06 22:35:00,218] INFO [__main__.test_table_schema:93] Column: receive_ccy_sell_rate, Type: numeric, Length: None, Nullable: YES
+[2025-01-06 22:35:00,218] INFO [__main__.test_table_schema:93] Column: receive_settlement_rate, Type: numeric, Length: None, Nullable: YES
+[2025-01-06 22:35:00,218] INFO [__main__.test_table_schema:93] Column: receive_settlement_currency, Type: varchar, Length: 3, Nullable: YES
+[2025-01-06 22:35:00,218] INFO [__main__.test_table_schema:93] Column: receive_settlement_amount, Type: money, Length: None, Nullable: YES
+[2025-01-06 22:35:00,218] INFO [__main__.test_table_schema:93] Column: receive_commission, Type: money, Length: None, Nullable: YES
+[2025-01-06 22:35:00,218] INFO [__main__.test_table_schema:93] Column: receive_commission_currency, Type: varchar, Length: 3, Nullable: YES
+[2025-01-06 22:35:00,218] INFO [__main__.test_table_schema:93] Column: receive_forex_gain, Type: money, Length: None, Nullable: YES
+[2025-01-06 22:35:00,219] INFO [__main__.test_table_schema:93] Column: sender_id, Type: uniqueidentifier, Length: None, Nullable: YES
+[2025-01-06 22:35:00,219] INFO [__main__.test_table_schema:93] Column: sender_full_name, Type: varchar, Length: 152, Nullable: YES
+[2025-01-06 22:35:00,219] INFO [__main__.test_table_schema:93] Column: sender_address_1, Type: varchar, Length: 100, Nullable: YES
+[2025-01-06 22:35:00,219] INFO [__main__.test_table_schema:93] Column: sender_address_2, Type: varchar, Length: 100, Nullable: YES
+[2025-01-06 22:35:00,219] INFO [__main__.test_table_schema:93] Column: sender_country, Type: char, Length: 2, Nullable: YES
+[2025-01-06 22:35:00,219] INFO [__main__.test_table_schema:93] Column: source_of_income, Type: varchar, Length: 50, Nullable: YES
+[2025-01-06 22:35:00,219] INFO [__main__.test_table_schema:93] Column: receiver_id, Type: uniqueidentifier, Length: None, Nullable: YES
+[2025-01-06 22:35:00,219] INFO [__main__.test_table_schema:93] Column: receiver_full_name, Type: varchar, Length: 152, Nullable: YES
+[2025-01-06 22:35:00,219] INFO [__main__.test_table_schema:93] Column: receiver_address_1, Type: varchar, Length: 100, Nullable: YES
+[2025-01-06 22:35:00,219] INFO [__main__.test_table_schema:93] Column: receiver_address_2, Type: varchar, Length: 100, Nullable: YES
+[2025-01-06 22:35:00,221] INFO [__main__.test_table_schema:93] Column: receiver_country, Type: char, Length: 2, Nullable: YES
+[2025-01-06 22:35:00,221] INFO [__main__.test_table_schema:93] Column: relation, Type: varchar, Length: 50, Nullable: YES
+[2025-01-06 22:35:00,221] INFO [__main__.test_table_schema:93] Column: purpose, Type: varchar, Length: 50, Nullable: YES
+[2025-01-06 22:35:00,221] INFO [__main__.test_table_schema:93] Column: tax, Type: varchar, Length: 20, Nullable: YES
+[2025-01-06 22:35:00,221] INFO [__main__.test_table_schema:93] Column: tax_rate, Type: money, Length: None, Nullable: YES
+[2025-01-06 22:35:00,221] INFO [__main__.test_table_schema:93] Column: tax_fee, Type: money, Length: None, Nullable: YES
+[2025-01-06 22:35:00,222] INFO [__main__.test_table_schema:93] Column: product, Type: varchar, Length: 50, Nullable: YES
+[2025-01-06 22:35:00,222] INFO [__main__.test_table_schema:93] Column: current_status, Type: varchar, Length: 36, Nullable: YES
+[2025-01-06 22:35:00,222] INFO [__main__.test_table_schema:93] Column: status_date, Type: datetime, Length: None, Nullable: YES
+[2025-01-06 22:35:00,222] INFO [__main__.test_table_schema:93] Column: merchant_id, Type: uniqueidentifier, Length: None, Nullable: YES
+[2025-01-06 22:35:00,222] INFO [__main__.test_table_schema:93] Column: merchant_name, Type: varchar, Length: 100, Nullable: YES
+[2025-01-06 22:35:00,222] INFO [__main__.test_table_schema:93] Column: merchant_account_number, Type: varchar, Length: 50, Nullable: YES
+[2025-01-06 22:35:00,222] INFO [__main__.test_table_schema:93] Column: merchant_account_branch, Type: varchar, Length: 36, Nullable: YES
+[2025-01-06 22:35:00,223] INFO [__main__.test_table_schema:93] Column: remarks, Type: varchar, Length: 500, Nullable: YES
+[2025-01-06 22:35:00,223] INFO [__main__.test_table_schema:93] Column: status_by, Type: uniqueidentifier, Length: None, Nullable: YES
+[2025-01-06 22:35:00,223] INFO [__main__.test_table_schema:93] Column: aml_status, Type: int, Length: None, Nullable: YES
+[2025-01-06 22:35:00,223] INFO [__main__.test_table_schema:93] Column: sanction_status, Type: int, Length: None, Nullable: YES
+[2025-01-06 22:35:00,223] INFO [__main__.test_table_schema:93] Column: aml_remarks, Type: nvarchar, Length: 1500, Nullable: YES
+[2025-01-06 22:35:00,223] INFO [__main__.test_table_schema:93] Column: sanction_remarks, Type: nvarchar, Length: 500, Nullable: YES
+[2025-01-06 22:35:00,223] INFO [__main__.test_table_schema:93] Column: api_response_key, Type: varchar, Length: 500, Nullable: YES
+[2025-01-06 22:35:00,223] INFO [__main__.test_table_schema:93] Column: forex_margin_type, Type: varchar, Length: 10, Nullable: YES
+[2025-01-06 22:35:00,224] INFO [__main__.test_table_schema:93] Column: forex_margin_value, Type: money, Length: None, Nullable: YES
+[2025-01-06 22:35:00,224] INFO [__main__.test_table_schema:93] Column: collection_type, Type: varchar, Length: 36, Nullable: YES
+[2025-01-06 22:35:00,224] INFO [__main__.test_table_schema:93] Column: create_by, Type: uniqueidentifier, Length: None, Nullable: YES
+[2025-01-06 22:35:00,224] INFO [__main__.test_table_schema:93] Column: create_date, Type: datetime, Length: None, Nullable: NO
+[2025-01-06 22:35:00,224] INFO [__main__.test_table_schema:93] Column: lock_by, Type: uniqueidentifier, Length: None, Nullable: YES
+[2025-01-06 22:35:00,224] INFO [__main__.test_table_schema:93] Column: lock_date, Type: datetime, Length: None, Nullable: YES
+[2025-01-06 22:35:00,225] INFO [__main__.test_table_schema:93] Column: update_by, Type: uniqueidentifier, Length: None, Nullable: YES
+[2025-01-06 22:35:00,225] INFO [__main__.test_table_schema:93] Column: update_date, Type: datetime, Length: None, Nullable: YES
+[2025-01-06 22:35:00,225] INFO [__main__.test_table_schema:93] Column: approve_by, Type: uniqueidentifier, Length: None, Nullable: YES
+[2025-01-06 22:35:00,225] INFO [__main__.test_table_schema:93] Column: approve_date, Type: datetime, Length: None, Nullable: YES
+[2025-01-06 22:35:00,225] INFO [__main__.test_table_schema:93] Column: api_response_token, Type: nvarchar, Length: 100, Nullable: YES
+[2025-01-06 22:35:00,225] INFO [__main__.test_table_schema:93] Column: card_transaction_key, Type: uniqueidentifier, Length: None, Nullable: YES
+[2025-01-06 22:35:00,227] INFO [__main__.test_table_schema:93] Column: card_number, Type: varchar, Length: 20, Nullable: YES
+[2025-01-06 22:35:00,227] INFO [__main__.test_table_schema:93] Column: remit_card_atm_fee, Type: money, Length: None, Nullable: YES
+[2025-01-06 22:35:00,227] INFO [__main__.test_table_schema:93] Column: own_pin_number, Type: varchar, Length: 36, Nullable: YES
+[2025-01-06 22:35:00,227] INFO [__main__.test_table_schema:93] Column: campaign_code, Type: varchar, Length: 36, Nullable: YES
+[2025-01-06 22:35:00,227] INFO [__main__.test_table_schema:93] Column: reward_point, Type: money, Length: None, Nullable: YES
+[2025-01-06 22:35:00,227] INFO [__main__.test_table_schema:93] Column: campaign_discount, Type: money, Length: None, Nullable: YES
+[2025-01-06 22:35:00,228] INFO [__main__.test_table_schema:93] Column: reject_reason, Type: nvarchar, Length: 200, Nullable: YES
+[2025-01-06 22:35:00,228] INFO [__main__.test_table_schema:93] Column: purpose2, Type: varchar, Length: 36, Nullable: YES
+[2025-01-06 22:35:00,228] INFO [__main__.test_table_schema:93] Column: agent_sno, Type: int, Length: None, Nullable: YES
+[2025-01-06 22:35:00,228] INFO [__main__.test_table_schema:93] Column: remit_serial_no, Type: int, Length: None, Nullable: YES
+[2025-01-06 22:35:00,228] INFO [__main__.test_table_schema:93] Column: row_version, Type: timestamp, Length: None, Nullable: NO
+[2025-01-06 22:35:00,228] INFO [__main__.test_table_schema:93] Column: campaign_benefit, Type: money, Length: None, Nullable: YES
+[2025-01-06 22:35:00,228] INFO [__main__.test_table_schema:93] Column: process_agent_id, Type: uniqueidentifier, Length: None, Nullable: YES
+[2025-01-06 22:35:00,229] INFO [__main__.test_table_schema:93] Column: process_agent_name, Type: varchar, Length: 100, Nullable: YES
+[2025-01-06 22:35:00,229] INFO [__main__.test_table_schema:93] Column: process_agent_commission, Type: money, Length: None, Nullable: YES
+[2025-01-06 22:35:00,229] INFO [__main__.test_table_schema:93] Column: process_agent_commission_currency, Type: varchar, Length: 3, Nullable: YES
+[2025-01-06 22:35:00,394] INFO [__main__.test_table_schema:91] 
+Table: dbo.customers
+[2025-01-06 22:35:00,394] INFO [__main__.test_table_schema:93] Column: id, Type: uniqueidentifier, Length: None, Nullable: NO
+[2025-01-06 22:35:00,395] INFO [__main__.test_table_schema:93] Column: customer_id, Type: varchar, Length: 50, Nullable: YES
+[2025-01-06 22:35:00,395] INFO [__main__.test_table_schema:93] Column: full_name, Type: varchar, Length: 150, Nullable: YES
+[2025-01-06 22:35:00,395] INFO [__main__.test_table_schema:93] Column: customer_type, Type: varchar, Length: 50, Nullable: YES
+[2025-01-06 22:35:00,395] INFO [__main__.test_table_schema:93] Column: customer_category, Type: varchar, Length: 1, Nullable: YES
+[2025-01-06 22:35:00,395] INFO [__main__.test_table_schema:93] Column: country, Type: char, Length: 2, Nullable: YES
+[2025-01-06 22:35:00,395] INFO [__main__.test_table_schema:93] Column: timezone, Type: varchar, Length: 50, Nullable: YES
+[2025-01-06 22:35:00,396] INFO [__main__.test_table_schema:93] Column: profile_picture, Type: varchar, Length: 500, Nullable: YES
+[2025-01-06 22:35:00,396] INFO [__main__.test_table_schema:93] Column: current_status, Type: int, Length: None, Nullable: YES
+[2025-01-06 22:35:00,396] INFO [__main__.test_table_schema:93] Column: mobile_no, Type: varchar, Length: 20, Nullable: YES
+[2025-01-06 22:35:00,396] INFO [__main__.test_table_schema:93] Column: user_language, Type: varchar, Length: 36, Nullable: YES
+[2025-01-06 22:35:00,396] INFO [__main__.test_table_schema:93] Column: create_by, Type: uniqueidentifier, Length: None, Nullable: YES
+[2025-01-06 22:35:00,396] INFO [__main__.test_table_schema:93] Column: create_date, Type: datetime, Length: None, Nullable: YES
+[2025-01-06 22:35:00,396] INFO [__main__.test_table_schema:93] Column: update_by, Type: uniqueidentifier, Length: None, Nullable: YES
+[2025-01-06 22:35:00,396] INFO [__main__.test_table_schema:93] Column: update_date, Type: datetime, Length: None, Nullable: YES
+[2025-01-06 22:35:00,396] INFO [__main__.test_table_schema:93] Column: lock_by, Type: varchar, Length: 50, Nullable: YES
+[2025-01-06 22:35:00,398] INFO [__main__.test_table_schema:93] Column: lock_date, Type: datetime, Length: None, Nullable: YES
+[2025-01-06 22:35:00,398] INFO [__main__.test_table_schema:93] Column: is_active, Type: bit, Length: None, Nullable: YES
+[2025-01-06 22:35:00,398] INFO [__main__.test_table_schema:93] Column: balance, Type: money, Length: None, Nullable: YES
+[2025-01-06 22:35:00,398] INFO [__main__.test_table_schema:93] Column: referal_code, Type: uniqueidentifier, Length: None, Nullable: YES
+[2025-01-06 22:35:00,398] INFO [__main__.test_table_schema:93] Column: enable_remittance, Type: bit, Length: None, Nullable: YES
+[2025-01-06 22:35:00,398] INFO [__main__.test_table_schema:93] Column: enable_wallet, Type: bit, Length: None, Nullable: YES
+[2025-01-06 22:35:00,398] INFO [__main__.test_table_schema:93] Column: enable_online, Type: bit, Length: None, Nullable: YES
+[2025-01-06 22:35:00,398] INFO [__main__.test_table_schema:93] Column: delete_customer, Type: bit, Length: None, Nullable: YES
+[2025-01-06 22:35:00,398] INFO [__main__.test_table_schema:93] Column: suspend_customer, Type: bit, Length: None, Nullable: YES
+[2025-01-06 22:35:00,398] INFO [__main__.test_table_schema:93] Column: approve_by, Type: uniqueidentifier, Length: None, Nullable: YES
+[2025-01-06 22:35:00,398] INFO [__main__.test_table_schema:93] Column: approve_date, Type: datetime, Length: None, Nullable: YES
+[2025-01-06 22:35:00,398] INFO [__main__.test_table_schema:93] Column: create_agent_key, Type: uniqueidentifier, Length: None, Nullable: YES
+[2025-01-06 22:35:00,398] INFO [__main__.test_table_schema:93] Column: sanction_screen, Type: bit, Length: None, Nullable: YES
+[2025-01-06 22:35:00,400] INFO [__main__.test_table_schema:93] Column: sanction_status, Type: bit, Length: None, Nullable: YES
+[2025-01-06 22:35:00,400] INFO [__main__.test_table_schema:93] Column: sanction_date, Type: datetime, Length: None, Nullable: YES
+[2025-01-06 22:35:00,400] INFO [__main__.test_table_schema:93] Column: kyc_status_by, Type: uniqueidentifier, Length: None, Nullable: YES
+[2025-01-06 22:35:00,400] INFO [__main__.test_table_schema:93] Column: kyc_status_date, Type: datetime, Length: None, Nullable: YES
+[2025-01-06 22:35:00,400] INFO [__main__.test_table_schema:93] Column: kyc_approve, Type: bit, Length: None, Nullable: YES
+[2025-01-06 22:35:00,400] INFO [__main__.test_table_schema:93] Column: referal_customer_key, Type: uniqueidentifier, Length: None, Nullable: YES
+[2025-01-06 22:35:00,400] INFO [__main__.test_table_schema:93] Column: referal_own_code, Type: varchar, Length: 10, Nullable: YES
+[2025-01-06 22:35:00,400] INFO [__main__.test_table_schema:93] Column: points, Type: money, Length: None, Nullable: YES
+[2025-01-06 22:35:00,400] INFO [__main__.test_table_schema:93] Column: risk_score, Type: int, Length: None, Nullable: YES
+[2025-01-06 22:35:00,401] INFO [__main__.test_table_schema:93] Column: risk_score_detail, Type: varchar, Length: 1000, Nullable: YES
+[2025-01-06 22:35:00,401] INFO [__main__.test_table_schema:93] Column: self_risk_score, Type: int, Length: None, Nullable: YES
+[2025-01-06 22:35:00,401] INFO [__main__.test_table_schema:93] Column: additional_risk, Type: int, Length: None, Nullable: YES
+[2025-01-06 22:35:00,401] INFO [__main__.test_table_schema:93] Column: row_version, Type: timestamp, Length: None, Nullable: NO
+[2025-01-06 22:35:00,486] INFO [__main__.main:127] 
+=== All tests passed successfully! ===

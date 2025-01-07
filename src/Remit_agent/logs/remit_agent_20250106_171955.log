@@ -1,0 +1,839 @@
+[2025-01-06 17:19:55,423] INFO [Remit_agent.database.get_logger:77] Logger initialized: Remit_agent.database
+[2025-01-06 17:19:55,470] INFO [Remit_agent.tools.tool_monitoring.get_logger:77] Logger initialized: Remit_agent.tools.tool_monitoring
+[2025-01-06 17:19:55,472] INFO [Remit_agent.tools.tools.get_logger:77] Logger initialized: Remit_agent.tools.tools
+[2025-01-06 17:19:56,083] INFO [Remit_agent.core.sql_agent.get_logger:77] Logger initialized: Remit_agent.core.sql_agent
+[2025-01-06 17:19:56,087] INFO [__main__.get_logger:77] Logger initialized: __main__
+[2025-01-06 17:19:56,746] INFO [Remit_agent.core.sql_agent.__init__:56] SQL Agent initialized successfully
+[2025-01-06 17:19:59,929] INFO [__main__.main:249] Processing question: What is the current exchange rate between nepal and UAE
+[2025-01-06 17:19:59,939] INFO [Remit_agent.core.sql_agent.run:273] Starting workflow with question: What is the current exchange rate between nepal and UAE
+[2025-01-06 17:20:00,096] INFO [Remit_agent.database.get_database_schema:53] Retrieved database schema
+[2025-01-06 17:20:00,096] INFO [Remit_agent.database.get_database_schema:54] Schema:
+Table: currency
+- currency_code: VARCHAR(3)
+- currency_name: VARCHAR(50)
+
+Table: exchange_rates
+- exchange_rate_id: INTEGER
+- rate_date: DATE
+- base_currency_code: VARCHAR(3)
+- target_currency_code: VARCHAR(3)
+- exchange_rate: NUMERIC(20, 10)
+- unit: INTEGER
+
+[2025-01-06 17:20:01,275] INFO [Remit_agent.tools.tools.check_relevance:74] Relevance check completed with result: relevant
+[2025-01-06 17:20:01,275] INFO [Remit_agent.core.sql_agent._check_relevance:64] Relevance check result: relevant
+[2025-01-06 17:20:01,287] INFO [Remit_agent.database.get_database_schema:53] Retrieved database schema
+[2025-01-06 17:20:01,289] INFO [Remit_agent.database.get_database_schema:54] Schema:
+Table: currency
+- currency_code: VARCHAR(3)
+- currency_name: VARCHAR(50)
+
+Table: exchange_rates
+- exchange_rate_id: INTEGER
+- rate_date: DATE
+- base_currency_code: VARCHAR(3)
+- target_currency_code: VARCHAR(3)
+- exchange_rate: NUMERIC(20, 10)
+- unit: INTEGER
+
+[2025-01-06 17:20:02,759] INFO [Remit_agent.tools.tools.convert_to_sql:88] Generated SQL query: SELECT er.*
+FROM exchange_rates er
+WHERE er.base_currency_code = 'NPR'
+AND er.target_currency_code = 'AED'
+AND er.rate_date = (
+    SELECT MAX(rate_date)
+    FROM exchange_rates
+    WHERE base_currency_code = 'NPR'
+    AND target_currency_code = 'AED'
+);
+[2025-01-06 17:20:02,759] INFO [Remit_agent.core.sql_agent._convert_to_sql:77] Generated SQL query: SELECT er.*
+FROM exchange_rates er
+WHERE er.base_currency_code = 'NPR'
+AND er.target_currency_code = 'AED'
+AND er.rate_date = (
+    SELECT MAX(rate_date)
+    FROM exchange_rates
+    WHERE base_currency_code = 'NPR'
+    AND target_currency_code = 'AED'
+);
+[2025-01-06 17:20:02,763] INFO [Remit_agent.core.sql_agent._execute_sql:93] === SQL Agent _execute_sql ===
+[2025-01-06 17:20:02,763] INFO [Remit_agent.core.sql_agent._execute_sql:94] Input state: {
+  "question": "What is the current exchange rate between nepal and UAE",
+  "sql_query": "SELECT er.*\nFROM exchange_rates er\nWHERE er.base_currency_code = 'NPR'\nAND er.target_currency_code = 'AED'\nAND er.rate_date = (\n    SELECT MAX(rate_date)\n    FROM exchange_rates\n    WHERE base_currency_code = 'NPR'\n    AND target_currency_code = 'AED'\n);",
+  "query_result": "",
+  "query_rows": [],
+  "columns": [],
+  "attempts": 0,
+  "relevance": "relevant",
+  "sql_error": false
+}
+[2025-01-06 17:20:02,764] INFO [Remit_agent.core.sql_agent._execute_sql:104] Calling execute_sql_query with query: SELECT er.*
+FROM exchange_rates er
+WHERE er.base_currency_code = 'NPR'
+AND er.target_currency_code = 'AED'
+AND er.rate_date = (
+    SELECT MAX(rate_date)
+    FROM exchange_rates
+    WHERE base_currency_code = 'NPR'
+    AND target_currency_code = 'AED'
+);
+[2025-01-06 17:20:02,765] INFO [Remit_agent.tools.tools.execute_sql_query:99] === Tools execute_sql_query ===
+[2025-01-06 17:20:02,765] INFO [Remit_agent.tools.tools.execute_sql_query:100] Input query: SELECT er.*
+FROM exchange_rates er
+WHERE er.base_currency_code = 'NPR'
+AND er.target_currency_code = 'AED'
+AND er.rate_date = (
+    SELECT MAX(rate_date)
+    FROM exchange_rates
+    WHERE base_currency_code = 'NPR'
+    AND target_currency_code = 'AED'
+);
+[2025-01-06 17:20:02,768] INFO [Remit_agent.tools.tools.execute_sql_query:110] Raw query result - Rows: 1, Columns: ['exchange_rate_id', 'rate_date', 'base_currency_code', 'target_currency_code', 'exchange_rate', 'unit']
+[2025-01-06 17:20:02,768] INFO [Remit_agent.tools.tools.execute_sql_query:135] Number of rows in result: 1
+[2025-01-06 17:20:02,768] INFO [Remit_agent.tools.tools.execute_sql_query:136] Sample of first row: {'exchange_rate_id': 18591, 'rate_date': '2024-12-23', 'base_currency_code': 'NPR', 'target_currency_code': 'AED', 'exchange_rate': 0.0269396552, 'unit': 1}
+[2025-01-06 17:20:02,769] INFO [Remit_agent.core.sql_agent._execute_sql:106] Result from execute_sql_query: {'success': True, 'error': None, 'rows': [{'exchange_rate_id': 18591, 'rate_date': '2024-12-23', 'base_currency_code': 'NPR', 'target_currency_code': 'AED', 'exchange_rate': 0.0269396552, 'unit': 1}], 'columns': ['exchange_rate_id', 'rate_date', 'base_currency_code', 'target_currency_code', 'exchange_rate', 'unit']}
+[2025-01-06 17:20:02,769] INFO [Remit_agent.core.sql_agent._execute_sql:120] Query executed successfully. Processed 1 rows.
+[2025-01-06 17:20:02,769] INFO [Remit_agent.core.sql_agent._execute_sql:129] Output state: {
+  "question": "What is the current exchange rate between nepal and UAE",
+  "sql_query": "SELECT er.*\nFROM exchange_rates er\nWHERE er.base_currency_code = 'NPR'\nAND er.target_currency_code = 'AED'\nAND er.rate_date = (\n    SELECT MAX(rate_date)\n    FROM exchange_rates\n    WHERE base_currency_code = 'NPR'\n    AND target_currency_code = 'AED'\n);",
+  "query_result": "Query executed successfully",
+  "query_rows": [
+    {
+      "exchange_rate_id": 18591,
+      "rate_date": "2024-12-23",
+      "base_currency_code": "NPR",
+      "target_currency_code": "AED",
+      "exchange_rate": 0.0269396552,
+      "unit": 1
+    }
+  ],
+  "columns": [
+    "exchange_rate_id",
+    "rate_date",
+    "base_currency_code",
+    "target_currency_code",
+    "exchange_rate",
+    "unit"
+  ],
+  "attempts": 0,
+  "relevance": "relevant",
+  "sql_error": false
+}
+[2025-01-06 17:20:02,770] INFO [Remit_agent.core.sql_agent._execute_sql:130] === End SQL Agent _execute_sql ===
+[2025-01-06 17:20:02,774] INFO [Remit_agent.core.sql_agent._generate_human_readable:135] === SQL Agent _generate_human_readable ===
+[2025-01-06 17:20:02,774] INFO [Remit_agent.core.sql_agent._generate_human_readable:136] Input state: {
+  "question": "What is the current exchange rate between nepal and UAE",
+  "sql_query": "SELECT er.*\nFROM exchange_rates er\nWHERE er.base_currency_code = 'NPR'\nAND er.target_currency_code = 'AED'\nAND er.rate_date = (\n    SELECT MAX(rate_date)\n    FROM exchange_rates\n    WHERE base_currency_code = 'NPR'\n    AND target_currency_code = 'AED'\n);",
+  "query_result": "Query executed successfully",
+  "query_rows": [
+    {
+      "exchange_rate_id": 18591,
+      "rate_date": "2024-12-23",
+      "base_currency_code": "NPR",
+      "target_currency_code": "AED",
+      "exchange_rate": 0.0269396552,
+      "unit": 1
+    }
+  ],
+  "columns": [
+    "exchange_rate_id",
+    "rate_date",
+    "base_currency_code",
+    "target_currency_code",
+    "exchange_rate",
+    "unit"
+  ],
+  "attempts": 0,
+  "relevance": "relevant",
+  "sql_error": false
+}
+[2025-01-06 17:20:02,775] INFO [Remit_agent.core.sql_agent._generate_human_readable:153] Calling generate_human_readable with input: {'input_data': {'sql': "SELECT er.*\nFROM exchange_rates er\nWHERE er.base_currency_code = 'NPR'\nAND er.target_currency_code = 'AED'\nAND er.rate_date = (\n    SELECT MAX(rate_date)\n    FROM exchange_rates\n    WHERE base_currency_code = 'NPR'\n    AND target_currency_code = 'AED'\n);", 'result': {'rows': [{'exchange_rate_id': 18591, 'rate_date': '2024-12-23', 'base_currency_code': 'NPR', 'target_currency_code': 'AED', 'exchange_rate': 0.0269396552, 'unit': 1}], 'columns': ['exchange_rate_id', 'rate_date', 'base_currency_code', 'target_currency_code', 'exchange_rate', 'unit'], 'success': True, 'error': None}}}
+[2025-01-06 17:20:02,776] INFO [Remit_agent.tools.tools.generate_human_readable:162] === Tools generate_human_readable ===
+[2025-01-06 17:20:02,776] INFO [Remit_agent.tools.tools.generate_human_readable:163] Raw input data: {'sql': "SELECT er.*\nFROM exchange_rates er\nWHERE er.base_currency_code = 'NPR'\nAND er.target_currency_code = 'AED'\nAND er.rate_date = (\n    SELECT MAX(rate_date)\n    FROM exchange_rates\n    WHERE base_currency_code = 'NPR'\n    AND target_currency_code = 'AED'\n);", 'result': {'rows': [{'exchange_rate_id': 18591, 'rate_date': '2024-12-23', 'base_currency_code': 'NPR', 'target_currency_code': 'AED', 'exchange_rate': 0.0269396552, 'unit': 1}], 'columns': ['exchange_rate_id', 'rate_date', 'base_currency_code', 'target_currency_code', 'exchange_rate', 'unit'], 'success': True, 'error': None}}
+[2025-01-06 17:20:02,776] INFO [Remit_agent.tools.tools.generate_human_readable:172] Processing query results: 1 rows, 6 columns
+[2025-01-06 17:20:02,777] INFO [Remit_agent.tools.tools.generate_human_readable:190] Chain input - SQL: SELECT er.*
+FROM exchange_rates er
+WHERE er.base_currency_code = 'NPR'
+AND er.target_currency_code = 'AED'
+AND er.rate_date = (
+    SELECT MAX(rate_date)
+    FROM exchange_rates
+    WHERE base_currency_code = 'NPR'
+    AND target_currency_code = 'AED'
+);
+[2025-01-06 17:20:02,777] INFO [Remit_agent.tools.tools.generate_human_readable:191] Chain input - First row sample: {'exchange_rate_id': 18591, 'rate_date': '2024-12-23', 'base_currency_code': 'NPR', 'target_currency_code': 'AED', 'exchange_rate': 0.0269396552, 'unit': 1}
+[2025-01-06 17:20:04,471] INFO [Remit_agent.tools.tools.generate_human_readable:194] Generated response: The latest exchange rate from NPR (Nepalese Rupee) to AED (United Arab Emirates Dirham) is 0.0269 AED for 1 NPR (as of December 23, 2024).
+
+| exchange_rate_id | rate_date | base_currency_code | target_currency_code | exchange_rate | unit |
+|------------------:|:----------|:-------------------|:---------------------|--------------:|:-----|
+|             18591 | Dec 23, 2024 | NPR | AED | 0.0269 | 1 |
+[2025-01-06 17:20:04,472] INFO [Remit_agent.core.sql_agent._generate_human_readable:155] Response from generate_human_readable: The latest exchange rate from NPR (Nepalese Rupee) to AED (United Arab Emirates Dirham) is 0.0269 AED for 1 NPR (as of December 23, 2024).
+
+| exchange_rate_id | rate_date | base_currency_code | target_currency_code | exchange_rate | unit |
+|------------------:|:----------|:-------------------|:---------------------|--------------:|:-----|
+|             18591 | Dec 23, 2024 | NPR | AED | 0.0269 | 1 |
+[2025-01-06 17:20:04,472] INFO [Remit_agent.core.sql_agent._generate_human_readable:158] Generated human-readable response
+[2025-01-06 17:20:04,472] INFO [Remit_agent.core.sql_agent._generate_human_readable:163] Output state: {
+  "question": "What is the current exchange rate between nepal and UAE",
+  "sql_query": "SELECT er.*\nFROM exchange_rates er\nWHERE er.base_currency_code = 'NPR'\nAND er.target_currency_code = 'AED'\nAND er.rate_date = (\n    SELECT MAX(rate_date)\n    FROM exchange_rates\n    WHERE base_currency_code = 'NPR'\n    AND target_currency_code = 'AED'\n);",
+  "query_result": "The latest exchange rate from NPR (Nepalese Rupee) to AED (United Arab Emirates Dirham) is 0.0269 AED for 1 NPR (as of December 23, 2024).\n\n| exchange_rate_id | rate_date | base_currency_code | target_currency_code | exchange_rate | unit |\n|------------------:|:----------|:-------------------|:---------------------|--------------:|:-----|\n|             18591 | Dec 23, 2024 | NPR | AED | 0.0269 | 1 |",
+  "query_rows": [
+    {
+      "exchange_rate_id": 18591,
+      "rate_date": "2024-12-23",
+      "base_currency_code": "NPR",
+      "target_currency_code": "AED",
+      "exchange_rate": 0.0269396552,
+      "unit": 1
+    }
+  ],
+  "columns": [
+    "exchange_rate_id",
+    "rate_date",
+    "base_currency_code",
+    "target_currency_code",
+    "exchange_rate",
+    "unit"
+  ],
+  "attempts": 0,
+  "relevance": "relevant",
+  "sql_error": false
+}
+[2025-01-06 17:20:04,473] INFO [Remit_agent.core.sql_agent._generate_human_readable:164] === End SQL Agent _generate_human_readable ===
+[2025-01-06 17:20:04,475] INFO [Remit_agent.core.sql_agent.run:275] Workflow completed successfully
+[2025-01-06 17:20:32,238] INFO [__main__.main:249] Processing question: Show me the exchange rate between nepal and usa for last 7 days
+[2025-01-06 17:20:32,241] INFO [Remit_agent.core.sql_agent.run:273] Starting workflow with question: Show me the exchange rate between nepal and usa for last 7 days
+[2025-01-06 17:20:32,257] INFO [Remit_agent.database.get_database_schema:53] Retrieved database schema
+[2025-01-06 17:20:32,258] INFO [Remit_agent.database.get_database_schema:54] Schema:
+Table: currency
+- currency_code: VARCHAR(3)
+- currency_name: VARCHAR(50)
+
+Table: exchange_rates
+- exchange_rate_id: INTEGER
+- rate_date: DATE
+- base_currency_code: VARCHAR(3)
+- target_currency_code: VARCHAR(3)
+- exchange_rate: NUMERIC(20, 10)
+- unit: INTEGER
+
+[2025-01-06 17:20:33,033] INFO [Remit_agent.tools.tools.check_relevance:74] Relevance check completed with result: relevant
+[2025-01-06 17:20:33,034] INFO [Remit_agent.core.sql_agent._check_relevance:64] Relevance check result: relevant
+[2025-01-06 17:20:33,048] INFO [Remit_agent.database.get_database_schema:53] Retrieved database schema
+[2025-01-06 17:20:33,048] INFO [Remit_agent.database.get_database_schema:54] Schema:
+Table: currency
+- currency_code: VARCHAR(3)
+- currency_name: VARCHAR(50)
+
+Table: exchange_rates
+- exchange_rate_id: INTEGER
+- rate_date: DATE
+- base_currency_code: VARCHAR(3)
+- target_currency_code: VARCHAR(3)
+- exchange_rate: NUMERIC(20, 10)
+- unit: INTEGER
+
+[2025-01-06 17:20:34,025] INFO [Remit_agent.tools.tools.convert_to_sql:88] Generated SQL query: SELECT er.*
+FROM exchange_rates er
+WHERE (er.base_currency_code = 'NPR' AND er.target_currency_code = 'USD')
+AND er.rate_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+AND er.rate_date <= CURDATE();
+[2025-01-06 17:20:34,025] INFO [Remit_agent.core.sql_agent._convert_to_sql:77] Generated SQL query: SELECT er.*
+FROM exchange_rates er
+WHERE (er.base_currency_code = 'NPR' AND er.target_currency_code = 'USD')
+AND er.rate_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+AND er.rate_date <= CURDATE();
+[2025-01-06 17:20:34,028] INFO [Remit_agent.core.sql_agent._execute_sql:93] === SQL Agent _execute_sql ===
+[2025-01-06 17:20:34,028] INFO [Remit_agent.core.sql_agent._execute_sql:94] Input state: {
+  "question": "Show me the exchange rate between nepal and usa for last 7 days",
+  "sql_query": "SELECT er.*\nFROM exchange_rates er\nWHERE (er.base_currency_code = 'NPR' AND er.target_currency_code = 'USD')\nAND er.rate_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)\nAND er.rate_date <= CURDATE();",
+  "query_result": "",
+  "query_rows": [],
+  "columns": [],
+  "attempts": 0,
+  "relevance": "relevant",
+  "sql_error": false
+}
+[2025-01-06 17:20:34,028] INFO [Remit_agent.core.sql_agent._execute_sql:104] Calling execute_sql_query with query: SELECT er.*
+FROM exchange_rates er
+WHERE (er.base_currency_code = 'NPR' AND er.target_currency_code = 'USD')
+AND er.rate_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+AND er.rate_date <= CURDATE();
+[2025-01-06 17:20:34,029] INFO [Remit_agent.tools.tools.execute_sql_query:99] === Tools execute_sql_query ===
+[2025-01-06 17:20:34,029] INFO [Remit_agent.tools.tools.execute_sql_query:100] Input query: SELECT er.*
+FROM exchange_rates er
+WHERE (er.base_currency_code = 'NPR' AND er.target_currency_code = 'USD')
+AND er.rate_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+AND er.rate_date <= CURDATE();
+[2025-01-06 17:20:34,039] ERROR [Remit_agent.tools.tools.execute_sql_query:149] Error executing query: (psycopg2.errors.SyntaxError) syntax error at or near "7"
+LINE 4: AND er.rate_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+                                                         ^
+
+[SQL: SELECT er.*
+FROM exchange_rates er
+WHERE (er.base_currency_code = 'NPR' AND er.target_currency_code = 'USD')
+AND er.rate_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+AND er.rate_date <= CURDATE();]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+[2025-01-06 17:20:34,040] INFO [Remit_agent.core.sql_agent._execute_sql:106] Result from execute_sql_query: {'success': False, 'error': '(psycopg2.errors.SyntaxError) syntax error at or near "7"\nLINE 4: AND er.rate_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)\n                                                         ^\n\n[SQL: SELECT er.*\nFROM exchange_rates er\nWHERE (er.base_currency_code = \'NPR\' AND er.target_currency_code = \'USD\')\nAND er.rate_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)\nAND er.rate_date <= CURDATE();]\n(Background on this error at: https://sqlalche.me/e/20/f405)', 'rows': None, 'columns': None}
+[2025-01-06 17:20:34,040] ERROR [Remit_agent.core.sql_agent._execute_sql:111] SQL execution failed: (psycopg2.errors.SyntaxError) syntax error at or near "7"
+LINE 4: AND er.rate_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+                                                         ^
+
+[SQL: SELECT er.*
+FROM exchange_rates er
+WHERE (er.base_currency_code = 'NPR' AND er.target_currency_code = 'USD')
+AND er.rate_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+AND er.rate_date <= CURDATE();]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+[2025-01-06 17:20:34,043] ERROR [Remit_agent.core.sql_agent._regenerate_query:177] Error rewriting question: 'function' object has no attribute 'invoke'
+[2025-01-06 17:20:34,056] INFO [Remit_agent.database.get_database_schema:53] Retrieved database schema
+[2025-01-06 17:20:34,056] INFO [Remit_agent.database.get_database_schema:54] Schema:
+Table: currency
+- currency_code: VARCHAR(3)
+- currency_name: VARCHAR(50)
+
+Table: exchange_rates
+- exchange_rate_id: INTEGER
+- rate_date: DATE
+- base_currency_code: VARCHAR(3)
+- target_currency_code: VARCHAR(3)
+- exchange_rate: NUMERIC(20, 10)
+- unit: INTEGER
+
+[2025-01-06 17:20:35,447] INFO [Remit_agent.tools.tools.convert_to_sql:88] Generated SQL query: SELECT er.*
+FROM exchange_rates er
+WHERE (er.base_currency_code = 'NPR' AND er.target_currency_code = 'USD')
+OR (er.base_currency_code = 'USD' AND er.target_currency_code = 'NPR')
+AND er.rate_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+AND er.rate_date <= CURDATE()
+ORDER BY er.rate_date DESC;
+[2025-01-06 17:20:35,448] INFO [Remit_agent.core.sql_agent._convert_to_sql:77] Generated SQL query: SELECT er.*
+FROM exchange_rates er
+WHERE (er.base_currency_code = 'NPR' AND er.target_currency_code = 'USD')
+OR (er.base_currency_code = 'USD' AND er.target_currency_code = 'NPR')
+AND er.rate_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+AND er.rate_date <= CURDATE()
+ORDER BY er.rate_date DESC;
+[2025-01-06 17:20:35,451] INFO [Remit_agent.core.sql_agent._execute_sql:93] === SQL Agent _execute_sql ===
+[2025-01-06 17:20:35,451] INFO [Remit_agent.core.sql_agent._execute_sql:94] Input state: {
+  "question": "Show me the exchange rate between nepal and usa for last 7 days",
+  "sql_query": "SELECT er.*\nFROM exchange_rates er\nWHERE (er.base_currency_code = 'NPR' AND er.target_currency_code = 'USD')\nOR (er.base_currency_code = 'USD' AND er.target_currency_code = 'NPR')\nAND er.rate_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)\nAND er.rate_date <= CURDATE()\nORDER BY er.rate_date DESC;",
+  "query_result": "Error executing query: (psycopg2.errors.SyntaxError) syntax error at or near \"7\"\nLINE 4: AND er.rate_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)\n                                                         ^\n\n[SQL: SELECT er.*\nFROM exchange_rates er\nWHERE (er.base_currency_code = 'NPR' AND er.target_currency_code = 'USD')\nAND er.rate_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)\nAND er.rate_date <= CURDATE();]\n(Background on this error at: https://sqlalche.me/e/20/f405)",
+  "query_rows": [],
+  "columns": [],
+  "attempts": 0,
+  "relevance": "relevant",
+  "sql_error": false
+}
+[2025-01-06 17:20:35,451] INFO [Remit_agent.core.sql_agent._execute_sql:104] Calling execute_sql_query with query: SELECT er.*
+FROM exchange_rates er
+WHERE (er.base_currency_code = 'NPR' AND er.target_currency_code = 'USD')
+OR (er.base_currency_code = 'USD' AND er.target_currency_code = 'NPR')
+AND er.rate_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+AND er.rate_date <= CURDATE()
+ORDER BY er.rate_date DESC;
+[2025-01-06 17:20:35,452] INFO [Remit_agent.tools.tools.execute_sql_query:99] === Tools execute_sql_query ===
+[2025-01-06 17:20:35,453] INFO [Remit_agent.tools.tools.execute_sql_query:100] Input query: SELECT er.*
+FROM exchange_rates er
+WHERE (er.base_currency_code = 'NPR' AND er.target_currency_code = 'USD')
+OR (er.base_currency_code = 'USD' AND er.target_currency_code = 'NPR')
+AND er.rate_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+AND er.rate_date <= CURDATE()
+ORDER BY er.rate_date DESC;
+[2025-01-06 17:20:35,454] ERROR [Remit_agent.tools.tools.execute_sql_query:149] Error executing query: (psycopg2.errors.SyntaxError) syntax error at or near "7"
+LINE 5: AND er.rate_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+                                                         ^
+
+[SQL: SELECT er.*
+FROM exchange_rates er
+WHERE (er.base_currency_code = 'NPR' AND er.target_currency_code = 'USD')
+OR (er.base_currency_code = 'USD' AND er.target_currency_code = 'NPR')
+AND er.rate_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+AND er.rate_date <= CURDATE()
+ORDER BY er.rate_date DESC;]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+[2025-01-06 17:20:35,455] INFO [Remit_agent.core.sql_agent._execute_sql:106] Result from execute_sql_query: {'success': False, 'error': '(psycopg2.errors.SyntaxError) syntax error at or near "7"\nLINE 5: AND er.rate_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)\n                                                         ^\n\n[SQL: SELECT er.*\nFROM exchange_rates er\nWHERE (er.base_currency_code = \'NPR\' AND er.target_currency_code = \'USD\')\nOR (er.base_currency_code = \'USD\' AND er.target_currency_code = \'NPR\')\nAND er.rate_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)\nAND er.rate_date <= CURDATE()\nORDER BY er.rate_date DESC;]\n(Background on this error at: https://sqlalche.me/e/20/f405)', 'rows': None, 'columns': None}
+[2025-01-06 17:20:35,456] ERROR [Remit_agent.core.sql_agent._execute_sql:111] SQL execution failed: (psycopg2.errors.SyntaxError) syntax error at or near "7"
+LINE 5: AND er.rate_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+                                                         ^
+
+[SQL: SELECT er.*
+FROM exchange_rates er
+WHERE (er.base_currency_code = 'NPR' AND er.target_currency_code = 'USD')
+OR (er.base_currency_code = 'USD' AND er.target_currency_code = 'NPR')
+AND er.rate_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+AND er.rate_date <= CURDATE()
+ORDER BY er.rate_date DESC;]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+[2025-01-06 17:20:35,459] ERROR [Remit_agent.core.sql_agent._regenerate_query:177] Error rewriting question: 'function' object has no attribute 'invoke'
+[2025-01-06 17:20:35,471] INFO [Remit_agent.database.get_database_schema:53] Retrieved database schema
+[2025-01-06 17:20:35,471] INFO [Remit_agent.database.get_database_schema:54] Schema:
+Table: currency
+- currency_code: VARCHAR(3)
+- currency_name: VARCHAR(50)
+
+Table: exchange_rates
+- exchange_rate_id: INTEGER
+- rate_date: DATE
+- base_currency_code: VARCHAR(3)
+- target_currency_code: VARCHAR(3)
+- exchange_rate: NUMERIC(20, 10)
+- unit: INTEGER
+
+[2025-01-06 17:20:36,390] INFO [Remit_agent.tools.tools.convert_to_sql:88] Generated SQL query: SELECT er.*
+FROM exchange_rates er
+WHERE (er.base_currency_code = 'NPR' AND er.target_currency_code = 'USD')
+   OR (er.base_currency_code = 'USD' AND er.target_currency_code = 'NPR')
+AND er.rate_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+AND er.rate_date <= CURDATE();
+[2025-01-06 17:20:36,400] INFO [Remit_agent.core.sql_agent._convert_to_sql:77] Generated SQL query: SELECT er.*
+FROM exchange_rates er
+WHERE (er.base_currency_code = 'NPR' AND er.target_currency_code = 'USD')
+   OR (er.base_currency_code = 'USD' AND er.target_currency_code = 'NPR')
+AND er.rate_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+AND er.rate_date <= CURDATE();
+[2025-01-06 17:20:36,403] INFO [Remit_agent.core.sql_agent._execute_sql:93] === SQL Agent _execute_sql ===
+[2025-01-06 17:20:36,404] INFO [Remit_agent.core.sql_agent._execute_sql:94] Input state: {
+  "question": "Show me the exchange rate between nepal and usa for last 7 days",
+  "sql_query": "SELECT er.*\nFROM exchange_rates er\nWHERE (er.base_currency_code = 'NPR' AND er.target_currency_code = 'USD')\n   OR (er.base_currency_code = 'USD' AND er.target_currency_code = 'NPR')\nAND er.rate_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)\nAND er.rate_date <= CURDATE();",
+  "query_result": "Error executing query: (psycopg2.errors.SyntaxError) syntax error at or near \"7\"\nLINE 5: AND er.rate_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)\n                                                         ^\n\n[SQL: SELECT er.*\nFROM exchange_rates er\nWHERE (er.base_currency_code = 'NPR' AND er.target_currency_code = 'USD')\nOR (er.base_currency_code = 'USD' AND er.target_currency_code = 'NPR')\nAND er.rate_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)\nAND er.rate_date <= CURDATE()\nORDER BY er.rate_date DESC;]\n(Background on this error at: https://sqlalche.me/e/20/f405)",
+  "query_rows": [],
+  "columns": [],
+  "attempts": 0,
+  "relevance": "relevant",
+  "sql_error": false
+}
+[2025-01-06 17:20:36,404] INFO [Remit_agent.core.sql_agent._execute_sql:104] Calling execute_sql_query with query: SELECT er.*
+FROM exchange_rates er
+WHERE (er.base_currency_code = 'NPR' AND er.target_currency_code = 'USD')
+   OR (er.base_currency_code = 'USD' AND er.target_currency_code = 'NPR')
+AND er.rate_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+AND er.rate_date <= CURDATE();
+[2025-01-06 17:20:36,405] INFO [Remit_agent.tools.tools.execute_sql_query:99] === Tools execute_sql_query ===
+[2025-01-06 17:20:36,406] INFO [Remit_agent.tools.tools.execute_sql_query:100] Input query: SELECT er.*
+FROM exchange_rates er
+WHERE (er.base_currency_code = 'NPR' AND er.target_currency_code = 'USD')
+   OR (er.base_currency_code = 'USD' AND er.target_currency_code = 'NPR')
+AND er.rate_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+AND er.rate_date <= CURDATE();
+[2025-01-06 17:20:36,407] ERROR [Remit_agent.tools.tools.execute_sql_query:149] Error executing query: (psycopg2.errors.SyntaxError) syntax error at or near "7"
+LINE 5: AND er.rate_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+                                                         ^
+
+[SQL: SELECT er.*
+FROM exchange_rates er
+WHERE (er.base_currency_code = 'NPR' AND er.target_currency_code = 'USD')
+   OR (er.base_currency_code = 'USD' AND er.target_currency_code = 'NPR')
+AND er.rate_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+AND er.rate_date <= CURDATE();]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+[2025-01-06 17:20:36,408] INFO [Remit_agent.core.sql_agent._execute_sql:106] Result from execute_sql_query: {'success': False, 'error': '(psycopg2.errors.SyntaxError) syntax error at or near "7"\nLINE 5: AND er.rate_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)\n                                                         ^\n\n[SQL: SELECT er.*\nFROM exchange_rates er\nWHERE (er.base_currency_code = \'NPR\' AND er.target_currency_code = \'USD\')\n   OR (er.base_currency_code = \'USD\' AND er.target_currency_code = \'NPR\')\nAND er.rate_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)\nAND er.rate_date <= CURDATE();]\n(Background on this error at: https://sqlalche.me/e/20/f405)', 'rows': None, 'columns': None}
+[2025-01-06 17:20:36,408] ERROR [Remit_agent.core.sql_agent._execute_sql:111] SQL execution failed: (psycopg2.errors.SyntaxError) syntax error at or near "7"
+LINE 5: AND er.rate_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+                                                         ^
+
+[SQL: SELECT er.*
+FROM exchange_rates er
+WHERE (er.base_currency_code = 'NPR' AND er.target_currency_code = 'USD')
+   OR (er.base_currency_code = 'USD' AND er.target_currency_code = 'NPR')
+AND er.rate_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+AND er.rate_date <= CURDATE();]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+[2025-01-06 17:20:36,411] ERROR [Remit_agent.core.sql_agent._regenerate_query:177] Error rewriting question: 'function' object has no attribute 'invoke'
+[2025-01-06 17:20:36,421] INFO [Remit_agent.database.get_database_schema:53] Retrieved database schema
+[2025-01-06 17:20:36,421] INFO [Remit_agent.database.get_database_schema:54] Schema:
+Table: currency
+- currency_code: VARCHAR(3)
+- currency_name: VARCHAR(50)
+
+Table: exchange_rates
+- exchange_rate_id: INTEGER
+- rate_date: DATE
+- base_currency_code: VARCHAR(3)
+- target_currency_code: VARCHAR(3)
+- exchange_rate: NUMERIC(20, 10)
+- unit: INTEGER
+
+[2025-01-06 17:20:37,733] INFO [Remit_agent.tools.tools.convert_to_sql:88] Generated SQL query: SELECT er.*
+FROM exchange_rates er
+WHERE (er.base_currency_code = 'NPR' AND er.target_currency_code = 'USD')
+   OR (er.base_currency_code = 'USD' AND er.target_currency_code = 'NPR')
+AND er.rate_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+AND er.rate_date <= CURDATE()
+ORDER BY er.rate_date DESC;
+[2025-01-06 17:20:37,734] INFO [Remit_agent.core.sql_agent._convert_to_sql:77] Generated SQL query: SELECT er.*
+FROM exchange_rates er
+WHERE (er.base_currency_code = 'NPR' AND er.target_currency_code = 'USD')
+   OR (er.base_currency_code = 'USD' AND er.target_currency_code = 'NPR')
+AND er.rate_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+AND er.rate_date <= CURDATE()
+ORDER BY er.rate_date DESC;
+[2025-01-06 17:20:37,736] INFO [Remit_agent.core.sql_agent._execute_sql:93] === SQL Agent _execute_sql ===
+[2025-01-06 17:20:37,736] INFO [Remit_agent.core.sql_agent._execute_sql:94] Input state: {
+  "question": "Show me the exchange rate between nepal and usa for last 7 days",
+  "sql_query": "SELECT er.*\nFROM exchange_rates er\nWHERE (er.base_currency_code = 'NPR' AND er.target_currency_code = 'USD')\n   OR (er.base_currency_code = 'USD' AND er.target_currency_code = 'NPR')\nAND er.rate_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)\nAND er.rate_date <= CURDATE()\nORDER BY er.rate_date DESC;",
+  "query_result": "Error executing query: (psycopg2.errors.SyntaxError) syntax error at or near \"7\"\nLINE 5: AND er.rate_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)\n                                                         ^\n\n[SQL: SELECT er.*\nFROM exchange_rates er\nWHERE (er.base_currency_code = 'NPR' AND er.target_currency_code = 'USD')\n   OR (er.base_currency_code = 'USD' AND er.target_currency_code = 'NPR')\nAND er.rate_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)\nAND er.rate_date <= CURDATE();]\n(Background on this error at: https://sqlalche.me/e/20/f405)",
+  "query_rows": [],
+  "columns": [],
+  "attempts": 0,
+  "relevance": "relevant",
+  "sql_error": false
+}
+[2025-01-06 17:20:37,736] INFO [Remit_agent.core.sql_agent._execute_sql:104] Calling execute_sql_query with query: SELECT er.*
+FROM exchange_rates er
+WHERE (er.base_currency_code = 'NPR' AND er.target_currency_code = 'USD')
+   OR (er.base_currency_code = 'USD' AND er.target_currency_code = 'NPR')
+AND er.rate_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+AND er.rate_date <= CURDATE()
+ORDER BY er.rate_date DESC;
+[2025-01-06 17:20:37,737] INFO [Remit_agent.tools.tools.execute_sql_query:99] === Tools execute_sql_query ===
+[2025-01-06 17:20:37,738] INFO [Remit_agent.tools.tools.execute_sql_query:100] Input query: SELECT er.*
+FROM exchange_rates er
+WHERE (er.base_currency_code = 'NPR' AND er.target_currency_code = 'USD')
+   OR (er.base_currency_code = 'USD' AND er.target_currency_code = 'NPR')
+AND er.rate_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+AND er.rate_date <= CURDATE()
+ORDER BY er.rate_date DESC;
+[2025-01-06 17:20:37,739] ERROR [Remit_agent.tools.tools.execute_sql_query:149] Error executing query: (psycopg2.errors.SyntaxError) syntax error at or near "7"
+LINE 5: AND er.rate_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+                                                         ^
+
+[SQL: SELECT er.*
+FROM exchange_rates er
+WHERE (er.base_currency_code = 'NPR' AND er.target_currency_code = 'USD')
+   OR (er.base_currency_code = 'USD' AND er.target_currency_code = 'NPR')
+AND er.rate_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+AND er.rate_date <= CURDATE()
+ORDER BY er.rate_date DESC;]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+[2025-01-06 17:20:37,739] INFO [Remit_agent.core.sql_agent._execute_sql:106] Result from execute_sql_query: {'success': False, 'error': '(psycopg2.errors.SyntaxError) syntax error at or near "7"\nLINE 5: AND er.rate_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)\n                                                         ^\n\n[SQL: SELECT er.*\nFROM exchange_rates er\nWHERE (er.base_currency_code = \'NPR\' AND er.target_currency_code = \'USD\')\n   OR (er.base_currency_code = \'USD\' AND er.target_currency_code = \'NPR\')\nAND er.rate_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)\nAND er.rate_date <= CURDATE()\nORDER BY er.rate_date DESC;]\n(Background on this error at: https://sqlalche.me/e/20/f405)', 'rows': None, 'columns': None}
+[2025-01-06 17:20:37,740] ERROR [Remit_agent.core.sql_agent._execute_sql:111] SQL execution failed: (psycopg2.errors.SyntaxError) syntax error at or near "7"
+LINE 5: AND er.rate_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+                                                         ^
+
+[SQL: SELECT er.*
+FROM exchange_rates er
+WHERE (er.base_currency_code = 'NPR' AND er.target_currency_code = 'USD')
+   OR (er.base_currency_code = 'USD' AND er.target_currency_code = 'NPR')
+AND er.rate_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+AND er.rate_date <= CURDATE()
+ORDER BY er.rate_date DESC;]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+[2025-01-06 17:20:37,743] ERROR [Remit_agent.core.sql_agent._regenerate_query:177] Error rewriting question: 'function' object has no attribute 'invoke'
+[2025-01-06 17:20:37,755] INFO [Remit_agent.database.get_database_schema:53] Retrieved database schema
+[2025-01-06 17:20:37,756] INFO [Remit_agent.database.get_database_schema:54] Schema:
+Table: currency
+- currency_code: VARCHAR(3)
+- currency_name: VARCHAR(50)
+
+Table: exchange_rates
+- exchange_rate_id: INTEGER
+- rate_date: DATE
+- base_currency_code: VARCHAR(3)
+- target_currency_code: VARCHAR(3)
+- exchange_rate: NUMERIC(20, 10)
+- unit: INTEGER
+
+[2025-01-06 17:20:39,001] INFO [Remit_agent.tools.tools.convert_to_sql:88] Generated SQL query: SELECT er.*
+FROM exchange_rates er
+WHERE (er.base_currency_code = 'NPR' AND er.target_currency_code = 'USD')
+OR (er.base_currency_code = 'USD' AND er.target_currency_code = 'NPR')
+AND er.rate_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+AND er.rate_date <= CURDATE()
+ORDER BY er.rate_date DESC;
+[2025-01-06 17:20:39,002] INFO [Remit_agent.core.sql_agent._convert_to_sql:77] Generated SQL query: SELECT er.*
+FROM exchange_rates er
+WHERE (er.base_currency_code = 'NPR' AND er.target_currency_code = 'USD')
+OR (er.base_currency_code = 'USD' AND er.target_currency_code = 'NPR')
+AND er.rate_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+AND er.rate_date <= CURDATE()
+ORDER BY er.rate_date DESC;
+[2025-01-06 17:20:39,004] INFO [Remit_agent.core.sql_agent._execute_sql:93] === SQL Agent _execute_sql ===
+[2025-01-06 17:20:39,004] INFO [Remit_agent.core.sql_agent._execute_sql:94] Input state: {
+  "question": "Show me the exchange rate between nepal and usa for last 7 days",
+  "sql_query": "SELECT er.*\nFROM exchange_rates er\nWHERE (er.base_currency_code = 'NPR' AND er.target_currency_code = 'USD')\nOR (er.base_currency_code = 'USD' AND er.target_currency_code = 'NPR')\nAND er.rate_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)\nAND er.rate_date <= CURDATE()\nORDER BY er.rate_date DESC;",
+  "query_result": "Error executing query: (psycopg2.errors.SyntaxError) syntax error at or near \"7\"\nLINE 5: AND er.rate_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)\n                                                         ^\n\n[SQL: SELECT er.*\nFROM exchange_rates er\nWHERE (er.base_currency_code = 'NPR' AND er.target_currency_code = 'USD')\n   OR (er.base_currency_code = 'USD' AND er.target_currency_code = 'NPR')\nAND er.rate_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)\nAND er.rate_date <= CURDATE()\nORDER BY er.rate_date DESC;]\n(Background on this error at: https://sqlalche.me/e/20/f405)",
+  "query_rows": [],
+  "columns": [],
+  "attempts": 0,
+  "relevance": "relevant",
+  "sql_error": false
+}
+[2025-01-06 17:20:39,004] INFO [Remit_agent.core.sql_agent._execute_sql:104] Calling execute_sql_query with query: SELECT er.*
+FROM exchange_rates er
+WHERE (er.base_currency_code = 'NPR' AND er.target_currency_code = 'USD')
+OR (er.base_currency_code = 'USD' AND er.target_currency_code = 'NPR')
+AND er.rate_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+AND er.rate_date <= CURDATE()
+ORDER BY er.rate_date DESC;
+[2025-01-06 17:20:39,006] INFO [Remit_agent.tools.tools.execute_sql_query:99] === Tools execute_sql_query ===
+[2025-01-06 17:20:39,006] INFO [Remit_agent.tools.tools.execute_sql_query:100] Input query: SELECT er.*
+FROM exchange_rates er
+WHERE (er.base_currency_code = 'NPR' AND er.target_currency_code = 'USD')
+OR (er.base_currency_code = 'USD' AND er.target_currency_code = 'NPR')
+AND er.rate_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+AND er.rate_date <= CURDATE()
+ORDER BY er.rate_date DESC;
+[2025-01-06 17:20:39,007] ERROR [Remit_agent.tools.tools.execute_sql_query:149] Error executing query: (psycopg2.errors.SyntaxError) syntax error at or near "7"
+LINE 5: AND er.rate_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+                                                         ^
+
+[SQL: SELECT er.*
+FROM exchange_rates er
+WHERE (er.base_currency_code = 'NPR' AND er.target_currency_code = 'USD')
+OR (er.base_currency_code = 'USD' AND er.target_currency_code = 'NPR')
+AND er.rate_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+AND er.rate_date <= CURDATE()
+ORDER BY er.rate_date DESC;]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+[2025-01-06 17:20:39,008] INFO [Remit_agent.core.sql_agent._execute_sql:106] Result from execute_sql_query: {'success': False, 'error': '(psycopg2.errors.SyntaxError) syntax error at or near "7"\nLINE 5: AND er.rate_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)\n                                                         ^\n\n[SQL: SELECT er.*\nFROM exchange_rates er\nWHERE (er.base_currency_code = \'NPR\' AND er.target_currency_code = \'USD\')\nOR (er.base_currency_code = \'USD\' AND er.target_currency_code = \'NPR\')\nAND er.rate_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)\nAND er.rate_date <= CURDATE()\nORDER BY er.rate_date DESC;]\n(Background on this error at: https://sqlalche.me/e/20/f405)', 'rows': None, 'columns': None}
+[2025-01-06 17:20:39,008] ERROR [Remit_agent.core.sql_agent._execute_sql:111] SQL execution failed: (psycopg2.errors.SyntaxError) syntax error at or near "7"
+LINE 5: AND er.rate_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+                                                         ^
+
+[SQL: SELECT er.*
+FROM exchange_rates er
+WHERE (er.base_currency_code = 'NPR' AND er.target_currency_code = 'USD')
+OR (er.base_currency_code = 'USD' AND er.target_currency_code = 'NPR')
+AND er.rate_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+AND er.rate_date <= CURDATE()
+ORDER BY er.rate_date DESC;]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+[2025-01-06 17:20:39,010] ERROR [Remit_agent.core.sql_agent._regenerate_query:177] Error rewriting question: 'function' object has no attribute 'invoke'
+[2025-01-06 17:20:39,019] INFO [Remit_agent.database.get_database_schema:53] Retrieved database schema
+[2025-01-06 17:20:39,020] INFO [Remit_agent.database.get_database_schema:54] Schema:
+Table: currency
+- currency_code: VARCHAR(3)
+- currency_name: VARCHAR(50)
+
+Table: exchange_rates
+- exchange_rate_id: INTEGER
+- rate_date: DATE
+- base_currency_code: VARCHAR(3)
+- target_currency_code: VARCHAR(3)
+- exchange_rate: NUMERIC(20, 10)
+- unit: INTEGER
+
+[2025-01-06 17:20:40,295] INFO [Remit_agent.tools.tools.convert_to_sql:88] Generated SQL query: SELECT er.*
+FROM exchange_rates er
+WHERE (er.base_currency_code = 'NPR' AND er.target_currency_code = 'USD')
+OR (er.base_currency_code = 'USD' AND er.target_currency_code = 'NPR')
+AND er.rate_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+AND er.rate_date <= CURDATE()
+ORDER BY er.rate_date DESC;
+[2025-01-06 17:20:40,296] INFO [Remit_agent.core.sql_agent._convert_to_sql:77] Generated SQL query: SELECT er.*
+FROM exchange_rates er
+WHERE (er.base_currency_code = 'NPR' AND er.target_currency_code = 'USD')
+OR (er.base_currency_code = 'USD' AND er.target_currency_code = 'NPR')
+AND er.rate_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+AND er.rate_date <= CURDATE()
+ORDER BY er.rate_date DESC;
+[2025-01-06 17:20:40,298] INFO [Remit_agent.core.sql_agent._execute_sql:93] === SQL Agent _execute_sql ===
+[2025-01-06 17:20:40,299] INFO [Remit_agent.core.sql_agent._execute_sql:94] Input state: {
+  "question": "Show me the exchange rate between nepal and usa for last 7 days",
+  "sql_query": "SELECT er.*\nFROM exchange_rates er\nWHERE (er.base_currency_code = 'NPR' AND er.target_currency_code = 'USD')\nOR (er.base_currency_code = 'USD' AND er.target_currency_code = 'NPR')\nAND er.rate_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)\nAND er.rate_date <= CURDATE()\nORDER BY er.rate_date DESC;",
+  "query_result": "Error executing query: (psycopg2.errors.SyntaxError) syntax error at or near \"7\"\nLINE 5: AND er.rate_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)\n                                                         ^\n\n[SQL: SELECT er.*\nFROM exchange_rates er\nWHERE (er.base_currency_code = 'NPR' AND er.target_currency_code = 'USD')\nOR (er.base_currency_code = 'USD' AND er.target_currency_code = 'NPR')\nAND er.rate_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)\nAND er.rate_date <= CURDATE()\nORDER BY er.rate_date DESC;]\n(Background on this error at: https://sqlalche.me/e/20/f405)",
+  "query_rows": [],
+  "columns": [],
+  "attempts": 0,
+  "relevance": "relevant",
+  "sql_error": false
+}
+[2025-01-06 17:20:40,299] INFO [Remit_agent.core.sql_agent._execute_sql:104] Calling execute_sql_query with query: SELECT er.*
+FROM exchange_rates er
+WHERE (er.base_currency_code = 'NPR' AND er.target_currency_code = 'USD')
+OR (er.base_currency_code = 'USD' AND er.target_currency_code = 'NPR')
+AND er.rate_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+AND er.rate_date <= CURDATE()
+ORDER BY er.rate_date DESC;
+[2025-01-06 17:20:40,300] INFO [Remit_agent.tools.tools.execute_sql_query:99] === Tools execute_sql_query ===
+[2025-01-06 17:20:40,301] INFO [Remit_agent.tools.tools.execute_sql_query:100] Input query: SELECT er.*
+FROM exchange_rates er
+WHERE (er.base_currency_code = 'NPR' AND er.target_currency_code = 'USD')
+OR (er.base_currency_code = 'USD' AND er.target_currency_code = 'NPR')
+AND er.rate_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+AND er.rate_date <= CURDATE()
+ORDER BY er.rate_date DESC;
+[2025-01-06 17:20:40,302] ERROR [Remit_agent.tools.tools.execute_sql_query:149] Error executing query: (psycopg2.errors.SyntaxError) syntax error at or near "7"
+LINE 5: AND er.rate_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+                                                         ^
+
+[SQL: SELECT er.*
+FROM exchange_rates er
+WHERE (er.base_currency_code = 'NPR' AND er.target_currency_code = 'USD')
+OR (er.base_currency_code = 'USD' AND er.target_currency_code = 'NPR')
+AND er.rate_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+AND er.rate_date <= CURDATE()
+ORDER BY er.rate_date DESC;]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+[2025-01-06 17:20:40,303] INFO [Remit_agent.core.sql_agent._execute_sql:106] Result from execute_sql_query: {'success': False, 'error': '(psycopg2.errors.SyntaxError) syntax error at or near "7"\nLINE 5: AND er.rate_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)\n                                                         ^\n\n[SQL: SELECT er.*\nFROM exchange_rates er\nWHERE (er.base_currency_code = \'NPR\' AND er.target_currency_code = \'USD\')\nOR (er.base_currency_code = \'USD\' AND er.target_currency_code = \'NPR\')\nAND er.rate_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)\nAND er.rate_date <= CURDATE()\nORDER BY er.rate_date DESC;]\n(Background on this error at: https://sqlalche.me/e/20/f405)', 'rows': None, 'columns': None}
+[2025-01-06 17:20:40,304] ERROR [Remit_agent.core.sql_agent._execute_sql:111] SQL execution failed: (psycopg2.errors.SyntaxError) syntax error at or near "7"
+LINE 5: AND er.rate_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+                                                         ^
+
+[SQL: SELECT er.*
+FROM exchange_rates er
+WHERE (er.base_currency_code = 'NPR' AND er.target_currency_code = 'USD')
+OR (er.base_currency_code = 'USD' AND er.target_currency_code = 'NPR')
+AND er.rate_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+AND er.rate_date <= CURDATE()
+ORDER BY er.rate_date DESC;]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+[2025-01-06 17:20:40,308] ERROR [Remit_agent.core.sql_agent._regenerate_query:177] Error rewriting question: 'function' object has no attribute 'invoke'
+[2025-01-06 17:20:40,318] INFO [Remit_agent.database.get_database_schema:53] Retrieved database schema
+[2025-01-06 17:20:40,319] INFO [Remit_agent.database.get_database_schema:54] Schema:
+Table: currency
+- currency_code: VARCHAR(3)
+- currency_name: VARCHAR(50)
+
+Table: exchange_rates
+- exchange_rate_id: INTEGER
+- rate_date: DATE
+- base_currency_code: VARCHAR(3)
+- target_currency_code: VARCHAR(3)
+- exchange_rate: NUMERIC(20, 10)
+- unit: INTEGER
+
+[2025-01-06 17:20:41,801] INFO [Remit_agent.tools.tools.convert_to_sql:88] Generated SQL query: SELECT er.*
+FROM exchange_rates er
+WHERE (er.base_currency_code = 'NPR' AND er.target_currency_code = 'USD')
+OR (er.base_currency_code = 'USD' AND er.target_currency_code = 'NPR')
+AND er.rate_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+AND er.rate_date <= CURDATE()
+ORDER BY er.rate_date DESC;
+[2025-01-06 17:20:41,802] INFO [Remit_agent.core.sql_agent._convert_to_sql:77] Generated SQL query: SELECT er.*
+FROM exchange_rates er
+WHERE (er.base_currency_code = 'NPR' AND er.target_currency_code = 'USD')
+OR (er.base_currency_code = 'USD' AND er.target_currency_code = 'NPR')
+AND er.rate_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+AND er.rate_date <= CURDATE()
+ORDER BY er.rate_date DESC;
+[2025-01-06 17:20:41,804] INFO [Remit_agent.core.sql_agent._execute_sql:93] === SQL Agent _execute_sql ===
+[2025-01-06 17:20:41,804] INFO [Remit_agent.core.sql_agent._execute_sql:94] Input state: {
+  "question": "Show me the exchange rate between nepal and usa for last 7 days",
+  "sql_query": "SELECT er.*\nFROM exchange_rates er\nWHERE (er.base_currency_code = 'NPR' AND er.target_currency_code = 'USD')\nOR (er.base_currency_code = 'USD' AND er.target_currency_code = 'NPR')\nAND er.rate_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)\nAND er.rate_date <= CURDATE()\nORDER BY er.rate_date DESC;",
+  "query_result": "Error executing query: (psycopg2.errors.SyntaxError) syntax error at or near \"7\"\nLINE 5: AND er.rate_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)\n                                                         ^\n\n[SQL: SELECT er.*\nFROM exchange_rates er\nWHERE (er.base_currency_code = 'NPR' AND er.target_currency_code = 'USD')\nOR (er.base_currency_code = 'USD' AND er.target_currency_code = 'NPR')\nAND er.rate_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)\nAND er.rate_date <= CURDATE()\nORDER BY er.rate_date DESC;]\n(Background on this error at: https://sqlalche.me/e/20/f405)",
+  "query_rows": [],
+  "columns": [],
+  "attempts": 0,
+  "relevance": "relevant",
+  "sql_error": false
+}
+[2025-01-06 17:20:41,805] INFO [Remit_agent.core.sql_agent._execute_sql:104] Calling execute_sql_query with query: SELECT er.*
+FROM exchange_rates er
+WHERE (er.base_currency_code = 'NPR' AND er.target_currency_code = 'USD')
+OR (er.base_currency_code = 'USD' AND er.target_currency_code = 'NPR')
+AND er.rate_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+AND er.rate_date <= CURDATE()
+ORDER BY er.rate_date DESC;
+[2025-01-06 17:20:41,815] INFO [Remit_agent.tools.tools.execute_sql_query:99] === Tools execute_sql_query ===
+[2025-01-06 17:20:41,815] INFO [Remit_agent.tools.tools.execute_sql_query:100] Input query: SELECT er.*
+FROM exchange_rates er
+WHERE (er.base_currency_code = 'NPR' AND er.target_currency_code = 'USD')
+OR (er.base_currency_code = 'USD' AND er.target_currency_code = 'NPR')
+AND er.rate_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+AND er.rate_date <= CURDATE()
+ORDER BY er.rate_date DESC;
+[2025-01-06 17:20:41,816] ERROR [Remit_agent.tools.tools.execute_sql_query:149] Error executing query: (psycopg2.errors.SyntaxError) syntax error at or near "7"
+LINE 5: AND er.rate_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+                                                         ^
+
+[SQL: SELECT er.*
+FROM exchange_rates er
+WHERE (er.base_currency_code = 'NPR' AND er.target_currency_code = 'USD')
+OR (er.base_currency_code = 'USD' AND er.target_currency_code = 'NPR')
+AND er.rate_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+AND er.rate_date <= CURDATE()
+ORDER BY er.rate_date DESC;]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+[2025-01-06 17:20:41,817] INFO [Remit_agent.core.sql_agent._execute_sql:106] Result from execute_sql_query: {'success': False, 'error': '(psycopg2.errors.SyntaxError) syntax error at or near "7"\nLINE 5: AND er.rate_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)\n                                                         ^\n\n[SQL: SELECT er.*\nFROM exchange_rates er\nWHERE (er.base_currency_code = \'NPR\' AND er.target_currency_code = \'USD\')\nOR (er.base_currency_code = \'USD\' AND er.target_currency_code = \'NPR\')\nAND er.rate_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)\nAND er.rate_date <= CURDATE()\nORDER BY er.rate_date DESC;]\n(Background on this error at: https://sqlalche.me/e/20/f405)', 'rows': None, 'columns': None}
+[2025-01-06 17:20:41,817] ERROR [Remit_agent.core.sql_agent._execute_sql:111] SQL execution failed: (psycopg2.errors.SyntaxError) syntax error at or near "7"
+LINE 5: AND er.rate_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+                                                         ^
+
+[SQL: SELECT er.*
+FROM exchange_rates er
+WHERE (er.base_currency_code = 'NPR' AND er.target_currency_code = 'USD')
+OR (er.base_currency_code = 'USD' AND er.target_currency_code = 'NPR')
+AND er.rate_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+AND er.rate_date <= CURDATE()
+ORDER BY er.rate_date DESC;]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+[2025-01-06 17:20:41,821] ERROR [Remit_agent.core.sql_agent._regenerate_query:177] Error rewriting question: 'function' object has no attribute 'invoke'
+[2025-01-06 17:20:41,831] INFO [Remit_agent.database.get_database_schema:53] Retrieved database schema
+[2025-01-06 17:20:41,831] INFO [Remit_agent.database.get_database_schema:54] Schema:
+Table: currency
+- currency_code: VARCHAR(3)
+- currency_name: VARCHAR(50)
+
+Table: exchange_rates
+- exchange_rate_id: INTEGER
+- rate_date: DATE
+- base_currency_code: VARCHAR(3)
+- target_currency_code: VARCHAR(3)
+- exchange_rate: NUMERIC(20, 10)
+- unit: INTEGER
+
+[2025-01-06 17:20:43,012] INFO [Remit_agent.tools.tools.convert_to_sql:88] Generated SQL query: SELECT er.*
+FROM exchange_rates er
+WHERE (er.base_currency_code = 'NPR' AND er.target_currency_code = 'USD')
+OR (er.base_currency_code = 'USD' AND er.target_currency_code = 'NPR')
+AND er.rate_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+AND er.rate_date <= CURDATE();
+[2025-01-06 17:20:43,014] INFO [Remit_agent.core.sql_agent._convert_to_sql:77] Generated SQL query: SELECT er.*
+FROM exchange_rates er
+WHERE (er.base_currency_code = 'NPR' AND er.target_currency_code = 'USD')
+OR (er.base_currency_code = 'USD' AND er.target_currency_code = 'NPR')
+AND er.rate_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+AND er.rate_date <= CURDATE();
+[2025-01-06 17:20:43,018] INFO [Remit_agent.core.sql_agent._execute_sql:93] === SQL Agent _execute_sql ===
+[2025-01-06 17:20:43,019] INFO [Remit_agent.core.sql_agent._execute_sql:94] Input state: {
+  "question": "Show me the exchange rate between nepal and usa for last 7 days",
+  "sql_query": "SELECT er.*\nFROM exchange_rates er\nWHERE (er.base_currency_code = 'NPR' AND er.target_currency_code = 'USD')\nOR (er.base_currency_code = 'USD' AND er.target_currency_code = 'NPR')\nAND er.rate_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)\nAND er.rate_date <= CURDATE();",
+  "query_result": "Error executing query: (psycopg2.errors.SyntaxError) syntax error at or near \"7\"\nLINE 5: AND er.rate_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)\n                                                         ^\n\n[SQL: SELECT er.*\nFROM exchange_rates er\nWHERE (er.base_currency_code = 'NPR' AND er.target_currency_code = 'USD')\nOR (er.base_currency_code = 'USD' AND er.target_currency_code = 'NPR')\nAND er.rate_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)\nAND er.rate_date <= CURDATE()\nORDER BY er.rate_date DESC;]\n(Background on this error at: https://sqlalche.me/e/20/f405)",
+  "query_rows": [],
+  "columns": [],
+  "attempts": 0,
+  "relevance": "relevant",
+  "sql_error": false
+}
+[2025-01-06 17:20:43,019] INFO [Remit_agent.core.sql_agent._execute_sql:104] Calling execute_sql_query with query: SELECT er.*
+FROM exchange_rates er
+WHERE (er.base_currency_code = 'NPR' AND er.target_currency_code = 'USD')
+OR (er.base_currency_code = 'USD' AND er.target_currency_code = 'NPR')
+AND er.rate_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+AND er.rate_date <= CURDATE();
+[2025-01-06 17:20:43,021] INFO [Remit_agent.tools.tools.execute_sql_query:99] === Tools execute_sql_query ===
+[2025-01-06 17:20:43,021] INFO [Remit_agent.tools.tools.execute_sql_query:100] Input query: SELECT er.*
+FROM exchange_rates er
+WHERE (er.base_currency_code = 'NPR' AND er.target_currency_code = 'USD')
+OR (er.base_currency_code = 'USD' AND er.target_currency_code = 'NPR')
+AND er.rate_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+AND er.rate_date <= CURDATE();
+[2025-01-06 17:20:43,022] ERROR [Remit_agent.tools.tools.execute_sql_query:149] Error executing query: (psycopg2.errors.SyntaxError) syntax error at or near "7"
+LINE 5: AND er.rate_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+                                                         ^
+
+[SQL: SELECT er.*
+FROM exchange_rates er
+WHERE (er.base_currency_code = 'NPR' AND er.target_currency_code = 'USD')
+OR (er.base_currency_code = 'USD' AND er.target_currency_code = 'NPR')
+AND er.rate_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+AND er.rate_date <= CURDATE();]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+[2025-01-06 17:20:43,024] INFO [Remit_agent.core.sql_agent._execute_sql:106] Result from execute_sql_query: {'success': False, 'error': '(psycopg2.errors.SyntaxError) syntax error at or near "7"\nLINE 5: AND er.rate_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)\n                                                         ^\n\n[SQL: SELECT er.*\nFROM exchange_rates er\nWHERE (er.base_currency_code = \'NPR\' AND er.target_currency_code = \'USD\')\nOR (er.base_currency_code = \'USD\' AND er.target_currency_code = \'NPR\')\nAND er.rate_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)\nAND er.rate_date <= CURDATE();]\n(Background on this error at: https://sqlalche.me/e/20/f405)', 'rows': None, 'columns': None}
+[2025-01-06 17:20:43,024] ERROR [Remit_agent.core.sql_agent._execute_sql:111] SQL execution failed: (psycopg2.errors.SyntaxError) syntax error at or near "7"
+LINE 5: AND er.rate_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+                                                         ^
+
+[SQL: SELECT er.*
+FROM exchange_rates er
+WHERE (er.base_currency_code = 'NPR' AND er.target_currency_code = 'USD')
+OR (er.base_currency_code = 'USD' AND er.target_currency_code = 'NPR')
+AND er.rate_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+AND er.rate_date <= CURDATE();]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+[2025-01-06 17:20:43,026] ERROR [Remit_agent.core.sql_agent._regenerate_query:177] Error rewriting question: 'function' object has no attribute 'invoke'
+[2025-01-06 17:20:43,030] ERROR [Remit_agent.core.sql_agent.run:289] Error running workflow: Recursion limit of 25 reached without hitting a stop condition. You can increase the limit by setting the `recursion_limit` config key.
+For troubleshooting, visit: https://python.langchain.com/docs/troubleshooting/errors/GRAPH_RECURSION_LIMIT

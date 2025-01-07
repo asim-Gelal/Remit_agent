@@ -1,0 +1,29 @@
+[2025-01-07 14:59:03,164] INFO [Remit_agent.database.get_logger:77] Logger initialized: Remit_agent.database
+[2025-01-07 14:59:03,266] INFO [Remit_agent.tools.tool_monitoring.get_logger:77] Logger initialized: Remit_agent.tools.tool_monitoring
+[2025-01-07 14:59:04,126] INFO [Remit_agent.tools.tools.get_logger:77] Logger initialized: Remit_agent.tools.tools
+[2025-01-07 14:59:04,729] INFO [Remit_agent.core.sql_agent.get_logger:77] Logger initialized: Remit_agent.core.sql_agent
+[2025-01-07 14:59:04,730] INFO [__main__.get_logger:77] Logger initialized: __main__
+[2025-01-07 14:59:05,489] INFO [Remit_agent.core.sql_agent.__init__:24] Initializing SQL Agent...
+[2025-01-07 14:59:06,830] INFO [Remit_agent.database.receive_connect:37] New database connection established
+[2025-01-07 14:59:06,918] INFO [Remit_agent.core.sql_agent.__init__:32] Database connection successful
+[2025-01-07 14:59:07,011] INFO [Remit_agent.core.sql_agent.__init__:42] Number of tables in the database: 207
+[2025-01-07 14:59:07,088] INFO [Remit_agent.core.sql_agent.__init__:48] SQL Agent initialized successfully
+[2025-01-07 14:59:25,318] INFO [__main__.main:239] Processing question: Give me the list of 20 customer of type sender
+[2025-01-07 14:59:25,318] INFO [Remit_agent.core.sql_agent.run:192] Starting workflow with question: Give me the list of 20 customer of type sender
+[2025-01-07 14:59:25,435] INFO [Remit_agent.core.sql_agent._check_relevance:53] Checking relevance for question: Give me the list of 20 customer of type sender
+[2025-01-07 14:59:25,435] INFO [Remit_agent.tools.tools.check_relevance:27] Checking relevance for question: Give me the list of 20 customer of type sender
+[2025-01-07 14:59:27,988] ERROR [Remit_agent.tools.tools.check_relevance:64] Failed to parse relevance check response: Expecting value: line 1 column 1 (char 0)
+[2025-01-07 14:59:27,988] ERROR [Remit_agent.tools.tools.check_relevance:65] Raw response that failed to parse: ```json
+{
+    "relevant": true,
+    "tables": ["dbo.customers"],
+    "breakdown": {
+        "intent": "lookup",
+        "entities": ["customer", "sender"],
+        "conditions": ["type = sender"],
+        "timeframe": "all"
+    },
+    "explanation": "The query is about retrieving a list of customers who are of type 'sender'. This requires accessing the customers table and filtering by the 'type' attribute."
+}
+```
+[2025-01-07 14:59:27,988] INFO [Remit_agent.core.sql_agent._check_relevance:55] Relevance check result: {'relevant': False, 'tables': [], 'breakdown': {'intent': 'unknown', 'entities': [], 'conditions': [], 'timeframe': 'none'}, 'explanation': 'Failed to parse response'}

@@ -1,0 +1,366 @@
+[2025-01-06 16:16:54,922] INFO [Remit_agent.database.get_logger:77] Logger initialized: Remit_agent.database
+[2025-01-06 16:16:54,974] INFO [Remit_agent.tools.tool_monitoring.get_logger:77] Logger initialized: Remit_agent.tools.tool_monitoring
+[2025-01-06 16:16:54,976] INFO [Remit_agent.tools.tools.get_logger:77] Logger initialized: Remit_agent.tools.tools
+[2025-01-06 16:16:55,560] INFO [Remit_agent.core.sql_agent.get_logger:77] Logger initialized: Remit_agent.core.sql_agent
+[2025-01-06 16:16:55,565] INFO [__main__.get_logger:77] Logger initialized: __main__
+[2025-01-06 16:16:56,260] INFO [Remit_agent.core.sql_agent.__init__:56] SQL Agent initialized successfully
+[2025-01-06 16:17:00,945] INFO [__main__.main:249] Processing question: What is the current exchange rate between Nepal and UAE
+[2025-01-06 16:17:00,954] INFO [Remit_agent.core.sql_agent.run:273] Starting workflow with question: What is the current exchange rate between Nepal and UAE
+[2025-01-06 16:17:01,108] INFO [Remit_agent.database.get_database_schema:53] Retrieved database schema
+[2025-01-06 16:17:01,108] INFO [Remit_agent.database.get_database_schema:54] Schema:
+Table: currency
+- currency_code: VARCHAR(3)
+- currency_name: VARCHAR(50)
+
+Table: exchange_rates
+- exchange_rate_id: INTEGER
+- rate_date: DATE
+- base_currency_code: VARCHAR(3)
+- target_currency_code: VARCHAR(3)
+- exchange_rate: NUMERIC(20, 10)
+- unit: INTEGER
+
+[2025-01-06 16:17:01,770] INFO [Remit_agent.tools.tools.check_relevance:74] Relevance check completed with result: relevant
+[2025-01-06 16:17:01,771] INFO [Remit_agent.core.sql_agent._check_relevance:64] Relevance check result: relevant
+[2025-01-06 16:17:01,783] INFO [Remit_agent.database.get_database_schema:53] Retrieved database schema
+[2025-01-06 16:17:01,783] INFO [Remit_agent.database.get_database_schema:54] Schema:
+Table: currency
+- currency_code: VARCHAR(3)
+- currency_name: VARCHAR(50)
+
+Table: exchange_rates
+- exchange_rate_id: INTEGER
+- rate_date: DATE
+- base_currency_code: VARCHAR(3)
+- target_currency_code: VARCHAR(3)
+- exchange_rate: NUMERIC(20, 10)
+- unit: INTEGER
+
+[2025-01-06 16:17:02,953] INFO [Remit_agent.tools.tools.convert_to_sql:88] Generated SQL query: SELECT er.*
+FROM exchange_rates er
+WHERE er.base_currency_code = 'NPR'
+AND er.target_currency_code = 'AED'
+AND er.rate_date = (
+    SELECT MAX(rate_date)
+    FROM exchange_rates
+    WHERE base_currency_code = 'NPR'
+    AND target_currency_code = 'AED'
+);
+[2025-01-06 16:17:02,954] INFO [Remit_agent.core.sql_agent._convert_to_sql:77] Generated SQL query: SELECT er.*
+FROM exchange_rates er
+WHERE er.base_currency_code = 'NPR'
+AND er.target_currency_code = 'AED'
+AND er.rate_date = (
+    SELECT MAX(rate_date)
+    FROM exchange_rates
+    WHERE base_currency_code = 'NPR'
+    AND target_currency_code = 'AED'
+);
+[2025-01-06 16:17:02,958] INFO [Remit_agent.core.sql_agent._execute_sql:93] === SQL Agent _execute_sql ===
+[2025-01-06 16:17:02,958] INFO [Remit_agent.core.sql_agent._execute_sql:94] Input state: {
+  "question": "What is the current exchange rate between Nepal and UAE",
+  "sql_query": "SELECT er.*\nFROM exchange_rates er\nWHERE er.base_currency_code = 'NPR'\nAND er.target_currency_code = 'AED'\nAND er.rate_date = (\n    SELECT MAX(rate_date)\n    FROM exchange_rates\n    WHERE base_currency_code = 'NPR'\n    AND target_currency_code = 'AED'\n);",
+  "query_result": "",
+  "query_rows": [],
+  "columns": [],
+  "attempts": 0,
+  "relevance": "relevant",
+  "sql_error": false
+}
+[2025-01-06 16:17:02,959] INFO [Remit_agent.core.sql_agent._execute_sql:104] Calling execute_sql_query with query: SELECT er.*
+FROM exchange_rates er
+WHERE er.base_currency_code = 'NPR'
+AND er.target_currency_code = 'AED'
+AND er.rate_date = (
+    SELECT MAX(rate_date)
+    FROM exchange_rates
+    WHERE base_currency_code = 'NPR'
+    AND target_currency_code = 'AED'
+);
+[2025-01-06 16:17:02,961] INFO [Remit_agent.tools.tools.execute_sql_query:99] === Tools execute_sql_query ===
+[2025-01-06 16:17:02,962] INFO [Remit_agent.tools.tools.execute_sql_query:100] Input query: SELECT er.*
+FROM exchange_rates er
+WHERE er.base_currency_code = 'NPR'
+AND er.target_currency_code = 'AED'
+AND er.rate_date = (
+    SELECT MAX(rate_date)
+    FROM exchange_rates
+    WHERE base_currency_code = 'NPR'
+    AND target_currency_code = 'AED'
+);
+[2025-01-06 16:17:02,967] INFO [Remit_agent.tools.tools.execute_sql_query:110] Raw query result - Rows: 1, Columns: ['exchange_rate_id', 'rate_date', 'base_currency_code', 'target_currency_code', 'exchange_rate', 'unit']
+[2025-01-06 16:17:02,967] INFO [Remit_agent.tools.tools.execute_sql_query:132] Output result: {'success': True, 'error': None, 'rows': [{'exchange_rate_id': 18591, 'rate_date': '2024-12-23', 'base_currency_code': 'NPR', 'target_currency_code': 'AED', 'exchange_rate': 0.0269396552, 'unit': 1}], 'columns': ['exchange_rate_id', 'rate_date', 'base_currency_code', 'target_currency_code', 'exchange_rate', 'unit']}
+[2025-01-06 16:17:02,967] INFO [Remit_agent.tools.tools.execute_sql_query:133] === End Tools execute_sql_query ===
+[2025-01-06 16:17:02,968] INFO [Remit_agent.core.sql_agent._execute_sql:106] Result from execute_sql_query: {'success': True, 'error': None, 'rows': [{'exchange_rate_id': 18591, 'rate_date': '2024-12-23', 'base_currency_code': 'NPR', 'target_currency_code': 'AED', 'exchange_rate': 0.0269396552, 'unit': 1}], 'columns': ['exchange_rate_id', 'rate_date', 'base_currency_code', 'target_currency_code', 'exchange_rate', 'unit']}
+[2025-01-06 16:17:02,968] INFO [Remit_agent.core.sql_agent._execute_sql:120] Query executed successfully. Processed 1 rows.
+[2025-01-06 16:17:02,970] INFO [Remit_agent.core.sql_agent._execute_sql:129] Output state: {
+  "question": "What is the current exchange rate between Nepal and UAE",
+  "sql_query": "SELECT er.*\nFROM exchange_rates er\nWHERE er.base_currency_code = 'NPR'\nAND er.target_currency_code = 'AED'\nAND er.rate_date = (\n    SELECT MAX(rate_date)\n    FROM exchange_rates\n    WHERE base_currency_code = 'NPR'\n    AND target_currency_code = 'AED'\n);",
+  "query_result": "Query executed successfully",
+  "query_rows": [
+    {
+      "exchange_rate_id": 18591,
+      "rate_date": "2024-12-23",
+      "base_currency_code": "NPR",
+      "target_currency_code": "AED",
+      "exchange_rate": 0.0269396552,
+      "unit": 1
+    }
+  ],
+  "columns": [
+    "exchange_rate_id",
+    "rate_date",
+    "base_currency_code",
+    "target_currency_code",
+    "exchange_rate",
+    "unit"
+  ],
+  "attempts": 0,
+  "relevance": "relevant",
+  "sql_error": false
+}
+[2025-01-06 16:17:02,973] INFO [Remit_agent.core.sql_agent._execute_sql:130] === End SQL Agent _execute_sql ===
+[2025-01-06 16:17:02,976] INFO [Remit_agent.core.sql_agent._generate_human_readable:135] === SQL Agent _generate_human_readable ===
+[2025-01-06 16:17:02,976] INFO [Remit_agent.core.sql_agent._generate_human_readable:136] Input state: {
+  "question": "What is the current exchange rate between Nepal and UAE",
+  "sql_query": "SELECT er.*\nFROM exchange_rates er\nWHERE er.base_currency_code = 'NPR'\nAND er.target_currency_code = 'AED'\nAND er.rate_date = (\n    SELECT MAX(rate_date)\n    FROM exchange_rates\n    WHERE base_currency_code = 'NPR'\n    AND target_currency_code = 'AED'\n);",
+  "query_result": "Query executed successfully",
+  "query_rows": [
+    {
+      "exchange_rate_id": 18591,
+      "rate_date": "2024-12-23",
+      "base_currency_code": "NPR",
+      "target_currency_code": "AED",
+      "exchange_rate": 0.0269396552,
+      "unit": 1
+    }
+  ],
+  "columns": [
+    "exchange_rate_id",
+    "rate_date",
+    "base_currency_code",
+    "target_currency_code",
+    "exchange_rate",
+    "unit"
+  ],
+  "attempts": 0,
+  "relevance": "relevant",
+  "sql_error": false
+}
+[2025-01-06 16:17:02,977] INFO [Remit_agent.core.sql_agent._generate_human_readable:153] Calling generate_human_readable with input: {'input_data': {'sql': "SELECT er.*\nFROM exchange_rates er\nWHERE er.base_currency_code = 'NPR'\nAND er.target_currency_code = 'AED'\nAND er.rate_date = (\n    SELECT MAX(rate_date)\n    FROM exchange_rates\n    WHERE base_currency_code = 'NPR'\n    AND target_currency_code = 'AED'\n);", 'result': {'rows': [{'exchange_rate_id': 18591, 'rate_date': '2024-12-23', 'base_currency_code': 'NPR', 'target_currency_code': 'AED', 'exchange_rate': 0.0269396552, 'unit': 1}], 'columns': ['exchange_rate_id', 'rate_date', 'base_currency_code', 'target_currency_code', 'exchange_rate', 'unit'], 'success': True, 'error': None}}}
+[2025-01-06 16:17:02,988] INFO [Remit_agent.tools.tools.generate_human_readable:169] === Tools generate_human_readable ===
+[2025-01-06 16:17:02,988] INFO [Remit_agent.tools.tools.generate_human_readable:170] Raw input data: {'sql': "SELECT er.*\nFROM exchange_rates er\nWHERE er.base_currency_code = 'NPR'\nAND er.target_currency_code = 'AED'\nAND er.rate_date = (\n    SELECT MAX(rate_date)\n    FROM exchange_rates\n    WHERE base_currency_code = 'NPR'\n    AND target_currency_code = 'AED'\n);", 'result': {'rows': [{'exchange_rate_id': 18591, 'rate_date': '2024-12-23', 'base_currency_code': 'NPR', 'target_currency_code': 'AED', 'exchange_rate': 0.0269396552, 'unit': 1}], 'columns': ['exchange_rate_id', 'rate_date', 'base_currency_code', 'target_currency_code', 'exchange_rate', 'unit'], 'success': True, 'error': None}}
+[2025-01-06 16:17:02,988] INFO [Remit_agent.tools.tools.generate_human_readable:178] Extracted SQL: None
+[2025-01-06 16:17:02,989] INFO [Remit_agent.tools.tools.generate_human_readable:179] Extracted result: {}
+[2025-01-06 16:17:02,989] INFO [Remit_agent.tools.tools.generate_human_readable:182] No rows found in input data
+[2025-01-06 16:17:02,990] INFO [Remit_agent.tools.tools.generate_human_readable:183] === End Tools generate_human_readable ===
+[2025-01-06 16:17:02,990] INFO [Remit_agent.core.sql_agent._generate_human_readable:155] Response from generate_human_readable: No data found for the given query.
+[2025-01-06 16:17:02,990] INFO [Remit_agent.core.sql_agent._generate_human_readable:158] Generated human-readable response
+[2025-01-06 16:17:02,991] INFO [Remit_agent.core.sql_agent._generate_human_readable:163] Output state: {
+  "question": "What is the current exchange rate between Nepal and UAE",
+  "sql_query": "SELECT er.*\nFROM exchange_rates er\nWHERE er.base_currency_code = 'NPR'\nAND er.target_currency_code = 'AED'\nAND er.rate_date = (\n    SELECT MAX(rate_date)\n    FROM exchange_rates\n    WHERE base_currency_code = 'NPR'\n    AND target_currency_code = 'AED'\n);",
+  "query_result": "No data found for the given query.",
+  "query_rows": [
+    {
+      "exchange_rate_id": 18591,
+      "rate_date": "2024-12-23",
+      "base_currency_code": "NPR",
+      "target_currency_code": "AED",
+      "exchange_rate": 0.0269396552,
+      "unit": 1
+    }
+  ],
+  "columns": [
+    "exchange_rate_id",
+    "rate_date",
+    "base_currency_code",
+    "target_currency_code",
+    "exchange_rate",
+    "unit"
+  ],
+  "attempts": 0,
+  "relevance": "relevant",
+  "sql_error": false
+}
+[2025-01-06 16:17:02,991] INFO [Remit_agent.core.sql_agent._generate_human_readable:164] === End SQL Agent _generate_human_readable ===
+[2025-01-06 16:17:02,995] INFO [Remit_agent.core.sql_agent.run:275] Workflow completed successfully
+[2025-01-06 16:20:25,229] INFO [__main__.main:249] Processing question: What is the current exchange rate between Nepal and UAE
+[2025-01-06 16:20:25,229] INFO [Remit_agent.core.sql_agent.run:273] Starting workflow with question: What is the current exchange rate between Nepal and UAE
+[2025-01-06 16:20:25,247] INFO [Remit_agent.database.get_database_schema:53] Retrieved database schema
+[2025-01-06 16:20:25,247] INFO [Remit_agent.database.get_database_schema:54] Schema:
+Table: currency
+- currency_code: VARCHAR(3)
+- currency_name: VARCHAR(50)
+
+Table: exchange_rates
+- exchange_rate_id: INTEGER
+- rate_date: DATE
+- base_currency_code: VARCHAR(3)
+- target_currency_code: VARCHAR(3)
+- exchange_rate: NUMERIC(20, 10)
+- unit: INTEGER
+
+[2025-01-06 16:20:25,819] INFO [Remit_agent.tools.tools.check_relevance:74] Relevance check completed with result: relevant
+[2025-01-06 16:20:25,820] INFO [Remit_agent.core.sql_agent._check_relevance:64] Relevance check result: relevant
+[2025-01-06 16:20:25,834] INFO [Remit_agent.database.get_database_schema:53] Retrieved database schema
+[2025-01-06 16:20:25,834] INFO [Remit_agent.database.get_database_schema:54] Schema:
+Table: currency
+- currency_code: VARCHAR(3)
+- currency_name: VARCHAR(50)
+
+Table: exchange_rates
+- exchange_rate_id: INTEGER
+- rate_date: DATE
+- base_currency_code: VARCHAR(3)
+- target_currency_code: VARCHAR(3)
+- exchange_rate: NUMERIC(20, 10)
+- unit: INTEGER
+
+[2025-01-06 16:20:26,964] INFO [Remit_agent.tools.tools.convert_to_sql:88] Generated SQL query: SELECT er.*
+FROM exchange_rates er
+WHERE er.base_currency_code = 'NPR'
+AND er.target_currency_code = 'AED'
+AND er.rate_date = (
+    SELECT MAX(rate_date)
+    FROM exchange_rates
+    WHERE base_currency_code = 'NPR'
+    AND target_currency_code = 'AED'
+);
+[2025-01-06 16:20:26,965] INFO [Remit_agent.core.sql_agent._convert_to_sql:77] Generated SQL query: SELECT er.*
+FROM exchange_rates er
+WHERE er.base_currency_code = 'NPR'
+AND er.target_currency_code = 'AED'
+AND er.rate_date = (
+    SELECT MAX(rate_date)
+    FROM exchange_rates
+    WHERE base_currency_code = 'NPR'
+    AND target_currency_code = 'AED'
+);
+[2025-01-06 16:20:26,972] INFO [Remit_agent.core.sql_agent._execute_sql:93] === SQL Agent _execute_sql ===
+[2025-01-06 16:20:26,979] INFO [Remit_agent.core.sql_agent._execute_sql:94] Input state: {
+  "question": "What is the current exchange rate between Nepal and UAE",
+  "sql_query": "SELECT er.*\nFROM exchange_rates er\nWHERE er.base_currency_code = 'NPR'\nAND er.target_currency_code = 'AED'\nAND er.rate_date = (\n    SELECT MAX(rate_date)\n    FROM exchange_rates\n    WHERE base_currency_code = 'NPR'\n    AND target_currency_code = 'AED'\n);",
+  "query_result": "",
+  "query_rows": [],
+  "columns": [],
+  "attempts": 0,
+  "relevance": "relevant",
+  "sql_error": false
+}
+[2025-01-06 16:20:26,979] INFO [Remit_agent.core.sql_agent._execute_sql:104] Calling execute_sql_query with query: SELECT er.*
+FROM exchange_rates er
+WHERE er.base_currency_code = 'NPR'
+AND er.target_currency_code = 'AED'
+AND er.rate_date = (
+    SELECT MAX(rate_date)
+    FROM exchange_rates
+    WHERE base_currency_code = 'NPR'
+    AND target_currency_code = 'AED'
+);
+[2025-01-06 16:20:26,981] INFO [Remit_agent.tools.tools.execute_sql_query:99] === Tools execute_sql_query ===
+[2025-01-06 16:20:26,981] INFO [Remit_agent.tools.tools.execute_sql_query:100] Input query: SELECT er.*
+FROM exchange_rates er
+WHERE er.base_currency_code = 'NPR'
+AND er.target_currency_code = 'AED'
+AND er.rate_date = (
+    SELECT MAX(rate_date)
+    FROM exchange_rates
+    WHERE base_currency_code = 'NPR'
+    AND target_currency_code = 'AED'
+);
+[2025-01-06 16:20:26,982] INFO [Remit_agent.tools.tools.execute_sql_query:110] Raw query result - Rows: 1, Columns: ['exchange_rate_id', 'rate_date', 'base_currency_code', 'target_currency_code', 'exchange_rate', 'unit']
+[2025-01-06 16:20:26,984] INFO [Remit_agent.tools.tools.execute_sql_query:132] Output result: {'success': True, 'error': None, 'rows': [{'exchange_rate_id': 18591, 'rate_date': '2024-12-23', 'base_currency_code': 'NPR', 'target_currency_code': 'AED', 'exchange_rate': 0.0269396552, 'unit': 1}], 'columns': ['exchange_rate_id', 'rate_date', 'base_currency_code', 'target_currency_code', 'exchange_rate', 'unit']}
+[2025-01-06 16:20:26,984] INFO [Remit_agent.tools.tools.execute_sql_query:133] === End Tools execute_sql_query ===
+[2025-01-06 16:20:26,985] INFO [Remit_agent.core.sql_agent._execute_sql:106] Result from execute_sql_query: {'success': True, 'error': None, 'rows': [{'exchange_rate_id': 18591, 'rate_date': '2024-12-23', 'base_currency_code': 'NPR', 'target_currency_code': 'AED', 'exchange_rate': 0.0269396552, 'unit': 1}], 'columns': ['exchange_rate_id', 'rate_date', 'base_currency_code', 'target_currency_code', 'exchange_rate', 'unit']}
+[2025-01-06 16:20:26,985] INFO [Remit_agent.core.sql_agent._execute_sql:120] Query executed successfully. Processed 1 rows.
+[2025-01-06 16:20:26,985] INFO [Remit_agent.core.sql_agent._execute_sql:129] Output state: {
+  "question": "What is the current exchange rate between Nepal and UAE",
+  "sql_query": "SELECT er.*\nFROM exchange_rates er\nWHERE er.base_currency_code = 'NPR'\nAND er.target_currency_code = 'AED'\nAND er.rate_date = (\n    SELECT MAX(rate_date)\n    FROM exchange_rates\n    WHERE base_currency_code = 'NPR'\n    AND target_currency_code = 'AED'\n);",
+  "query_result": "Query executed successfully",
+  "query_rows": [
+    {
+      "exchange_rate_id": 18591,
+      "rate_date": "2024-12-23",
+      "base_currency_code": "NPR",
+      "target_currency_code": "AED",
+      "exchange_rate": 0.0269396552,
+      "unit": 1
+    }
+  ],
+  "columns": [
+    "exchange_rate_id",
+    "rate_date",
+    "base_currency_code",
+    "target_currency_code",
+    "exchange_rate",
+    "unit"
+  ],
+  "attempts": 0,
+  "relevance": "relevant",
+  "sql_error": false
+}
+[2025-01-06 16:20:26,986] INFO [Remit_agent.core.sql_agent._execute_sql:130] === End SQL Agent _execute_sql ===
+[2025-01-06 16:20:26,989] INFO [Remit_agent.core.sql_agent._generate_human_readable:135] === SQL Agent _generate_human_readable ===
+[2025-01-06 16:20:26,989] INFO [Remit_agent.core.sql_agent._generate_human_readable:136] Input state: {
+  "question": "What is the current exchange rate between Nepal and UAE",
+  "sql_query": "SELECT er.*\nFROM exchange_rates er\nWHERE er.base_currency_code = 'NPR'\nAND er.target_currency_code = 'AED'\nAND er.rate_date = (\n    SELECT MAX(rate_date)\n    FROM exchange_rates\n    WHERE base_currency_code = 'NPR'\n    AND target_currency_code = 'AED'\n);",
+  "query_result": "Query executed successfully",
+  "query_rows": [
+    {
+      "exchange_rate_id": 18591,
+      "rate_date": "2024-12-23",
+      "base_currency_code": "NPR",
+      "target_currency_code": "AED",
+      "exchange_rate": 0.0269396552,
+      "unit": 1
+    }
+  ],
+  "columns": [
+    "exchange_rate_id",
+    "rate_date",
+    "base_currency_code",
+    "target_currency_code",
+    "exchange_rate",
+    "unit"
+  ],
+  "attempts": 0,
+  "relevance": "relevant",
+  "sql_error": false
+}
+[2025-01-06 16:20:26,990] INFO [Remit_agent.core.sql_agent._generate_human_readable:153] Calling generate_human_readable with input: {'input_data': {'sql': "SELECT er.*\nFROM exchange_rates er\nWHERE er.base_currency_code = 'NPR'\nAND er.target_currency_code = 'AED'\nAND er.rate_date = (\n    SELECT MAX(rate_date)\n    FROM exchange_rates\n    WHERE base_currency_code = 'NPR'\n    AND target_currency_code = 'AED'\n);", 'result': {'rows': [{'exchange_rate_id': 18591, 'rate_date': '2024-12-23', 'base_currency_code': 'NPR', 'target_currency_code': 'AED', 'exchange_rate': 0.0269396552, 'unit': 1}], 'columns': ['exchange_rate_id', 'rate_date', 'base_currency_code', 'target_currency_code', 'exchange_rate', 'unit'], 'success': True, 'error': None}}}
+[2025-01-06 16:20:26,991] INFO [Remit_agent.tools.tools.generate_human_readable:169] === Tools generate_human_readable ===
+[2025-01-06 16:20:26,991] INFO [Remit_agent.tools.tools.generate_human_readable:170] Raw input data: {'sql': "SELECT er.*\nFROM exchange_rates er\nWHERE er.base_currency_code = 'NPR'\nAND er.target_currency_code = 'AED'\nAND er.rate_date = (\n    SELECT MAX(rate_date)\n    FROM exchange_rates\n    WHERE base_currency_code = 'NPR'\n    AND target_currency_code = 'AED'\n);", 'result': {'rows': [{'exchange_rate_id': 18591, 'rate_date': '2024-12-23', 'base_currency_code': 'NPR', 'target_currency_code': 'AED', 'exchange_rate': 0.0269396552, 'unit': 1}], 'columns': ['exchange_rate_id', 'rate_date', 'base_currency_code', 'target_currency_code', 'exchange_rate', 'unit'], 'success': True, 'error': None}}
+[2025-01-06 16:20:26,991] INFO [Remit_agent.tools.tools.generate_human_readable:178] Extracted SQL: None
+[2025-01-06 16:20:26,992] INFO [Remit_agent.tools.tools.generate_human_readable:179] Extracted result: {}
+[2025-01-06 16:20:26,992] INFO [Remit_agent.tools.tools.generate_human_readable:182] No rows found in input data
+[2025-01-06 16:20:26,992] INFO [Remit_agent.tools.tools.generate_human_readable:183] === End Tools generate_human_readable ===
+[2025-01-06 16:20:26,993] INFO [Remit_agent.core.sql_agent._generate_human_readable:155] Response from generate_human_readable: No data found for the given query.
+[2025-01-06 16:20:26,993] INFO [Remit_agent.core.sql_agent._generate_human_readable:158] Generated human-readable response
+[2025-01-06 16:20:26,993] INFO [Remit_agent.core.sql_agent._generate_human_readable:163] Output state: {
+  "question": "What is the current exchange rate between Nepal and UAE",
+  "sql_query": "SELECT er.*\nFROM exchange_rates er\nWHERE er.base_currency_code = 'NPR'\nAND er.target_currency_code = 'AED'\nAND er.rate_date = (\n    SELECT MAX(rate_date)\n    FROM exchange_rates\n    WHERE base_currency_code = 'NPR'\n    AND target_currency_code = 'AED'\n);",
+  "query_result": "No data found for the given query.",
+  "query_rows": [
+    {
+      "exchange_rate_id": 18591,
+      "rate_date": "2024-12-23",
+      "base_currency_code": "NPR",
+      "target_currency_code": "AED",
+      "exchange_rate": 0.0269396552,
+      "unit": 1
+    }
+  ],
+  "columns": [
+    "exchange_rate_id",
+    "rate_date",
+    "base_currency_code",
+    "target_currency_code",
+    "exchange_rate",
+    "unit"
+  ],
+  "attempts": 0,
+  "relevance": "relevant",
+  "sql_error": false
+}
+[2025-01-06 16:20:27,000] INFO [Remit_agent.core.sql_agent._generate_human_readable:164] === End SQL Agent _generate_human_readable ===
+[2025-01-06 16:20:27,003] INFO [Remit_agent.core.sql_agent.run:275] Workflow completed successfully

@@ -1,0 +1,87 @@
+[2025-01-05 22:19:02,236] INFO [Remit_agent.database.get_logger:77] Logger initialized: Remit_agent.database
+[2025-01-05 22:19:02,291] INFO [Remit_agent.tools.tool_monitoring.get_logger:77] Logger initialized: Remit_agent.tools.tool_monitoring
+[2025-01-05 22:19:02,292] INFO [Remit_agent.tools.tools.get_logger:77] Logger initialized: Remit_agent.tools.tools
+[2025-01-05 22:19:02,924] INFO [Remit_agent.core.sql_agent.get_logger:77] Logger initialized: Remit_agent.core.sql_agent
+[2025-01-05 22:19:02,926] INFO [__main__.get_logger:77] Logger initialized: __main__
+[2025-01-05 22:19:07,022] INFO [__main__.main:249] Processing question: What is the current exchange rate between nepal and UAE
+[2025-01-05 22:19:07,032] INFO [Remit_agent.core.sql_agent.run:230] Starting workflow with question: What is the current exchange rate between nepal and UAE
+[2025-01-05 22:19:07,187] INFO [Remit_agent.database.get_database_schema:53] Retrieved database schema
+[2025-01-05 22:19:07,187] INFO [Remit_agent.database.get_database_schema:54] Schema:
+Table: currency
+- currency_code: VARCHAR(3)
+- currency_name: VARCHAR(50)
+
+Table: exchange_rates
+- exchange_rate_id: INTEGER
+- rate_date: DATE
+- base_currency_code: VARCHAR(3)
+- target_currency_code: VARCHAR(3)
+- exchange_rate: NUMERIC(20, 10)
+- unit: INTEGER
+
+[2025-01-05 22:19:08,353] INFO [Remit_agent.tools.tools.check_relevance:73] Relevance check completed with result: relevant
+[2025-01-05 22:19:08,354] INFO [Remit_agent.core.sql_agent._check_relevance:41] Relevance check result: relevant
+[2025-01-05 22:19:08,364] INFO [Remit_agent.database.get_database_schema:53] Retrieved database schema
+[2025-01-05 22:19:08,366] INFO [Remit_agent.database.get_database_schema:54] Schema:
+Table: currency
+- currency_code: VARCHAR(3)
+- currency_name: VARCHAR(50)
+
+Table: exchange_rates
+- exchange_rate_id: INTEGER
+- rate_date: DATE
+- base_currency_code: VARCHAR(3)
+- target_currency_code: VARCHAR(3)
+- exchange_rate: NUMERIC(20, 10)
+- unit: INTEGER
+
+[2025-01-05 22:19:09,441] INFO [Remit_agent.tools.tools.convert_to_sql:88] Generated SQL query: SELECT er.*
+FROM exchange_rates er
+WHERE er.base_currency_code = 'NPR'
+AND er.target_currency_code = 'AED'
+AND er.rate_date = (
+    SELECT MAX(rate_date)
+    FROM exchange_rates
+    WHERE base_currency_code = 'NPR'
+    AND target_currency_code = 'AED'
+);
+[2025-01-05 22:19:09,442] INFO [Remit_agent.core.sql_agent._convert_to_sql:52] Successfully generated SQL query: SELECT er.*
+FROM exchange_rates er
+WHERE er.base_currency_code = 'NPR'
+AND er.target_currency_code = 'AED'
+AND er.rate_date = (
+    SELECT MAX(rate_date)
+    FROM exchange_rates
+    WHERE base_currency_code = 'NPR'
+    AND target_currency_code = 'AED'
+);
+[2025-01-05 22:19:09,442] INFO [Remit_agent.core.sql_agent._convert_to_sql:58] State updated - SQL Query: SELECT er.*
+FROM exchange_rates er
+WHERE er.base_currency_code = 'NPR'
+AND er.target_currency_code = 'AED'
+AND er.rate_date = (
+    SELECT MAX(rate_date)
+    FROM exchange_rates
+    WHERE base_currency_code = 'NPR'
+    AND target_currency_code = 'AED'
+);, Error: False
+[2025-01-05 22:19:09,446] INFO [Remit_agent.tools.tools.execute_sql_query:102] Executing query: SELECT er.*
+FROM exchange_rates er
+WHERE er.base_currency_code = 'NPR'
+AND er.target_currency_code = 'AED'
+AND er.rate_date = (
+    SELECT MAX(rate_date)
+    FROM exchange_rates
+    WHERE base_currency_code = 'NPR'
+    AND target_currency_code = 'AED'
+);
+[2025-01-05 22:19:09,448] INFO [Remit_agent.tools.tools.execute_sql_query:108] Query executed successfully. Fetched 1 rows.
+[2025-01-05 22:19:09,450] INFO [Remit_agent.core.sql_agent._execute_sql:77] Result from execute_sql_query: {'success': True, 'error': None, 'rows': [{'exchange_rate_id': 18591, 'rate_date': '2024-12-23', 'base_currency_code': 'NPR', 'target_currency_code': 'AED', 'exchange_rate': 0.0269396552, 'unit': 1}], 'columns': ['exchange_rate_id', 'rate_date', 'base_currency_code', 'target_currency_code', 'exchange_rate', 'unit']}
+[2025-01-05 22:19:09,450] INFO [Remit_agent.core.sql_agent._execute_sql:90] Query executed successfully. Processed 1 rows.
+[2025-01-05 22:19:09,452] INFO [Remit_agent.core.sql_agent._generate_human_readable:115] Preparing data for human readable response: {'sql': "SELECT er.*\nFROM exchange_rates er\nWHERE er.base_currency_code = 'NPR'\nAND er.target_currency_code = 'AED'\nAND er.rate_date = (\n    SELECT MAX(rate_date)\n    FROM exchange_rates\n    WHERE base_currency_code = 'NPR'\n    AND target_currency_code = 'AED'\n);", 'result': {'query_result': 'Query executed successfully', 'query_rows': [{'exchange_rate_id': 18591, 'rate_date': '2024-12-23', 'base_currency_code': 'NPR', 'target_currency_code': 'AED', 'exchange_rate': 0.0269396552, 'unit': 1}], 'sql_error': False}}
+[2025-01-05 22:19:09,464] ERROR [Remit_agent.core.sql_agent._generate_human_readable:121] Error generating readable response: 1 validation error for generate_human_readable
+data
+  Field required [type=missing, input_value={'sql': "SELECT er.*\nFRO...}], 'sql_error': False}}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.10/v/missing
+[2025-01-05 22:19:09,466] INFO [Remit_agent.core.sql_agent.run:235] Workflow completed successfully
+[2025-01-05 22:19:09,466] ERROR [__main__.main:270] Error processing question: `st.session_state.user_input` cannot be modified after the widget with key `user_input` is instantiated.

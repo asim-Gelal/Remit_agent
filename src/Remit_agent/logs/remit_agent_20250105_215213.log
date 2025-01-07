@@ -1,0 +1,114 @@
+[2025-01-05 21:52:13,816] INFO [Remit_agent.database.get_logger:77] Logger initialized: Remit_agent.database
+[2025-01-05 21:52:13,864] INFO [Remit_agent.tools.tool_monitoring.get_logger:77] Logger initialized: Remit_agent.tools.tool_monitoring
+[2025-01-05 21:52:13,865] INFO [Remit_agent.tools.tools.get_logger:77] Logger initialized: Remit_agent.tools.tools
+[2025-01-05 21:52:14,482] INFO [Remit_agent.core.sql_agent.get_logger:77] Logger initialized: Remit_agent.core.sql_agent
+[2025-01-05 21:52:14,484] INFO [__main__.get_logger:77] Logger initialized: __main__
+[2025-01-05 21:53:05,117] INFO [__main__.main:240] Processing question: I want to send  5000 money to nepal from India.  How much will my family receive in Nepal
+[2025-01-05 21:53:05,127] INFO [Remit_agent.core.sql_agent.run:221] Starting workflow with question: I want to send  5000 money to nepal from India.  How much will my family receive in Nepal
+[2025-01-05 21:53:05,431] INFO [Remit_agent.database.get_database_schema:53] Retrieved database schema
+[2025-01-05 21:53:05,432] INFO [Remit_agent.database.get_database_schema:54] Schema:
+Table: currency
+- currency_code: VARCHAR(3)
+- currency_name: VARCHAR(50)
+
+Table: exchange_rates
+- exchange_rate_id: INTEGER
+- rate_date: DATE
+- base_currency_code: VARCHAR(3)
+- target_currency_code: VARCHAR(3)
+- exchange_rate: NUMERIC(20, 10)
+- unit: INTEGER
+
+[2025-01-05 21:53:05,924] INFO [Remit_agent.tools.tools.check_relevance:75] Relevance check completed with result: relevant
+[2025-01-05 21:53:05,924] INFO [Remit_agent.core.sql_agent._check_relevance:41] Relevance check result: relevant
+[2025-01-05 21:53:05,938] INFO [Remit_agent.database.get_database_schema:53] Retrieved database schema
+[2025-01-05 21:53:05,939] INFO [Remit_agent.database.get_database_schema:54] Schema:
+Table: currency
+- currency_code: VARCHAR(3)
+- currency_name: VARCHAR(50)
+
+Table: exchange_rates
+- exchange_rate_id: INTEGER
+- rate_date: DATE
+- base_currency_code: VARCHAR(3)
+- target_currency_code: VARCHAR(3)
+- exchange_rate: NUMERIC(20, 10)
+- unit: INTEGER
+
+[2025-01-05 21:53:07,799] INFO [Remit_agent.tools.tools.convert_to_sql:89] Generated SQL query: SELECT 
+    c1.currency_name as from_currency,
+    c2.currency_name as to_currency,
+    er.rate_date,
+    er.exchange_rate,
+    (5000 * er.exchange_rate / er.unit) as received_amount_in_nepal
+FROM exchange_rates er
+JOIN currency c1 ON er.base_currency_code = c1.currency_code
+JOIN currency c2 ON er.target_currency_code = c2.currency_code
+WHERE er.base_currency_code = 'INR'
+AND er.target_currency_code = 'NPR'
+AND er.rate_date = (
+    SELECT MAX(rate_date)
+    FROM exchange_rates
+    WHERE base_currency_code = 'INR'
+    AND target_currency_code = 'NPR'
+);
+[2025-01-05 21:53:07,800] INFO [Remit_agent.core.sql_agent._convert_to_sql:52] Successfully generated SQL query: SELECT 
+    c1.currency_name as from_currency,
+    c2.currency_name as to_currency,
+    er.rate_date,
+    er.exchange_rate,
+    (5000 * er.exchange_rate / er.unit) as received_amount_in_nepal
+FROM exchange_rates er
+JOIN currency c1 ON er.base_currency_code = c1.currency_code
+JOIN currency c2 ON er.target_currency_code = c2.currency_code
+WHERE er.base_currency_code = 'INR'
+AND er.target_currency_code = 'NPR'
+AND er.rate_date = (
+    SELECT MAX(rate_date)
+    FROM exchange_rates
+    WHERE base_currency_code = 'INR'
+    AND target_currency_code = 'NPR'
+);
+[2025-01-05 21:53:07,801] INFO [Remit_agent.core.sql_agent._convert_to_sql:58] State updated - SQL Query: SELECT 
+    c1.currency_name as from_currency,
+    c2.currency_name as to_currency,
+    er.rate_date,
+    er.exchange_rate,
+    (5000 * er.exchange_rate / er.unit) as received_amount_in_nepal
+FROM exchange_rates er
+JOIN currency c1 ON er.base_currency_code = c1.currency_code
+JOIN currency c2 ON er.target_currency_code = c2.currency_code
+WHERE er.base_currency_code = 'INR'
+AND er.target_currency_code = 'NPR'
+AND er.rate_date = (
+    SELECT MAX(rate_date)
+    FROM exchange_rates
+    WHERE base_currency_code = 'INR'
+    AND target_currency_code = 'NPR'
+);, Error: False
+[2025-01-05 21:53:07,807] INFO [Remit_agent.tools.tools.execute_sql_query:102] Executing query: SELECT 
+    c1.currency_name as from_currency,
+    c2.currency_name as to_currency,
+    er.rate_date,
+    er.exchange_rate,
+    (5000 * er.exchange_rate / er.unit) as received_amount_in_nepal
+FROM exchange_rates er
+JOIN currency c1 ON er.base_currency_code = c1.currency_code
+JOIN currency c2 ON er.target_currency_code = c2.currency_code
+WHERE er.base_currency_code = 'INR'
+AND er.target_currency_code = 'NPR'
+AND er.rate_date = (
+    SELECT MAX(rate_date)
+    FROM exchange_rates
+    WHERE base_currency_code = 'INR'
+    AND target_currency_code = 'NPR'
+);
+[2025-01-05 21:53:07,828] INFO [Remit_agent.tools.tools.execute_sql_query:109] Query executed successfully. Fetched 1 rows.
+[2025-01-05 21:53:07,828] INFO [Remit_agent.core.sql_agent._execute_sql:77] Result from execute_sql_query: {'success': True, 'error': None, 'rows': [{'from_currency': 'Indian Rupee', 'to_currency': 'Nepalese Rupee', 'rate_date': datetime.date(2024, 12, 23), 'exchange_rate': Decimal('160.0000000000'), 'received_amount_in_nepal': Decimal('800000.000000000000')}], 'columns': ['from_currency', 'to_currency', 'rate_date', 'exchange_rate', 'received_amount_in_nepal']}
+[2025-01-05 21:53:07,829] INFO [Remit_agent.core.sql_agent._execute_sql:90] Query executed successfully. Processed 1 rows.
+[2025-01-05 21:53:07,834] ERROR [Remit_agent.core.sql_agent._generate_human_readable:112] Error generating readable response: 1 validation error for generate_human_readable
+data
+  Field required [type=missing, input_value={'sql': "SELECT \n    c1....t', 'sql_error': False}}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.10/v/missing
+[2025-01-05 21:53:07,835] INFO [Remit_agent.core.sql_agent.run:226] Workflow completed successfully
+[2025-01-05 21:53:07,836] ERROR [__main__.main:261] Error processing question: `st.session_state.user_input` cannot be modified after the widget with key `user_input` is instantiated.

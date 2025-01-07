@@ -1,0 +1,21 @@
+[2025-01-07 09:01:46,068] INFO [Remit_agent.database.get_logger:77] Logger initialized: Remit_agent.database
+[2025-01-07 09:01:46,991] INFO [Remit_agent.tools.tool_monitoring.get_logger:77] Logger initialized: Remit_agent.tools.tool_monitoring
+[2025-01-07 09:01:46,992] INFO [Remit_agent.tools.tools.get_logger:77] Logger initialized: Remit_agent.tools.tools
+[2025-01-07 09:01:47,590] INFO [Remit_agent.core.sql_agent.get_logger:77] Logger initialized: Remit_agent.core.sql_agent
+[2025-01-07 09:01:47,591] INFO [__main__.get_logger:77] Logger initialized: __main__
+[2025-01-07 09:01:48,265] INFO [Remit_agent.core.sql_agent.__init__:33] Initializing SQL Agent...
+[2025-01-07 09:01:49,783] INFO [Remit_agent.database.receive_connect:37] New database connection established
+[2025-01-07 09:01:49,879] INFO [Remit_agent.core.sql_agent.__init__:40] Database connection successful
+[2025-01-07 09:01:49,966] INFO [Remit_agent.core.sql_agent.__init__:45] SQL Agent initialized successfully
+[2025-01-07 09:01:58,168] INFO [__main__.main:249] Processing question: Give me the list of 20 customers
+[2025-01-07 09:01:58,168] INFO [Remit_agent.core.sql_agent.run:169] Starting workflow with question: Give me the list of 20 customers
+[2025-01-07 09:01:58,265] INFO [Remit_agent.tools.tools.check_relevance:37] Checking relevance for question: Give me the list of 20 customers
+[2025-01-07 09:01:59,422] INFO [Remit_agent.tools.tools.check_relevance:66] Relevance check completed: {'relevant': True, 'tables': ['dbo.customers'], 'breakdown': {'intent': 'list', 'entities': [], 'conditions': [], 'timeframe': 'none'}, 'explanation': 'Query is requesting a list of customers, which can be directly retrieved from the customers table'}
+[2025-01-07 09:01:59,470] ERROR [Remit_agent.core.sql_agent._convert_to_sql:75] Error in SQL conversion: 1 validation error for convert_to_sql
+relevance_result
+  Field required [type=missing, input_value={'question': 'Give me the list of 20 customers'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.10/v/missing
+[2025-01-07 09:01:59,495] ERROR [Remit_agent.core.sql_agent._generate_human_readable:131] Error generating readable response: 1 validation error for generate_human_readable
+input_data
+  Field required [type=missing, input_value={'sql': '', 'result': {'r...: [], 'success': False}}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.10/v/missing

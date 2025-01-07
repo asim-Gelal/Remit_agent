@@ -1,0 +1,3686 @@
+[2025-01-07 15:05:04,927] INFO [Remit_agent.database.get_logger:77] Logger initialized: Remit_agent.database
+[2025-01-07 15:05:05,065] INFO [Remit_agent.tools.tool_monitoring.get_logger:77] Logger initialized: Remit_agent.tools.tool_monitoring
+[2025-01-07 15:05:06,656] INFO [Remit_agent.tools.tools.get_logger:77] Logger initialized: Remit_agent.tools.tools
+[2025-01-07 15:05:07,834] INFO [Remit_agent.core.sql_agent.get_logger:77] Logger initialized: Remit_agent.core.sql_agent
+[2025-01-07 15:05:07,834] INFO [__main__.get_logger:77] Logger initialized: __main__
+[2025-01-07 15:05:09,107] INFO [Remit_agent.core.sql_agent.__init__:24] Initializing SQL Agent...
+[2025-01-07 15:05:11,813] INFO [Remit_agent.database.receive_connect:37] New database connection established
+[2025-01-07 15:05:11,919] INFO [Remit_agent.core.sql_agent.__init__:32] Database connection successful
+[2025-01-07 15:05:12,017] INFO [Remit_agent.core.sql_agent.__init__:42] Number of tables in the database: 207
+[2025-01-07 15:05:12,120] INFO [Remit_agent.core.sql_agent.__init__:48] SQL Agent initialized successfully
+[2025-01-07 15:05:18,648] INFO [__main__.main:239] Processing question: give me the customer with highest transaction amount
+[2025-01-07 15:05:18,650] INFO [Remit_agent.core.sql_agent.run:192] Starting workflow with question: give me the customer with highest transaction amount
+[2025-01-07 15:05:18,820] INFO [Remit_agent.core.sql_agent._check_relevance:53] Checking relevance for question: give me the customer with highest transaction amount
+[2025-01-07 15:05:18,820] INFO [Remit_agent.tools.tools.check_relevance:27] Checking relevance for question: give me the customer with highest transaction amount
+[2025-01-07 15:05:21,432] INFO [Remit_agent.tools.tools.check_relevance:57] Relevance check completed: {'relevant': True, 'tables': ['dbo.customers', 'dbo.remitTransactions'], 'breakdown': {'intent': 'aggregation', 'entities': [], 'conditions': ['highest transaction amount'], 'timeframe': 'all'}, 'explanation': 'The query involves finding the customer associated with the highest transaction amount, requiring aggregation of transaction data and linking it to customer information.'}
+[2025-01-07 15:05:21,433] INFO [Remit_agent.core.sql_agent._check_relevance:55] Relevance check result: {'relevant': True, 'tables': ['dbo.customers', 'dbo.remitTransactions'], 'breakdown': {'intent': 'aggregation', 'entities': [], 'conditions': ['highest transaction amount'], 'timeframe': 'all'}, 'explanation': 'The query involves finding the customer associated with the highest transaction amount, requiring aggregation of transaction data and linking it to customer information.'}
+[2025-01-07 15:05:21,436] INFO [Remit_agent.tools.tools.convert_to_sql:95] Converting to SQL - Question: give me the customer with highest transaction amount
+[2025-01-07 15:05:21,437] INFO [Remit_agent.tools.tools.convert_to_sql:96] Context: {'relevant': True, 'tables': ['dbo.customers', 'dbo.remitTransactions'], 'breakdown': {'intent': 'aggregation', 'entities': [], 'conditions': ['highest transaction amount'], 'timeframe': 'all'}, 'explanation': 'The query involves finding the customer associated with the highest transaction amount, requiring aggregation of transaction data and linking it to customer information.'}
+[2025-01-07 15:05:21,639] INFO [Remit_agent.database.get_database_schema:185] Retrieved schema:
+
+Table: customers
+- id: uniqueidentifier NOT NULL (Primary Key)
+- customer_id: varchar NULL
+- full_name: varchar NULL
+- customer_type: varchar NULL
+- customer_category: varchar NULL
+- country: char NULL
+- timezone: varchar NULL
+- profile_picture: varchar NULL
+- current_status: int NULL
+- mobile_no: varchar NULL
+- user_language: varchar NULL
+- create_by: uniqueidentifier NULL
+- create_date: datetime NULL
+- update_by: uniqueidentifier NULL
+- update_date: datetime NULL
+- lock_by: varchar NULL
+- lock_date: datetime NULL
+- is_active: bit NULL
+- balance: money NULL
+- referal_code: uniqueidentifier NULL
+- enable_remittance: bit NULL
+- enable_wallet: bit NULL
+- enable_online: bit NULL
+- delete_customer: bit NULL
+- suspend_customer: bit NULL
+- approve_by: uniqueidentifier NULL
+- approve_date: datetime NULL
+- create_agent_key: uniqueidentifier NULL
+- sanction_screen: bit NULL
+- sanction_status: bit NULL
+- sanction_date: datetime NULL
+- kyc_status_by: uniqueidentifier NULL
+- kyc_status_date: datetime NULL
+- kyc_approve: bit NULL
+- referal_customer_key: uniqueidentifier NULL
+- referal_own_code: varchar NULL
+- points: money NULL
+- risk_score: int NULL
+- risk_score_detail: varchar NULL
+- self_risk_score: int NULL
+- additional_risk: int NULL
+- row_version: timestamp NOT NULL
+
+Table: remitTransactions
+- id: uniqueidentifier NOT NULL (Primary Key)
+- remit_pin_number: varchar NULL
+- send_country: varchar NULL
+- send_agent_id: uniqueidentifier NULL
+- send_agent_name: varchar NULL
+- payment_method: varchar NULL
+- transaction_type: varchar NULL
+- send_amount: money NULL
+- service_fee: money NULL
+- exchange_rate: numeric NULL
+- collect_amount: money NULL
+- send_currency: varchar NULL
+- send_ccy_buy_rate: numeric NULL
+- send_ccy_sell_rate: numeric NULL
+- send_amount_usd: money NULL
+- service_fee_usd: money NULL
+- collect_amount_usd: money NULL
+- send_commission: money NULL
+- send_commission_currency: varchar NULL
+- send_forex_gain: money NULL
+- receive_country: varchar NULL
+- receive_agent_id: uniqueidentifier NULL
+- receive_agent_name: varchar NULL
+- receive_amount: money NULL
+- receive_currency: varchar NULL
+- receive_ccy_buy_rate: numeric NULL
+- receive_ccy_sell_rate: numeric NULL
+- receive_settlement_rate: numeric NULL
+- receive_settlement_currency: varchar NULL
+- receive_settlement_amount: money NULL
+- receive_commission: money NULL
+- receive_commission_currency: varchar NULL
+- receive_forex_gain: money NULL
+- sender_id: uniqueidentifier NULL
+- sender_full_name: varchar NULL
+- sender_address_1: varchar NULL
+- sender_address_2: varchar NULL
+- sender_country: char NULL
+- source_of_income: varchar NULL
+- receiver_id: uniqueidentifier NULL
+- receiver_full_name: varchar NULL
+- receiver_address_1: varchar NULL
+- receiver_address_2: varchar NULL
+- receiver_country: char NULL
+- relation: varchar NULL
+- purpose: varchar NULL
+- tax: varchar NULL
+- tax_rate: money NULL
+- tax_fee: money NULL
+- product: varchar NULL
+- current_status: varchar NULL
+- status_date: datetime NULL
+- merchant_id: uniqueidentifier NULL
+- merchant_name: varchar NULL
+- merchant_account_number: varchar NULL
+- merchant_account_branch: varchar NULL
+- remarks: varchar NULL
+- status_by: uniqueidentifier NULL
+- aml_status: int NULL
+- sanction_status: int NULL
+- aml_remarks: nvarchar NULL
+- sanction_remarks: nvarchar NULL
+- api_response_key: varchar NULL
+- forex_margin_type: varchar NULL
+- forex_margin_value: money NULL
+- collection_type: varchar NULL
+- create_by: uniqueidentifier NULL
+- create_date: datetime NOT NULL
+- lock_by: uniqueidentifier NULL
+- lock_date: datetime NULL
+- update_by: uniqueidentifier NULL
+- update_date: datetime NULL
+- approve_by: uniqueidentifier NULL
+- approve_date: datetime NULL
+- api_response_token: nvarchar NULL
+- card_transaction_key: uniqueidentifier NULL
+- card_number: varchar NULL
+- remit_card_atm_fee: money NULL
+- own_pin_number: varchar NULL
+- campaign_code: varchar NULL
+- reward_point: money NULL
+- campaign_discount: money NULL
+- reject_reason: nvarchar NULL
+- purpose2: varchar NULL
+- agent_sno: int NULL
+- remit_serial_no: int NULL
+- row_version: timestamp NOT NULL
+- campaign_benefit: money NULL
+- process_agent_id: uniqueidentifier NULL
+- process_agent_name: varchar NULL
+- process_agent_commission: money NULL
+- process_agent_commission_currency: varchar NULL
+[2025-01-07 15:05:23,030] INFO [Remit_agent.tools.tools.convert_to_sql:110] Generated SQL query: SELECT TOP 1 
+    c.full_name,
+    c.customer_id,
+    rt.send_amount
+FROM dbo.remitTransactions rt
+JOIN dbo.customers c ON rt.sender_id = c.id
+ORDER BY rt.send_amount DESC
+[2025-01-07 15:05:23,030] INFO [Remit_agent.core.sql_agent._convert_to_sql:84] Generated SQL query: SELECT TOP 1 
+    c.full_name,
+    c.customer_id,
+    rt.send_amount
+FROM dbo.remitTransactions rt
+JOIN dbo.customers c ON rt.sender_id = c.id
+ORDER BY rt.send_amount DESC
+[2025-01-07 15:05:23,034] INFO [Remit_agent.tools.tools.execute_sql_query:119] Executing SQL query: SELECT TOP 1 
+    c.full_name,
+    c.customer_id,
+    rt.send_amount
+FROM dbo.remitTransactions rt
+JOIN dbo.customers c ON rt.sender_id = c.id
+ORDER BY rt.send_amount DESC
+[2025-01-07 15:05:23,281] INFO [Remit_agent.core.sql_agent._execute_sql:122] SQL query executed successfully
+[2025-01-07 15:05:23,285] INFO [Remit_agent.tools.tools.generate_human_readable:153] Generating human readable response
+[2025-01-07 15:05:23,285] INFO [Remit_agent.tools.tools.generate_human_readable:154] Input SQL: SELECT TOP 1 
+    c.full_name,
+    c.customer_id,
+    rt.send_amount
+FROM dbo.remitTransactions rt
+JOIN dbo.customers c ON rt.sender_id = c.id
+ORDER BY rt.send_amount DESC
+[2025-01-07 15:05:25,147] INFO [Remit_agent.tools.tools.generate_human_readable:163] Generated response: **Customer with the Highest Transaction Amount**
+
+- **Customer Name:** Aabash Shrestha
+- **Customer ID:** CL00001737
+- **Transaction Amount:** $1,500,000.00
+
+This information highlights the customer who has made the highest transaction in terms of amount. The transaction amount is presented in US dollars for clarity.
+[2025-01-07 15:05:25,148] INFO [Remit_agent.core.sql_agent._generate_human_readable:152] Human readable response generated successfully
+[2025-01-07 15:06:25,479] INFO [__main__.main:239] Processing question: Give me the list of 20 customer of type sender
+[2025-01-07 15:06:25,480] INFO [Remit_agent.core.sql_agent.run:192] Starting workflow with question: Give me the list of 20 customer of type sender
+[2025-01-07 15:06:25,487] INFO [Remit_agent.core.sql_agent._check_relevance:53] Checking relevance for question: Give me the list of 20 customer of type sender
+[2025-01-07 15:06:25,488] INFO [Remit_agent.tools.tools.check_relevance:27] Checking relevance for question: Give me the list of 20 customer of type sender
+[2025-01-07 15:06:27,736] INFO [Remit_agent.tools.tools.check_relevance:57] Relevance check completed: {'relevant': True, 'tables': ['dbo.customers'], 'breakdown': {'intent': 'lookup', 'entities': ['customer', 'sender'], 'conditions': ['type = sender'], 'timeframe': 'all'}, 'explanation': "The query is about retrieving a list of customers who are of type 'sender'. This requires accessing the customers table and filtering by type."}
+[2025-01-07 15:06:27,736] INFO [Remit_agent.core.sql_agent._check_relevance:55] Relevance check result: {'relevant': True, 'tables': ['dbo.customers'], 'breakdown': {'intent': 'lookup', 'entities': ['customer', 'sender'], 'conditions': ['type = sender'], 'timeframe': 'all'}, 'explanation': "The query is about retrieving a list of customers who are of type 'sender'. This requires accessing the customers table and filtering by type."}
+[2025-01-07 15:06:27,740] INFO [Remit_agent.tools.tools.convert_to_sql:95] Converting to SQL - Question: Give me the list of 20 customer of type sender
+[2025-01-07 15:06:27,740] INFO [Remit_agent.tools.tools.convert_to_sql:96] Context: {'relevant': True, 'tables': ['dbo.customers'], 'breakdown': {'intent': 'lookup', 'entities': ['customer', 'sender'], 'conditions': ['type = sender'], 'timeframe': 'all'}, 'explanation': "The query is about retrieving a list of customers who are of type 'sender'. This requires accessing the customers table and filtering by type."}
+[2025-01-07 15:06:27,954] INFO [Remit_agent.database.get_database_schema:185] Retrieved schema:
+
+Table: customers
+- id: uniqueidentifier NOT NULL (Primary Key)
+- customer_id: varchar NULL
+- full_name: varchar NULL
+- customer_type: varchar NULL
+- customer_category: varchar NULL
+- country: char NULL
+- timezone: varchar NULL
+- profile_picture: varchar NULL
+- current_status: int NULL
+- mobile_no: varchar NULL
+- user_language: varchar NULL
+- create_by: uniqueidentifier NULL
+- create_date: datetime NULL
+- update_by: uniqueidentifier NULL
+- update_date: datetime NULL
+- lock_by: varchar NULL
+- lock_date: datetime NULL
+- is_active: bit NULL
+- balance: money NULL
+- referal_code: uniqueidentifier NULL
+- enable_remittance: bit NULL
+- enable_wallet: bit NULL
+- enable_online: bit NULL
+- delete_customer: bit NULL
+- suspend_customer: bit NULL
+- approve_by: uniqueidentifier NULL
+- approve_date: datetime NULL
+- create_agent_key: uniqueidentifier NULL
+- sanction_screen: bit NULL
+- sanction_status: bit NULL
+- sanction_date: datetime NULL
+- kyc_status_by: uniqueidentifier NULL
+- kyc_status_date: datetime NULL
+- kyc_approve: bit NULL
+- referal_customer_key: uniqueidentifier NULL
+- referal_own_code: varchar NULL
+- points: money NULL
+- risk_score: int NULL
+- risk_score_detail: varchar NULL
+- self_risk_score: int NULL
+- additional_risk: int NULL
+- row_version: timestamp NOT NULL
+
+Table: remitTransactions
+- id: uniqueidentifier NOT NULL (Primary Key)
+- remit_pin_number: varchar NULL
+- send_country: varchar NULL
+- send_agent_id: uniqueidentifier NULL
+- send_agent_name: varchar NULL
+- payment_method: varchar NULL
+- transaction_type: varchar NULL
+- send_amount: money NULL
+- service_fee: money NULL
+- exchange_rate: numeric NULL
+- collect_amount: money NULL
+- send_currency: varchar NULL
+- send_ccy_buy_rate: numeric NULL
+- send_ccy_sell_rate: numeric NULL
+- send_amount_usd: money NULL
+- service_fee_usd: money NULL
+- collect_amount_usd: money NULL
+- send_commission: money NULL
+- send_commission_currency: varchar NULL
+- send_forex_gain: money NULL
+- receive_country: varchar NULL
+- receive_agent_id: uniqueidentifier NULL
+- receive_agent_name: varchar NULL
+- receive_amount: money NULL
+- receive_currency: varchar NULL
+- receive_ccy_buy_rate: numeric NULL
+- receive_ccy_sell_rate: numeric NULL
+- receive_settlement_rate: numeric NULL
+- receive_settlement_currency: varchar NULL
+- receive_settlement_amount: money NULL
+- receive_commission: money NULL
+- receive_commission_currency: varchar NULL
+- receive_forex_gain: money NULL
+- sender_id: uniqueidentifier NULL
+- sender_full_name: varchar NULL
+- sender_address_1: varchar NULL
+- sender_address_2: varchar NULL
+- sender_country: char NULL
+- source_of_income: varchar NULL
+- receiver_id: uniqueidentifier NULL
+- receiver_full_name: varchar NULL
+- receiver_address_1: varchar NULL
+- receiver_address_2: varchar NULL
+- receiver_country: char NULL
+- relation: varchar NULL
+- purpose: varchar NULL
+- tax: varchar NULL
+- tax_rate: money NULL
+- tax_fee: money NULL
+- product: varchar NULL
+- current_status: varchar NULL
+- status_date: datetime NULL
+- merchant_id: uniqueidentifier NULL
+- merchant_name: varchar NULL
+- merchant_account_number: varchar NULL
+- merchant_account_branch: varchar NULL
+- remarks: varchar NULL
+- status_by: uniqueidentifier NULL
+- aml_status: int NULL
+- sanction_status: int NULL
+- aml_remarks: nvarchar NULL
+- sanction_remarks: nvarchar NULL
+- api_response_key: varchar NULL
+- forex_margin_type: varchar NULL
+- forex_margin_value: money NULL
+- collection_type: varchar NULL
+- create_by: uniqueidentifier NULL
+- create_date: datetime NOT NULL
+- lock_by: uniqueidentifier NULL
+- lock_date: datetime NULL
+- update_by: uniqueidentifier NULL
+- update_date: datetime NULL
+- approve_by: uniqueidentifier NULL
+- approve_date: datetime NULL
+- api_response_token: nvarchar NULL
+- card_transaction_key: uniqueidentifier NULL
+- card_number: varchar NULL
+- remit_card_atm_fee: money NULL
+- own_pin_number: varchar NULL
+- campaign_code: varchar NULL
+- reward_point: money NULL
+- campaign_discount: money NULL
+- reject_reason: nvarchar NULL
+- purpose2: varchar NULL
+- agent_sno: int NULL
+- remit_serial_no: int NULL
+- row_version: timestamp NOT NULL
+- campaign_benefit: money NULL
+- process_agent_id: uniqueidentifier NULL
+- process_agent_name: varchar NULL
+- process_agent_commission: money NULL
+- process_agent_commission_currency: varchar NULL
+[2025-01-07 15:06:29,064] INFO [Remit_agent.tools.tools.convert_to_sql:110] Generated SQL query: SELECT TOP 20 
+    c.customer_id,
+    c.full_name,
+    c.customer_type,
+    c.country
+FROM dbo.customers c
+WHERE c.customer_type = 'sender'
+[2025-01-07 15:06:29,064] INFO [Remit_agent.core.sql_agent._convert_to_sql:84] Generated SQL query: SELECT TOP 20 
+    c.customer_id,
+    c.full_name,
+    c.customer_type,
+    c.country
+FROM dbo.customers c
+WHERE c.customer_type = 'sender'
+[2025-01-07 15:06:29,068] INFO [Remit_agent.tools.tools.execute_sql_query:119] Executing SQL query: SELECT TOP 20 
+    c.customer_id,
+    c.full_name,
+    c.customer_type,
+    c.country
+FROM dbo.customers c
+WHERE c.customer_type = 'sender'
+[2025-01-07 15:06:29,304] INFO [Remit_agent.core.sql_agent._execute_sql:122] SQL query executed successfully
+[2025-01-07 15:06:29,310] INFO [Remit_agent.tools.tools.generate_human_readable:153] Generating human readable response
+[2025-01-07 15:06:29,310] INFO [Remit_agent.tools.tools.generate_human_readable:154] Input SQL: SELECT TOP 20 
+    c.customer_id,
+    c.full_name,
+    c.customer_type,
+    c.country
+FROM dbo.customers c
+WHERE c.customer_type = 'sender'
+[2025-01-07 15:06:44,191] INFO [Remit_agent.tools.tools.generate_human_readable:163] Generated response: Here is the list of 20 customers of type "sender":
+
+1. **Customer ID:** FC4-001E86F426FE
+   - **Full Name:** Not Provided
+   - **Country:** Not Provided
+
+2. **Customer ID:** 1EC-0032326AC450
+   - **Full Name:** Name
+   - **Country:** Not Provided
+
+3. **Customer ID:** CL00002564
+   - **Full Name:** Athapaththu Herath Mudiyanselageudayasri Kantha Athapaththu
+   - **Country:** Japan
+
+4. **Customer ID:** CT10051497
+   - **Full Name:** Not Provided
+   - **Country:** Not Provided
+
+5. **Customer ID:** CT10102648
+   - **Full Name:** Raunak
+   - **Country:** Japan
+
+6. **Customer ID:** CT10051721
+   - **Full Name:** Not Provided
+   - **Country:** Not Provided
+
+7. **Customer ID:** CT10051802
+   - **Full Name:** Chitwan User
+   - **Country:** Japan
+
+8. **Customer ID:** 860-009C2357CB79
+   - **Full Name:** Not Provided
+   - **Country:** Not Provided
+
+9. **Customer ID:** B45-009DC0C6B4F9
+   - **Full Name:** Not Provided
+   - **Country:** Not Provided
+
+10. **Customer ID:** CL00001990
+    - **Full Name:** Sajan Khanal
+    - **Country:** Japan
+
+11. **Customer ID:** CT10102895
+    - **Full Name:** Bijaya Shrestha
+    - **Country:** Japan
+
+12. **Customer ID:** 007-00EA0D9B51CC
+    - **Full Name:** Not Provided
+    - **Country:** Not Provided
+
+13. **Customer ID:** CT10051321
+    - **Full Name:** Mane Dai
+    - **Country:** Japan
+
+14. **Customer ID:** CT10051185
+    - **Full Name:** Not Provided
+    - **Country:** Not Provided
+
+15. **Customer ID:** CT10102773
+    - **Full Name:** Test
+    - **Country:** Japan
+
+16. **Customer ID:** CT10051618
+    - **Full Name:** Weather Shrestha
+    - **Country:** Japan
+
+17. **Customer ID:** CT10051537
+    - **Full Name:** Not Provided
+    - **Country:** Not Provided
+
+18. **Customer ID:** CL00002843
+    - **Full Name:** SRK
+    - **Country:** Japan
+
+19. **Customer ID:** CL00002041
+    - **Full Name:** Afjal Stha
+    - **Country:** Japan
+
+20. **Customer ID:** CT10102633
+    - **Full Name:** Fsdfsd
+    - **Country:** Not Provided
+
+Note: Some customers have not provided their full name or country information.
+[2025-01-07 15:06:44,195] INFO [Remit_agent.core.sql_agent._generate_human_readable:152] Human readable response generated successfully
+[2025-01-07 15:09:20,652] INFO [__main__.main:239] Processing question: Who is the first customer to make the transaction
+[2025-01-07 15:09:20,655] INFO [Remit_agent.core.sql_agent.run:192] Starting workflow with question: Who is the first customer to make the transaction
+[2025-01-07 15:09:20,664] INFO [Remit_agent.core.sql_agent._check_relevance:53] Checking relevance for question: Who is the first customer to make the transaction
+[2025-01-07 15:09:20,667] INFO [Remit_agent.tools.tools.check_relevance:27] Checking relevance for question: Who is the first customer to make the transaction
+[2025-01-07 15:09:23,321] INFO [Remit_agent.tools.tools.check_relevance:57] Relevance check completed: {'relevant': True, 'tables': ['dbo.customers', 'dbo.remitTransactions'], 'breakdown': {'intent': 'lookup', 'entities': [], 'conditions': ['first transaction'], 'timeframe': 'all'}, 'explanation': 'The query requires identifying the earliest transaction and finding the associated customer.'}
+[2025-01-07 15:09:23,321] INFO [Remit_agent.core.sql_agent._check_relevance:55] Relevance check result: {'relevant': True, 'tables': ['dbo.customers', 'dbo.remitTransactions'], 'breakdown': {'intent': 'lookup', 'entities': [], 'conditions': ['first transaction'], 'timeframe': 'all'}, 'explanation': 'The query requires identifying the earliest transaction and finding the associated customer.'}
+[2025-01-07 15:09:23,330] INFO [Remit_agent.tools.tools.convert_to_sql:95] Converting to SQL - Question: Who is the first customer to make the transaction
+[2025-01-07 15:09:23,330] INFO [Remit_agent.tools.tools.convert_to_sql:96] Context: {'relevant': True, 'tables': ['dbo.customers', 'dbo.remitTransactions'], 'breakdown': {'intent': 'lookup', 'entities': [], 'conditions': ['first transaction'], 'timeframe': 'all'}, 'explanation': 'The query requires identifying the earliest transaction and finding the associated customer.'}
+[2025-01-07 15:09:23,530] INFO [Remit_agent.database.get_database_schema:185] Retrieved schema:
+
+Table: customers
+- id: uniqueidentifier NOT NULL (Primary Key)
+- customer_id: varchar NULL
+- full_name: varchar NULL
+- customer_type: varchar NULL
+- customer_category: varchar NULL
+- country: char NULL
+- timezone: varchar NULL
+- profile_picture: varchar NULL
+- current_status: int NULL
+- mobile_no: varchar NULL
+- user_language: varchar NULL
+- create_by: uniqueidentifier NULL
+- create_date: datetime NULL
+- update_by: uniqueidentifier NULL
+- update_date: datetime NULL
+- lock_by: varchar NULL
+- lock_date: datetime NULL
+- is_active: bit NULL
+- balance: money NULL
+- referal_code: uniqueidentifier NULL
+- enable_remittance: bit NULL
+- enable_wallet: bit NULL
+- enable_online: bit NULL
+- delete_customer: bit NULL
+- suspend_customer: bit NULL
+- approve_by: uniqueidentifier NULL
+- approve_date: datetime NULL
+- create_agent_key: uniqueidentifier NULL
+- sanction_screen: bit NULL
+- sanction_status: bit NULL
+- sanction_date: datetime NULL
+- kyc_status_by: uniqueidentifier NULL
+- kyc_status_date: datetime NULL
+- kyc_approve: bit NULL
+- referal_customer_key: uniqueidentifier NULL
+- referal_own_code: varchar NULL
+- points: money NULL
+- risk_score: int NULL
+- risk_score_detail: varchar NULL
+- self_risk_score: int NULL
+- additional_risk: int NULL
+- row_version: timestamp NOT NULL
+
+Table: remitTransactions
+- id: uniqueidentifier NOT NULL (Primary Key)
+- remit_pin_number: varchar NULL
+- send_country: varchar NULL
+- send_agent_id: uniqueidentifier NULL
+- send_agent_name: varchar NULL
+- payment_method: varchar NULL
+- transaction_type: varchar NULL
+- send_amount: money NULL
+- service_fee: money NULL
+- exchange_rate: numeric NULL
+- collect_amount: money NULL
+- send_currency: varchar NULL
+- send_ccy_buy_rate: numeric NULL
+- send_ccy_sell_rate: numeric NULL
+- send_amount_usd: money NULL
+- service_fee_usd: money NULL
+- collect_amount_usd: money NULL
+- send_commission: money NULL
+- send_commission_currency: varchar NULL
+- send_forex_gain: money NULL
+- receive_country: varchar NULL
+- receive_agent_id: uniqueidentifier NULL
+- receive_agent_name: varchar NULL
+- receive_amount: money NULL
+- receive_currency: varchar NULL
+- receive_ccy_buy_rate: numeric NULL
+- receive_ccy_sell_rate: numeric NULL
+- receive_settlement_rate: numeric NULL
+- receive_settlement_currency: varchar NULL
+- receive_settlement_amount: money NULL
+- receive_commission: money NULL
+- receive_commission_currency: varchar NULL
+- receive_forex_gain: money NULL
+- sender_id: uniqueidentifier NULL
+- sender_full_name: varchar NULL
+- sender_address_1: varchar NULL
+- sender_address_2: varchar NULL
+- sender_country: char NULL
+- source_of_income: varchar NULL
+- receiver_id: uniqueidentifier NULL
+- receiver_full_name: varchar NULL
+- receiver_address_1: varchar NULL
+- receiver_address_2: varchar NULL
+- receiver_country: char NULL
+- relation: varchar NULL
+- purpose: varchar NULL
+- tax: varchar NULL
+- tax_rate: money NULL
+- tax_fee: money NULL
+- product: varchar NULL
+- current_status: varchar NULL
+- status_date: datetime NULL
+- merchant_id: uniqueidentifier NULL
+- merchant_name: varchar NULL
+- merchant_account_number: varchar NULL
+- merchant_account_branch: varchar NULL
+- remarks: varchar NULL
+- status_by: uniqueidentifier NULL
+- aml_status: int NULL
+- sanction_status: int NULL
+- aml_remarks: nvarchar NULL
+- sanction_remarks: nvarchar NULL
+- api_response_key: varchar NULL
+- forex_margin_type: varchar NULL
+- forex_margin_value: money NULL
+- collection_type: varchar NULL
+- create_by: uniqueidentifier NULL
+- create_date: datetime NOT NULL
+- lock_by: uniqueidentifier NULL
+- lock_date: datetime NULL
+- update_by: uniqueidentifier NULL
+- update_date: datetime NULL
+- approve_by: uniqueidentifier NULL
+- approve_date: datetime NULL
+- api_response_token: nvarchar NULL
+- card_transaction_key: uniqueidentifier NULL
+- card_number: varchar NULL
+- remit_card_atm_fee: money NULL
+- own_pin_number: varchar NULL
+- campaign_code: varchar NULL
+- reward_point: money NULL
+- campaign_discount: money NULL
+- reject_reason: nvarchar NULL
+- purpose2: varchar NULL
+- agent_sno: int NULL
+- remit_serial_no: int NULL
+- row_version: timestamp NOT NULL
+- campaign_benefit: money NULL
+- process_agent_id: uniqueidentifier NULL
+- process_agent_name: varchar NULL
+- process_agent_commission: money NULL
+- process_agent_commission_currency: varchar NULL
+[2025-01-07 15:09:25,181] INFO [Remit_agent.tools.tools.convert_to_sql:110] Generated SQL query: SELECT TOP 1 
+    c.full_name, 
+    c.customer_id, 
+    rt.create_date 
+FROM dbo.remitTransactions rt 
+JOIN dbo.customers c ON rt.sender_id = c.id 
+ORDER BY rt.create_date ASC
+[2025-01-07 15:09:25,182] INFO [Remit_agent.core.sql_agent._convert_to_sql:84] Generated SQL query: SELECT TOP 1 
+    c.full_name, 
+    c.customer_id, 
+    rt.create_date 
+FROM dbo.remitTransactions rt 
+JOIN dbo.customers c ON rt.sender_id = c.id 
+ORDER BY rt.create_date ASC
+[2025-01-07 15:09:25,184] INFO [Remit_agent.tools.tools.execute_sql_query:119] Executing SQL query: SELECT TOP 1 
+    c.full_name, 
+    c.customer_id, 
+    rt.create_date 
+FROM dbo.remitTransactions rt 
+JOIN dbo.customers c ON rt.sender_id = c.id 
+ORDER BY rt.create_date ASC
+[2025-01-07 15:09:25,422] INFO [Remit_agent.core.sql_agent._execute_sql:122] SQL query executed successfully
+[2025-01-07 15:09:25,427] INFO [Remit_agent.tools.tools.generate_human_readable:153] Generating human readable response
+[2025-01-07 15:09:25,428] INFO [Remit_agent.tools.tools.generate_human_readable:154] Input SQL: SELECT TOP 1 
+    c.full_name, 
+    c.customer_id, 
+    rt.create_date 
+FROM dbo.remitTransactions rt 
+JOIN dbo.customers c ON rt.sender_id = c.id 
+ORDER BY rt.create_date ASC
+[2025-01-07 15:09:26,962] INFO [Remit_agent.tools.tools.generate_human_readable:163] Generated response: **First Customer to Make a Transaction**
+
+- **Customer Name:** Pushpa Kamal Dahal
+- **Customer ID:** CL00001697
+- **Transaction Date:** February 4, 2022
+
+This information identifies the first customer who made a transaction, based on the earliest recorded transaction date.
+[2025-01-07 15:09:26,962] INFO [Remit_agent.core.sql_agent._generate_human_readable:152] Human readable response generated successfully
+[2025-01-07 15:10:30,197] INFO [__main__.main:239] Processing question: Who is the first customer of 2023
+[2025-01-07 15:10:30,197] INFO [Remit_agent.core.sql_agent.run:192] Starting workflow with question: Who is the first customer of 2023
+[2025-01-07 15:10:30,204] INFO [Remit_agent.core.sql_agent._check_relevance:53] Checking relevance for question: Who is the first customer of 2023
+[2025-01-07 15:10:30,204] INFO [Remit_agent.tools.tools.check_relevance:27] Checking relevance for question: Who is the first customer of 2023
+[2025-01-07 15:10:32,812] INFO [Remit_agent.tools.tools.check_relevance:57] Relevance check completed: {'relevant': True, 'tables': ['dbo.customers'], 'breakdown': {'intent': 'lookup', 'entities': [], 'conditions': ['first customer of 2023'], 'timeframe': '2023'}, 'explanation': 'The query is about identifying the first customer added in the year 2023, which requires examining the customer data.'}
+[2025-01-07 15:10:32,812] INFO [Remit_agent.core.sql_agent._check_relevance:55] Relevance check result: {'relevant': True, 'tables': ['dbo.customers'], 'breakdown': {'intent': 'lookup', 'entities': [], 'conditions': ['first customer of 2023'], 'timeframe': '2023'}, 'explanation': 'The query is about identifying the first customer added in the year 2023, which requires examining the customer data.'}
+[2025-01-07 15:10:32,821] INFO [Remit_agent.tools.tools.convert_to_sql:95] Converting to SQL - Question: Who is the first customer of 2023
+[2025-01-07 15:10:32,821] INFO [Remit_agent.tools.tools.convert_to_sql:96] Context: {'relevant': True, 'tables': ['dbo.customers'], 'breakdown': {'intent': 'lookup', 'entities': [], 'conditions': ['first customer of 2023'], 'timeframe': '2023'}, 'explanation': 'The query is about identifying the first customer added in the year 2023, which requires examining the customer data.'}
+[2025-01-07 15:10:33,025] INFO [Remit_agent.database.get_database_schema:185] Retrieved schema:
+
+Table: customers
+- id: uniqueidentifier NOT NULL (Primary Key)
+- customer_id: varchar NULL
+- full_name: varchar NULL
+- customer_type: varchar NULL
+- customer_category: varchar NULL
+- country: char NULL
+- timezone: varchar NULL
+- profile_picture: varchar NULL
+- current_status: int NULL
+- mobile_no: varchar NULL
+- user_language: varchar NULL
+- create_by: uniqueidentifier NULL
+- create_date: datetime NULL
+- update_by: uniqueidentifier NULL
+- update_date: datetime NULL
+- lock_by: varchar NULL
+- lock_date: datetime NULL
+- is_active: bit NULL
+- balance: money NULL
+- referal_code: uniqueidentifier NULL
+- enable_remittance: bit NULL
+- enable_wallet: bit NULL
+- enable_online: bit NULL
+- delete_customer: bit NULL
+- suspend_customer: bit NULL
+- approve_by: uniqueidentifier NULL
+- approve_date: datetime NULL
+- create_agent_key: uniqueidentifier NULL
+- sanction_screen: bit NULL
+- sanction_status: bit NULL
+- sanction_date: datetime NULL
+- kyc_status_by: uniqueidentifier NULL
+- kyc_status_date: datetime NULL
+- kyc_approve: bit NULL
+- referal_customer_key: uniqueidentifier NULL
+- referal_own_code: varchar NULL
+- points: money NULL
+- risk_score: int NULL
+- risk_score_detail: varchar NULL
+- self_risk_score: int NULL
+- additional_risk: int NULL
+- row_version: timestamp NOT NULL
+
+Table: remitTransactions
+- id: uniqueidentifier NOT NULL (Primary Key)
+- remit_pin_number: varchar NULL
+- send_country: varchar NULL
+- send_agent_id: uniqueidentifier NULL
+- send_agent_name: varchar NULL
+- payment_method: varchar NULL
+- transaction_type: varchar NULL
+- send_amount: money NULL
+- service_fee: money NULL
+- exchange_rate: numeric NULL
+- collect_amount: money NULL
+- send_currency: varchar NULL
+- send_ccy_buy_rate: numeric NULL
+- send_ccy_sell_rate: numeric NULL
+- send_amount_usd: money NULL
+- service_fee_usd: money NULL
+- collect_amount_usd: money NULL
+- send_commission: money NULL
+- send_commission_currency: varchar NULL
+- send_forex_gain: money NULL
+- receive_country: varchar NULL
+- receive_agent_id: uniqueidentifier NULL
+- receive_agent_name: varchar NULL
+- receive_amount: money NULL
+- receive_currency: varchar NULL
+- receive_ccy_buy_rate: numeric NULL
+- receive_ccy_sell_rate: numeric NULL
+- receive_settlement_rate: numeric NULL
+- receive_settlement_currency: varchar NULL
+- receive_settlement_amount: money NULL
+- receive_commission: money NULL
+- receive_commission_currency: varchar NULL
+- receive_forex_gain: money NULL
+- sender_id: uniqueidentifier NULL
+- sender_full_name: varchar NULL
+- sender_address_1: varchar NULL
+- sender_address_2: varchar NULL
+- sender_country: char NULL
+- source_of_income: varchar NULL
+- receiver_id: uniqueidentifier NULL
+- receiver_full_name: varchar NULL
+- receiver_address_1: varchar NULL
+- receiver_address_2: varchar NULL
+- receiver_country: char NULL
+- relation: varchar NULL
+- purpose: varchar NULL
+- tax: varchar NULL
+- tax_rate: money NULL
+- tax_fee: money NULL
+- product: varchar NULL
+- current_status: varchar NULL
+- status_date: datetime NULL
+- merchant_id: uniqueidentifier NULL
+- merchant_name: varchar NULL
+- merchant_account_number: varchar NULL
+- merchant_account_branch: varchar NULL
+- remarks: varchar NULL
+- status_by: uniqueidentifier NULL
+- aml_status: int NULL
+- sanction_status: int NULL
+- aml_remarks: nvarchar NULL
+- sanction_remarks: nvarchar NULL
+- api_response_key: varchar NULL
+- forex_margin_type: varchar NULL
+- forex_margin_value: money NULL
+- collection_type: varchar NULL
+- create_by: uniqueidentifier NULL
+- create_date: datetime NOT NULL
+- lock_by: uniqueidentifier NULL
+- lock_date: datetime NULL
+- update_by: uniqueidentifier NULL
+- update_date: datetime NULL
+- approve_by: uniqueidentifier NULL
+- approve_date: datetime NULL
+- api_response_token: nvarchar NULL
+- card_transaction_key: uniqueidentifier NULL
+- card_number: varchar NULL
+- remit_card_atm_fee: money NULL
+- own_pin_number: varchar NULL
+- campaign_code: varchar NULL
+- reward_point: money NULL
+- campaign_discount: money NULL
+- reject_reason: nvarchar NULL
+- purpose2: varchar NULL
+- agent_sno: int NULL
+- remit_serial_no: int NULL
+- row_version: timestamp NOT NULL
+- campaign_benefit: money NULL
+- process_agent_id: uniqueidentifier NULL
+- process_agent_name: varchar NULL
+- process_agent_commission: money NULL
+- process_agent_commission_currency: varchar NULL
+[2025-01-07 15:10:34,995] INFO [Remit_agent.tools.tools.convert_to_sql:110] Generated SQL query: SELECT TOP 1 
+    c.customer_id,
+    c.full_name,
+    c.create_date
+FROM dbo.customers c
+WHERE c.create_date >= '2023-01-01' AND c.create_date < '2024-01-01'
+ORDER BY c.create_date ASC
+[2025-01-07 15:10:34,995] INFO [Remit_agent.core.sql_agent._convert_to_sql:84] Generated SQL query: SELECT TOP 1 
+    c.customer_id,
+    c.full_name,
+    c.create_date
+FROM dbo.customers c
+WHERE c.create_date >= '2023-01-01' AND c.create_date < '2024-01-01'
+ORDER BY c.create_date ASC
+[2025-01-07 15:10:35,001] INFO [Remit_agent.tools.tools.execute_sql_query:119] Executing SQL query: SELECT TOP 1 
+    c.customer_id,
+    c.full_name,
+    c.create_date
+FROM dbo.customers c
+WHERE c.create_date >= '2023-01-01' AND c.create_date < '2024-01-01'
+ORDER BY c.create_date ASC
+[2025-01-07 15:10:35,307] INFO [Remit_agent.core.sql_agent._execute_sql:122] SQL query executed successfully
+[2025-01-07 15:10:35,312] INFO [Remit_agent.tools.tools.generate_human_readable:153] Generating human readable response
+[2025-01-07 15:10:35,314] INFO [Remit_agent.tools.tools.generate_human_readable:154] Input SQL: SELECT TOP 1 
+    c.customer_id,
+    c.full_name,
+    c.create_date
+FROM dbo.customers c
+WHERE c.create_date >= '2023-01-01' AND c.create_date < '2024-01-01'
+ORDER BY c.create_date ASC
+[2025-01-07 15:10:36,934] INFO [Remit_agent.tools.tools.generate_human_readable:163] Generated response: **First Customer of 2023**
+
+- **Customer ID:** CL00002065
+- **Full Name:** Mani Stha
+- **Account Created On:** January 2, 2023, at 09:52 AM
+
+This information identifies the first customer who registered in the year 2023.
+[2025-01-07 15:10:36,934] INFO [Remit_agent.core.sql_agent._generate_human_readable:152] Human readable response generated successfully
+[2025-01-07 15:11:39,145] INFO [__main__.main:239] Processing question: List of top 10 customer  who have made more than 10 transaction in 2023
+[2025-01-07 15:11:39,148] INFO [Remit_agent.core.sql_agent.run:192] Starting workflow with question: List of top 10 customer  who have made more than 10 transaction in 2023
+[2025-01-07 15:11:39,156] INFO [Remit_agent.core.sql_agent._check_relevance:53] Checking relevance for question: List of top 10 customer  who have made more than 10 transaction in 2023
+[2025-01-07 15:11:39,156] INFO [Remit_agent.tools.tools.check_relevance:27] Checking relevance for question: List of top 10 customer  who have made more than 10 transaction in 2023
+[2025-01-07 15:11:44,021] INFO [Remit_agent.tools.tools.check_relevance:57] Relevance check completed: {'relevant': True, 'tables': ['dbo.customers', 'dbo.remitTransactions'], 'breakdown': {'intent': 'aggregation', 'entities': [], 'conditions': ['transaction count > 10', 'year = 2023'], 'timeframe': '2023'}, 'explanation': 'The query requires counting transactions per customer in 2023 and filtering those with more than 10 transactions, then selecting the top 10 customers.'}
+[2025-01-07 15:11:44,021] INFO [Remit_agent.core.sql_agent._check_relevance:55] Relevance check result: {'relevant': True, 'tables': ['dbo.customers', 'dbo.remitTransactions'], 'breakdown': {'intent': 'aggregation', 'entities': [], 'conditions': ['transaction count > 10', 'year = 2023'], 'timeframe': '2023'}, 'explanation': 'The query requires counting transactions per customer in 2023 and filtering those with more than 10 transactions, then selecting the top 10 customers.'}
+[2025-01-07 15:11:44,031] INFO [Remit_agent.tools.tools.convert_to_sql:95] Converting to SQL - Question: List of top 10 customer  who have made more than 10 transaction in 2023
+[2025-01-07 15:11:44,031] INFO [Remit_agent.tools.tools.convert_to_sql:96] Context: {'relevant': True, 'tables': ['dbo.customers', 'dbo.remitTransactions'], 'breakdown': {'intent': 'aggregation', 'entities': [], 'conditions': ['transaction count > 10', 'year = 2023'], 'timeframe': '2023'}, 'explanation': 'The query requires counting transactions per customer in 2023 and filtering those with more than 10 transactions, then selecting the top 10 customers.'}
+[2025-01-07 15:11:44,239] INFO [Remit_agent.database.get_database_schema:185] Retrieved schema:
+
+Table: customers
+- id: uniqueidentifier NOT NULL (Primary Key)
+- customer_id: varchar NULL
+- full_name: varchar NULL
+- customer_type: varchar NULL
+- customer_category: varchar NULL
+- country: char NULL
+- timezone: varchar NULL
+- profile_picture: varchar NULL
+- current_status: int NULL
+- mobile_no: varchar NULL
+- user_language: varchar NULL
+- create_by: uniqueidentifier NULL
+- create_date: datetime NULL
+- update_by: uniqueidentifier NULL
+- update_date: datetime NULL
+- lock_by: varchar NULL
+- lock_date: datetime NULL
+- is_active: bit NULL
+- balance: money NULL
+- referal_code: uniqueidentifier NULL
+- enable_remittance: bit NULL
+- enable_wallet: bit NULL
+- enable_online: bit NULL
+- delete_customer: bit NULL
+- suspend_customer: bit NULL
+- approve_by: uniqueidentifier NULL
+- approve_date: datetime NULL
+- create_agent_key: uniqueidentifier NULL
+- sanction_screen: bit NULL
+- sanction_status: bit NULL
+- sanction_date: datetime NULL
+- kyc_status_by: uniqueidentifier NULL
+- kyc_status_date: datetime NULL
+- kyc_approve: bit NULL
+- referal_customer_key: uniqueidentifier NULL
+- referal_own_code: varchar NULL
+- points: money NULL
+- risk_score: int NULL
+- risk_score_detail: varchar NULL
+- self_risk_score: int NULL
+- additional_risk: int NULL
+- row_version: timestamp NOT NULL
+
+Table: remitTransactions
+- id: uniqueidentifier NOT NULL (Primary Key)
+- remit_pin_number: varchar NULL
+- send_country: varchar NULL
+- send_agent_id: uniqueidentifier NULL
+- send_agent_name: varchar NULL
+- payment_method: varchar NULL
+- transaction_type: varchar NULL
+- send_amount: money NULL
+- service_fee: money NULL
+- exchange_rate: numeric NULL
+- collect_amount: money NULL
+- send_currency: varchar NULL
+- send_ccy_buy_rate: numeric NULL
+- send_ccy_sell_rate: numeric NULL
+- send_amount_usd: money NULL
+- service_fee_usd: money NULL
+- collect_amount_usd: money NULL
+- send_commission: money NULL
+- send_commission_currency: varchar NULL
+- send_forex_gain: money NULL
+- receive_country: varchar NULL
+- receive_agent_id: uniqueidentifier NULL
+- receive_agent_name: varchar NULL
+- receive_amount: money NULL
+- receive_currency: varchar NULL
+- receive_ccy_buy_rate: numeric NULL
+- receive_ccy_sell_rate: numeric NULL
+- receive_settlement_rate: numeric NULL
+- receive_settlement_currency: varchar NULL
+- receive_settlement_amount: money NULL
+- receive_commission: money NULL
+- receive_commission_currency: varchar NULL
+- receive_forex_gain: money NULL
+- sender_id: uniqueidentifier NULL
+- sender_full_name: varchar NULL
+- sender_address_1: varchar NULL
+- sender_address_2: varchar NULL
+- sender_country: char NULL
+- source_of_income: varchar NULL
+- receiver_id: uniqueidentifier NULL
+- receiver_full_name: varchar NULL
+- receiver_address_1: varchar NULL
+- receiver_address_2: varchar NULL
+- receiver_country: char NULL
+- relation: varchar NULL
+- purpose: varchar NULL
+- tax: varchar NULL
+- tax_rate: money NULL
+- tax_fee: money NULL
+- product: varchar NULL
+- current_status: varchar NULL
+- status_date: datetime NULL
+- merchant_id: uniqueidentifier NULL
+- merchant_name: varchar NULL
+- merchant_account_number: varchar NULL
+- merchant_account_branch: varchar NULL
+- remarks: varchar NULL
+- status_by: uniqueidentifier NULL
+- aml_status: int NULL
+- sanction_status: int NULL
+- aml_remarks: nvarchar NULL
+- sanction_remarks: nvarchar NULL
+- api_response_key: varchar NULL
+- forex_margin_type: varchar NULL
+- forex_margin_value: money NULL
+- collection_type: varchar NULL
+- create_by: uniqueidentifier NULL
+- create_date: datetime NOT NULL
+- lock_by: uniqueidentifier NULL
+- lock_date: datetime NULL
+- update_by: uniqueidentifier NULL
+- update_date: datetime NULL
+- approve_by: uniqueidentifier NULL
+- approve_date: datetime NULL
+- api_response_token: nvarchar NULL
+- card_transaction_key: uniqueidentifier NULL
+- card_number: varchar NULL
+- remit_card_atm_fee: money NULL
+- own_pin_number: varchar NULL
+- campaign_code: varchar NULL
+- reward_point: money NULL
+- campaign_discount: money NULL
+- reject_reason: nvarchar NULL
+- purpose2: varchar NULL
+- agent_sno: int NULL
+- remit_serial_no: int NULL
+- row_version: timestamp NOT NULL
+- campaign_benefit: money NULL
+- process_agent_id: uniqueidentifier NULL
+- process_agent_name: varchar NULL
+- process_agent_commission: money NULL
+- process_agent_commission_currency: varchar NULL
+[2025-01-07 15:11:46,198] INFO [Remit_agent.tools.tools.convert_to_sql:110] Generated SQL query: SELECT TOP 10 
+    c.full_name,
+    COUNT(rt.id) AS transaction_count
+FROM dbo.remitTransactions rt
+JOIN dbo.customers c ON rt.sender_id = c.id
+WHERE YEAR(rt.create_date) = 2023
+GROUP BY c.full_name
+HAVING COUNT(rt.id) > 10
+ORDER BY transaction_count DESC
+[2025-01-07 15:11:46,198] INFO [Remit_agent.core.sql_agent._convert_to_sql:84] Generated SQL query: SELECT TOP 10 
+    c.full_name,
+    COUNT(rt.id) AS transaction_count
+FROM dbo.remitTransactions rt
+JOIN dbo.customers c ON rt.sender_id = c.id
+WHERE YEAR(rt.create_date) = 2023
+GROUP BY c.full_name
+HAVING COUNT(rt.id) > 10
+ORDER BY transaction_count DESC
+[2025-01-07 15:11:46,202] INFO [Remit_agent.tools.tools.execute_sql_query:119] Executing SQL query: SELECT TOP 10 
+    c.full_name,
+    COUNT(rt.id) AS transaction_count
+FROM dbo.remitTransactions rt
+JOIN dbo.customers c ON rt.sender_id = c.id
+WHERE YEAR(rt.create_date) = 2023
+GROUP BY c.full_name
+HAVING COUNT(rt.id) > 10
+ORDER BY transaction_count DESC
+[2025-01-07 15:11:46,474] INFO [Remit_agent.core.sql_agent._execute_sql:122] SQL query executed successfully
+[2025-01-07 15:11:46,474] INFO [Remit_agent.tools.tools.generate_human_readable:153] Generating human readable response
+[2025-01-07 15:11:46,474] INFO [Remit_agent.tools.tools.generate_human_readable:154] Input SQL: SELECT TOP 10 
+    c.full_name,
+    COUNT(rt.id) AS transaction_count
+FROM dbo.remitTransactions rt
+JOIN dbo.customers c ON rt.sender_id = c.id
+WHERE YEAR(rt.create_date) = 2023
+GROUP BY c.full_name
+HAVING COUNT(rt.id) > 10
+ORDER BY transaction_count DESC
+[2025-01-07 15:11:51,401] INFO [Remit_agent.tools.tools.generate_human_readable:163] Generated response: Here is a summary of the top 10 customers who have made more than 10 transactions in the year 2023:
+
+1. **PLIMATE BAHADUR SHRESTHA**
+   - Transactions: 1,166
+
+2. **ANBA ADHIKARI**
+   - Transactions: 306
+
+3. **SIMRAN RAI**
+   - Transactions: 193
+
+4. **PUSHPA KAMAL DAHAL**
+   - Transactions: 181
+
+5. **SUNTALA SHRESTHA**
+   - Transactions: 168
+
+6. **NEW QAT SENDER**
+   - Transactions: 105
+
+7. **BIBEK A**
+   - Transactions: 100
+
+8. **MANSUN REJECTED SHRESTHA**
+   - Transactions: 89
+
+9. **MOTU KHAMNAL**
+   - Transactions: 71
+
+10. **TEST KUMARI USER**
+    - Transactions: 69
+
+These customers have been identified as the most active in terms of transaction volume for the year 2023.
+[2025-01-07 15:11:51,401] INFO [Remit_agent.core.sql_agent._generate_human_readable:152] Human readable response generated successfully
+[2025-01-07 15:12:23,272] INFO [__main__.main:239] Processing question: who made the last transaction and when
+[2025-01-07 15:12:23,272] INFO [Remit_agent.core.sql_agent.run:192] Starting workflow with question: who made the last transaction and when
+[2025-01-07 15:12:23,282] INFO [Remit_agent.core.sql_agent._check_relevance:53] Checking relevance for question: who made the last transaction and when
+[2025-01-07 15:12:23,285] INFO [Remit_agent.tools.tools.check_relevance:27] Checking relevance for question: who made the last transaction and when
+[2025-01-07 15:12:26,423] INFO [Remit_agent.tools.tools.check_relevance:57] Relevance check completed: {'relevant': True, 'tables': ['dbo.remitTransactions', 'dbo.customers'], 'breakdown': {'intent': 'lookup', 'entities': [], 'conditions': ['latest transaction'], 'timeframe': 'most recent'}, 'explanation': 'The query seeks to identify the customer associated with the most recent transaction, requiring data from both transaction and customer tables.'}
+[2025-01-07 15:12:26,423] INFO [Remit_agent.core.sql_agent._check_relevance:55] Relevance check result: {'relevant': True, 'tables': ['dbo.remitTransactions', 'dbo.customers'], 'breakdown': {'intent': 'lookup', 'entities': [], 'conditions': ['latest transaction'], 'timeframe': 'most recent'}, 'explanation': 'The query seeks to identify the customer associated with the most recent transaction, requiring data from both transaction and customer tables.'}
+[2025-01-07 15:12:26,430] INFO [Remit_agent.tools.tools.convert_to_sql:95] Converting to SQL - Question: who made the last transaction and when
+[2025-01-07 15:12:26,430] INFO [Remit_agent.tools.tools.convert_to_sql:96] Context: {'relevant': True, 'tables': ['dbo.remitTransactions', 'dbo.customers'], 'breakdown': {'intent': 'lookup', 'entities': [], 'conditions': ['latest transaction'], 'timeframe': 'most recent'}, 'explanation': 'The query seeks to identify the customer associated with the most recent transaction, requiring data from both transaction and customer tables.'}
+[2025-01-07 15:12:26,640] INFO [Remit_agent.database.get_database_schema:185] Retrieved schema:
+
+Table: customers
+- id: uniqueidentifier NOT NULL (Primary Key)
+- customer_id: varchar NULL
+- full_name: varchar NULL
+- customer_type: varchar NULL
+- customer_category: varchar NULL
+- country: char NULL
+- timezone: varchar NULL
+- profile_picture: varchar NULL
+- current_status: int NULL
+- mobile_no: varchar NULL
+- user_language: varchar NULL
+- create_by: uniqueidentifier NULL
+- create_date: datetime NULL
+- update_by: uniqueidentifier NULL
+- update_date: datetime NULL
+- lock_by: varchar NULL
+- lock_date: datetime NULL
+- is_active: bit NULL
+- balance: money NULL
+- referal_code: uniqueidentifier NULL
+- enable_remittance: bit NULL
+- enable_wallet: bit NULL
+- enable_online: bit NULL
+- delete_customer: bit NULL
+- suspend_customer: bit NULL
+- approve_by: uniqueidentifier NULL
+- approve_date: datetime NULL
+- create_agent_key: uniqueidentifier NULL
+- sanction_screen: bit NULL
+- sanction_status: bit NULL
+- sanction_date: datetime NULL
+- kyc_status_by: uniqueidentifier NULL
+- kyc_status_date: datetime NULL
+- kyc_approve: bit NULL
+- referal_customer_key: uniqueidentifier NULL
+- referal_own_code: varchar NULL
+- points: money NULL
+- risk_score: int NULL
+- risk_score_detail: varchar NULL
+- self_risk_score: int NULL
+- additional_risk: int NULL
+- row_version: timestamp NOT NULL
+
+Table: remitTransactions
+- id: uniqueidentifier NOT NULL (Primary Key)
+- remit_pin_number: varchar NULL
+- send_country: varchar NULL
+- send_agent_id: uniqueidentifier NULL
+- send_agent_name: varchar NULL
+- payment_method: varchar NULL
+- transaction_type: varchar NULL
+- send_amount: money NULL
+- service_fee: money NULL
+- exchange_rate: numeric NULL
+- collect_amount: money NULL
+- send_currency: varchar NULL
+- send_ccy_buy_rate: numeric NULL
+- send_ccy_sell_rate: numeric NULL
+- send_amount_usd: money NULL
+- service_fee_usd: money NULL
+- collect_amount_usd: money NULL
+- send_commission: money NULL
+- send_commission_currency: varchar NULL
+- send_forex_gain: money NULL
+- receive_country: varchar NULL
+- receive_agent_id: uniqueidentifier NULL
+- receive_agent_name: varchar NULL
+- receive_amount: money NULL
+- receive_currency: varchar NULL
+- receive_ccy_buy_rate: numeric NULL
+- receive_ccy_sell_rate: numeric NULL
+- receive_settlement_rate: numeric NULL
+- receive_settlement_currency: varchar NULL
+- receive_settlement_amount: money NULL
+- receive_commission: money NULL
+- receive_commission_currency: varchar NULL
+- receive_forex_gain: money NULL
+- sender_id: uniqueidentifier NULL
+- sender_full_name: varchar NULL
+- sender_address_1: varchar NULL
+- sender_address_2: varchar NULL
+- sender_country: char NULL
+- source_of_income: varchar NULL
+- receiver_id: uniqueidentifier NULL
+- receiver_full_name: varchar NULL
+- receiver_address_1: varchar NULL
+- receiver_address_2: varchar NULL
+- receiver_country: char NULL
+- relation: varchar NULL
+- purpose: varchar NULL
+- tax: varchar NULL
+- tax_rate: money NULL
+- tax_fee: money NULL
+- product: varchar NULL
+- current_status: varchar NULL
+- status_date: datetime NULL
+- merchant_id: uniqueidentifier NULL
+- merchant_name: varchar NULL
+- merchant_account_number: varchar NULL
+- merchant_account_branch: varchar NULL
+- remarks: varchar NULL
+- status_by: uniqueidentifier NULL
+- aml_status: int NULL
+- sanction_status: int NULL
+- aml_remarks: nvarchar NULL
+- sanction_remarks: nvarchar NULL
+- api_response_key: varchar NULL
+- forex_margin_type: varchar NULL
+- forex_margin_value: money NULL
+- collection_type: varchar NULL
+- create_by: uniqueidentifier NULL
+- create_date: datetime NOT NULL
+- lock_by: uniqueidentifier NULL
+- lock_date: datetime NULL
+- update_by: uniqueidentifier NULL
+- update_date: datetime NULL
+- approve_by: uniqueidentifier NULL
+- approve_date: datetime NULL
+- api_response_token: nvarchar NULL
+- card_transaction_key: uniqueidentifier NULL
+- card_number: varchar NULL
+- remit_card_atm_fee: money NULL
+- own_pin_number: varchar NULL
+- campaign_code: varchar NULL
+- reward_point: money NULL
+- campaign_discount: money NULL
+- reject_reason: nvarchar NULL
+- purpose2: varchar NULL
+- agent_sno: int NULL
+- remit_serial_no: int NULL
+- row_version: timestamp NOT NULL
+- campaign_benefit: money NULL
+- process_agent_id: uniqueidentifier NULL
+- process_agent_name: varchar NULL
+- process_agent_commission: money NULL
+- process_agent_commission_currency: varchar NULL
+[2025-01-07 15:12:31,963] INFO [Remit_agent.tools.tools.convert_to_sql:110] Generated SQL query: SELECT TOP 1 
+    c.full_name AS customer_name,
+    rt.create_date AS transaction_date
+FROM dbo.remitTransactions rt
+JOIN dbo.customers c ON rt.sender_id = c.id
+ORDER BY rt.create_date DESC
+[2025-01-07 15:12:31,964] INFO [Remit_agent.core.sql_agent._convert_to_sql:84] Generated SQL query: SELECT TOP 1 
+    c.full_name AS customer_name,
+    rt.create_date AS transaction_date
+FROM dbo.remitTransactions rt
+JOIN dbo.customers c ON rt.sender_id = c.id
+ORDER BY rt.create_date DESC
+[2025-01-07 15:12:31,966] INFO [Remit_agent.tools.tools.execute_sql_query:119] Executing SQL query: SELECT TOP 1 
+    c.full_name AS customer_name,
+    rt.create_date AS transaction_date
+FROM dbo.remitTransactions rt
+JOIN dbo.customers c ON rt.sender_id = c.id
+ORDER BY rt.create_date DESC
+[2025-01-07 15:12:32,252] INFO [Remit_agent.core.sql_agent._execute_sql:122] SQL query executed successfully
+[2025-01-07 15:12:32,255] INFO [Remit_agent.tools.tools.generate_human_readable:153] Generating human readable response
+[2025-01-07 15:12:32,255] INFO [Remit_agent.tools.tools.generate_human_readable:154] Input SQL: SELECT TOP 1 
+    c.full_name AS customer_name,
+    rt.create_date AS transaction_date
+FROM dbo.remitTransactions rt
+JOIN dbo.customers c ON rt.sender_id = c.id
+ORDER BY rt.create_date DESC
+[2025-01-07 15:12:35,850] INFO [Remit_agent.tools.tools.generate_human_readable:163] Generated response: **Latest Transaction Details:**
+
+- **Customer Name:** AGENT ALL
+- **Transaction Date:** January 6, 2025, 05:29 AM
+
+This information reflects the most recent transaction recorded in the system.
+[2025-01-07 15:12:35,850] INFO [Remit_agent.core.sql_agent._generate_human_readable:152] Human readable response generated successfully
+[2025-01-07 15:14:00,480] INFO [__main__.main:239] Processing question: List last 10 transaction data with date, customer  and amount  in tabular format.
+[2025-01-07 15:14:00,480] INFO [Remit_agent.core.sql_agent.run:192] Starting workflow with question: List last 10 transaction data with date, customer  and amount  in tabular format.
+[2025-01-07 15:14:00,490] INFO [Remit_agent.core.sql_agent._check_relevance:53] Checking relevance for question: List last 10 transaction data with date, customer  and amount  in tabular format.
+[2025-01-07 15:14:00,490] INFO [Remit_agent.tools.tools.check_relevance:27] Checking relevance for question: List last 10 transaction data with date, customer  and amount  in tabular format.
+[2025-01-07 15:14:03,429] INFO [Remit_agent.tools.tools.check_relevance:57] Relevance check completed: {'relevant': True, 'tables': ['dbo.remitTransactions', 'dbo.customers'], 'breakdown': {'intent': 'lookup', 'entities': [], 'conditions': ['last 10 transactions'], 'timeframe': 'recent'}, 'explanation': 'The query requires accessing transaction data and joining with customer data to display the last 10 transactions with date, customer, and amount.'}
+[2025-01-07 15:14:03,429] INFO [Remit_agent.core.sql_agent._check_relevance:55] Relevance check result: {'relevant': True, 'tables': ['dbo.remitTransactions', 'dbo.customers'], 'breakdown': {'intent': 'lookup', 'entities': [], 'conditions': ['last 10 transactions'], 'timeframe': 'recent'}, 'explanation': 'The query requires accessing transaction data and joining with customer data to display the last 10 transactions with date, customer, and amount.'}
+[2025-01-07 15:14:03,433] INFO [Remit_agent.tools.tools.convert_to_sql:95] Converting to SQL - Question: List last 10 transaction data with date, customer  and amount  in tabular format.
+[2025-01-07 15:14:03,433] INFO [Remit_agent.tools.tools.convert_to_sql:96] Context: {'relevant': True, 'tables': ['dbo.remitTransactions', 'dbo.customers'], 'breakdown': {'intent': 'lookup', 'entities': [], 'conditions': ['last 10 transactions'], 'timeframe': 'recent'}, 'explanation': 'The query requires accessing transaction data and joining with customer data to display the last 10 transactions with date, customer, and amount.'}
+[2025-01-07 15:14:03,707] INFO [Remit_agent.database.get_database_schema:185] Retrieved schema:
+
+Table: customers
+- id: uniqueidentifier NOT NULL (Primary Key)
+- customer_id: varchar NULL
+- full_name: varchar NULL
+- customer_type: varchar NULL
+- customer_category: varchar NULL
+- country: char NULL
+- timezone: varchar NULL
+- profile_picture: varchar NULL
+- current_status: int NULL
+- mobile_no: varchar NULL
+- user_language: varchar NULL
+- create_by: uniqueidentifier NULL
+- create_date: datetime NULL
+- update_by: uniqueidentifier NULL
+- update_date: datetime NULL
+- lock_by: varchar NULL
+- lock_date: datetime NULL
+- is_active: bit NULL
+- balance: money NULL
+- referal_code: uniqueidentifier NULL
+- enable_remittance: bit NULL
+- enable_wallet: bit NULL
+- enable_online: bit NULL
+- delete_customer: bit NULL
+- suspend_customer: bit NULL
+- approve_by: uniqueidentifier NULL
+- approve_date: datetime NULL
+- create_agent_key: uniqueidentifier NULL
+- sanction_screen: bit NULL
+- sanction_status: bit NULL
+- sanction_date: datetime NULL
+- kyc_status_by: uniqueidentifier NULL
+- kyc_status_date: datetime NULL
+- kyc_approve: bit NULL
+- referal_customer_key: uniqueidentifier NULL
+- referal_own_code: varchar NULL
+- points: money NULL
+- risk_score: int NULL
+- risk_score_detail: varchar NULL
+- self_risk_score: int NULL
+- additional_risk: int NULL
+- row_version: timestamp NOT NULL
+
+Table: remitTransactions
+- id: uniqueidentifier NOT NULL (Primary Key)
+- remit_pin_number: varchar NULL
+- send_country: varchar NULL
+- send_agent_id: uniqueidentifier NULL
+- send_agent_name: varchar NULL
+- payment_method: varchar NULL
+- transaction_type: varchar NULL
+- send_amount: money NULL
+- service_fee: money NULL
+- exchange_rate: numeric NULL
+- collect_amount: money NULL
+- send_currency: varchar NULL
+- send_ccy_buy_rate: numeric NULL
+- send_ccy_sell_rate: numeric NULL
+- send_amount_usd: money NULL
+- service_fee_usd: money NULL
+- collect_amount_usd: money NULL
+- send_commission: money NULL
+- send_commission_currency: varchar NULL
+- send_forex_gain: money NULL
+- receive_country: varchar NULL
+- receive_agent_id: uniqueidentifier NULL
+- receive_agent_name: varchar NULL
+- receive_amount: money NULL
+- receive_currency: varchar NULL
+- receive_ccy_buy_rate: numeric NULL
+- receive_ccy_sell_rate: numeric NULL
+- receive_settlement_rate: numeric NULL
+- receive_settlement_currency: varchar NULL
+- receive_settlement_amount: money NULL
+- receive_commission: money NULL
+- receive_commission_currency: varchar NULL
+- receive_forex_gain: money NULL
+- sender_id: uniqueidentifier NULL
+- sender_full_name: varchar NULL
+- sender_address_1: varchar NULL
+- sender_address_2: varchar NULL
+- sender_country: char NULL
+- source_of_income: varchar NULL
+- receiver_id: uniqueidentifier NULL
+- receiver_full_name: varchar NULL
+- receiver_address_1: varchar NULL
+- receiver_address_2: varchar NULL
+- receiver_country: char NULL
+- relation: varchar NULL
+- purpose: varchar NULL
+- tax: varchar NULL
+- tax_rate: money NULL
+- tax_fee: money NULL
+- product: varchar NULL
+- current_status: varchar NULL
+- status_date: datetime NULL
+- merchant_id: uniqueidentifier NULL
+- merchant_name: varchar NULL
+- merchant_account_number: varchar NULL
+- merchant_account_branch: varchar NULL
+- remarks: varchar NULL
+- status_by: uniqueidentifier NULL
+- aml_status: int NULL
+- sanction_status: int NULL
+- aml_remarks: nvarchar NULL
+- sanction_remarks: nvarchar NULL
+- api_response_key: varchar NULL
+- forex_margin_type: varchar NULL
+- forex_margin_value: money NULL
+- collection_type: varchar NULL
+- create_by: uniqueidentifier NULL
+- create_date: datetime NOT NULL
+- lock_by: uniqueidentifier NULL
+- lock_date: datetime NULL
+- update_by: uniqueidentifier NULL
+- update_date: datetime NULL
+- approve_by: uniqueidentifier NULL
+- approve_date: datetime NULL
+- api_response_token: nvarchar NULL
+- card_transaction_key: uniqueidentifier NULL
+- card_number: varchar NULL
+- remit_card_atm_fee: money NULL
+- own_pin_number: varchar NULL
+- campaign_code: varchar NULL
+- reward_point: money NULL
+- campaign_discount: money NULL
+- reject_reason: nvarchar NULL
+- purpose2: varchar NULL
+- agent_sno: int NULL
+- remit_serial_no: int NULL
+- row_version: timestamp NOT NULL
+- campaign_benefit: money NULL
+- process_agent_id: uniqueidentifier NULL
+- process_agent_name: varchar NULL
+- process_agent_commission: money NULL
+- process_agent_commission_currency: varchar NULL
+[2025-01-07 15:14:05,092] INFO [Remit_agent.tools.tools.convert_to_sql:110] Generated SQL query: SELECT TOP 10
+    rt.create_date,
+    c.full_name AS customer_name,
+    rt.send_amount
+FROM dbo.remitTransactions rt
+JOIN dbo.customers c ON rt.sender_id = c.id
+ORDER BY rt.create_date DESC
+[2025-01-07 15:14:05,092] INFO [Remit_agent.core.sql_agent._convert_to_sql:84] Generated SQL query: SELECT TOP 10
+    rt.create_date,
+    c.full_name AS customer_name,
+    rt.send_amount
+FROM dbo.remitTransactions rt
+JOIN dbo.customers c ON rt.sender_id = c.id
+ORDER BY rt.create_date DESC
+[2025-01-07 15:14:05,100] INFO [Remit_agent.tools.tools.execute_sql_query:119] Executing SQL query: SELECT TOP 10
+    rt.create_date,
+    c.full_name AS customer_name,
+    rt.send_amount
+FROM dbo.remitTransactions rt
+JOIN dbo.customers c ON rt.sender_id = c.id
+ORDER BY rt.create_date DESC
+[2025-01-07 15:14:05,356] INFO [Remit_agent.core.sql_agent._execute_sql:122] SQL query executed successfully
+[2025-01-07 15:14:05,360] INFO [Remit_agent.tools.tools.generate_human_readable:153] Generating human readable response
+[2025-01-07 15:14:05,360] INFO [Remit_agent.tools.tools.generate_human_readable:154] Input SQL: SELECT TOP 10
+    rt.create_date,
+    c.full_name AS customer_name,
+    rt.send_amount
+FROM dbo.remitTransactions rt
+JOIN dbo.customers c ON rt.sender_id = c.id
+ORDER BY rt.create_date DESC
+[2025-01-07 15:14:10,872] INFO [Remit_agent.tools.tools.generate_human_readable:163] Generated response: Here is a summary of the last 10 transaction records, including the transaction date, customer name, and the amount sent:
+
+---
+
+**Recent Transactions:**
+
+1. **Date:** January 6, 2025  
+   **Customer:** AGENT ALL  
+   **Amount Sent:** $832.00
+
+2. **Date:** January 6, 2025  
+   **Customer:** AGENT ALL  
+   **Amount Sent:** $1,932.00
+
+3. **Date:** January 6, 2025  
+   **Customer:** AGENT ALL  
+   **Amount Sent:** $1,900.00
+
+4. **Date:** December 31, 2024  
+   **Customer:** SAMIKSHA  
+   **Amount Sent:** $4,399.00
+
+5. **Date:** December 31, 2024  
+   **Customer:** SAMIKSHA  
+   **Amount Sent:** $6,399.00
+
+6. **Date:** December 31, 2024  
+   **Customer:** SAMIKSHA SHARMA  
+   **Amount Sent:** $5,499.00
+
+7. **Date:** December 31, 2024  
+   **Customer:** SAMIKSHA SHARMA  
+   **Amount Sent:** $5,399.00
+
+8. **Date:** December 31, 2024  
+   **Customer:** SAMIKSHA SHARMA  
+   **Amount Sent:** $5,399.00
+
+9. **Date:** December 31, 2024  
+   **Customer:** SAMIKSHA SHARMA  
+   **Amount Sent:** $5,399.00
+
+10. **Date:** December 31, 2024  
+    **Customer:** SAMIKSHA SHARMA  
+    **Amount Sent:** $5,399.00
+
+---
+
+These transactions are listed in descending order by date, showing the most recent transactions first.
+[2025-01-07 15:14:10,872] INFO [Remit_agent.core.sql_agent._generate_human_readable:152] Human readable response generated successfully
+[2025-01-07 15:17:51,478] INFO [__main__.main:239] Processing question: what is the largest  transaction on data jan 6 2024
+[2025-01-07 15:17:51,480] INFO [Remit_agent.core.sql_agent.run:192] Starting workflow with question: what is the largest  transaction on data jan 6 2024
+[2025-01-07 15:17:51,489] INFO [Remit_agent.core.sql_agent._check_relevance:53] Checking relevance for question: what is the largest  transaction on data jan 6 2024
+[2025-01-07 15:17:51,490] INFO [Remit_agent.tools.tools.check_relevance:27] Checking relevance for question: what is the largest  transaction on data jan 6 2024
+[2025-01-07 15:17:54,275] INFO [Remit_agent.tools.tools.check_relevance:57] Relevance check completed: {'relevant': True, 'tables': ['dbo.remitTransactions'], 'breakdown': {'intent': 'aggregation', 'entities': [], 'conditions': ['date = January 6, 2024'], 'timeframe': 'specific date'}, 'explanation': 'The query seeks to find the largest transaction on a specific date, requiring analysis of transaction data.'}
+[2025-01-07 15:17:54,280] INFO [Remit_agent.core.sql_agent._check_relevance:55] Relevance check result: {'relevant': True, 'tables': ['dbo.remitTransactions'], 'breakdown': {'intent': 'aggregation', 'entities': [], 'conditions': ['date = January 6, 2024'], 'timeframe': 'specific date'}, 'explanation': 'The query seeks to find the largest transaction on a specific date, requiring analysis of transaction data.'}
+[2025-01-07 15:17:54,282] INFO [Remit_agent.tools.tools.convert_to_sql:95] Converting to SQL - Question: what is the largest  transaction on data jan 6 2024
+[2025-01-07 15:17:54,282] INFO [Remit_agent.tools.tools.convert_to_sql:96] Context: {'relevant': True, 'tables': ['dbo.remitTransactions'], 'breakdown': {'intent': 'aggregation', 'entities': [], 'conditions': ['date = January 6, 2024'], 'timeframe': 'specific date'}, 'explanation': 'The query seeks to find the largest transaction on a specific date, requiring analysis of transaction data.'}
+[2025-01-07 15:17:54,485] INFO [Remit_agent.database.get_database_schema:185] Retrieved schema:
+
+Table: customers
+- id: uniqueidentifier NOT NULL (Primary Key)
+- customer_id: varchar NULL
+- full_name: varchar NULL
+- customer_type: varchar NULL
+- customer_category: varchar NULL
+- country: char NULL
+- timezone: varchar NULL
+- profile_picture: varchar NULL
+- current_status: int NULL
+- mobile_no: varchar NULL
+- user_language: varchar NULL
+- create_by: uniqueidentifier NULL
+- create_date: datetime NULL
+- update_by: uniqueidentifier NULL
+- update_date: datetime NULL
+- lock_by: varchar NULL
+- lock_date: datetime NULL
+- is_active: bit NULL
+- balance: money NULL
+- referal_code: uniqueidentifier NULL
+- enable_remittance: bit NULL
+- enable_wallet: bit NULL
+- enable_online: bit NULL
+- delete_customer: bit NULL
+- suspend_customer: bit NULL
+- approve_by: uniqueidentifier NULL
+- approve_date: datetime NULL
+- create_agent_key: uniqueidentifier NULL
+- sanction_screen: bit NULL
+- sanction_status: bit NULL
+- sanction_date: datetime NULL
+- kyc_status_by: uniqueidentifier NULL
+- kyc_status_date: datetime NULL
+- kyc_approve: bit NULL
+- referal_customer_key: uniqueidentifier NULL
+- referal_own_code: varchar NULL
+- points: money NULL
+- risk_score: int NULL
+- risk_score_detail: varchar NULL
+- self_risk_score: int NULL
+- additional_risk: int NULL
+- row_version: timestamp NOT NULL
+
+Table: remitTransactions
+- id: uniqueidentifier NOT NULL (Primary Key)
+- remit_pin_number: varchar NULL
+- send_country: varchar NULL
+- send_agent_id: uniqueidentifier NULL
+- send_agent_name: varchar NULL
+- payment_method: varchar NULL
+- transaction_type: varchar NULL
+- send_amount: money NULL
+- service_fee: money NULL
+- exchange_rate: numeric NULL
+- collect_amount: money NULL
+- send_currency: varchar NULL
+- send_ccy_buy_rate: numeric NULL
+- send_ccy_sell_rate: numeric NULL
+- send_amount_usd: money NULL
+- service_fee_usd: money NULL
+- collect_amount_usd: money NULL
+- send_commission: money NULL
+- send_commission_currency: varchar NULL
+- send_forex_gain: money NULL
+- receive_country: varchar NULL
+- receive_agent_id: uniqueidentifier NULL
+- receive_agent_name: varchar NULL
+- receive_amount: money NULL
+- receive_currency: varchar NULL
+- receive_ccy_buy_rate: numeric NULL
+- receive_ccy_sell_rate: numeric NULL
+- receive_settlement_rate: numeric NULL
+- receive_settlement_currency: varchar NULL
+- receive_settlement_amount: money NULL
+- receive_commission: money NULL
+- receive_commission_currency: varchar NULL
+- receive_forex_gain: money NULL
+- sender_id: uniqueidentifier NULL
+- sender_full_name: varchar NULL
+- sender_address_1: varchar NULL
+- sender_address_2: varchar NULL
+- sender_country: char NULL
+- source_of_income: varchar NULL
+- receiver_id: uniqueidentifier NULL
+- receiver_full_name: varchar NULL
+- receiver_address_1: varchar NULL
+- receiver_address_2: varchar NULL
+- receiver_country: char NULL
+- relation: varchar NULL
+- purpose: varchar NULL
+- tax: varchar NULL
+- tax_rate: money NULL
+- tax_fee: money NULL
+- product: varchar NULL
+- current_status: varchar NULL
+- status_date: datetime NULL
+- merchant_id: uniqueidentifier NULL
+- merchant_name: varchar NULL
+- merchant_account_number: varchar NULL
+- merchant_account_branch: varchar NULL
+- remarks: varchar NULL
+- status_by: uniqueidentifier NULL
+- aml_status: int NULL
+- sanction_status: int NULL
+- aml_remarks: nvarchar NULL
+- sanction_remarks: nvarchar NULL
+- api_response_key: varchar NULL
+- forex_margin_type: varchar NULL
+- forex_margin_value: money NULL
+- collection_type: varchar NULL
+- create_by: uniqueidentifier NULL
+- create_date: datetime NOT NULL
+- lock_by: uniqueidentifier NULL
+- lock_date: datetime NULL
+- update_by: uniqueidentifier NULL
+- update_date: datetime NULL
+- approve_by: uniqueidentifier NULL
+- approve_date: datetime NULL
+- api_response_token: nvarchar NULL
+- card_transaction_key: uniqueidentifier NULL
+- card_number: varchar NULL
+- remit_card_atm_fee: money NULL
+- own_pin_number: varchar NULL
+- campaign_code: varchar NULL
+- reward_point: money NULL
+- campaign_discount: money NULL
+- reject_reason: nvarchar NULL
+- purpose2: varchar NULL
+- agent_sno: int NULL
+- remit_serial_no: int NULL
+- row_version: timestamp NOT NULL
+- campaign_benefit: money NULL
+- process_agent_id: uniqueidentifier NULL
+- process_agent_name: varchar NULL
+- process_agent_commission: money NULL
+- process_agent_commission_currency: varchar NULL
+[2025-01-07 15:17:56,405] INFO [Remit_agent.tools.tools.convert_to_sql:110] Generated SQL query: SELECT TOP 1
+    rt.remit_pin_number,
+    rt.send_amount,
+    rt.receive_amount,
+    rt.send_currency,
+    rt.receive_currency,
+    rt.create_date
+FROM dbo.remitTransactions rt
+WHERE rt.create_date = '2024-01-06'
+ORDER BY rt.send_amount DESC
+[2025-01-07 15:17:56,407] INFO [Remit_agent.core.sql_agent._convert_to_sql:84] Generated SQL query: SELECT TOP 1
+    rt.remit_pin_number,
+    rt.send_amount,
+    rt.receive_amount,
+    rt.send_currency,
+    rt.receive_currency,
+    rt.create_date
+FROM dbo.remitTransactions rt
+WHERE rt.create_date = '2024-01-06'
+ORDER BY rt.send_amount DESC
+[2025-01-07 15:17:56,411] INFO [Remit_agent.tools.tools.execute_sql_query:119] Executing SQL query: SELECT TOP 1
+    rt.remit_pin_number,
+    rt.send_amount,
+    rt.receive_amount,
+    rt.send_currency,
+    rt.receive_currency,
+    rt.create_date
+FROM dbo.remitTransactions rt
+WHERE rt.create_date = '2024-01-06'
+ORDER BY rt.send_amount DESC
+[2025-01-07 15:17:56,643] INFO [Remit_agent.core.sql_agent._execute_sql:122] SQL query executed successfully
+[2025-01-07 15:17:56,644] INFO [Remit_agent.tools.tools.generate_human_readable:153] Generating human readable response
+[2025-01-07 15:17:56,644] INFO [Remit_agent.tools.tools.generate_human_readable:154] Input SQL: SELECT TOP 1
+    rt.remit_pin_number,
+    rt.send_amount,
+    rt.receive_amount,
+    rt.send_currency,
+    rt.receive_currency,
+    rt.create_date
+FROM dbo.remitTransactions rt
+WHERE rt.create_date = '2024-01-06'
+ORDER BY rt.send_amount DESC
+[2025-01-07 15:17:57,870] INFO [Remit_agent.tools.tools.generate_human_readable:163] Generated response: On January 6, 2024, there were no recorded transactions in the database. Therefore, there is no information available regarding the largest transaction for that date. If you have any other queries or need further assistance, please let me know.
+[2025-01-07 15:17:57,870] INFO [Remit_agent.core.sql_agent._generate_human_readable:152] Human readable response generated successfully
+[2025-01-07 15:18:39,293] INFO [__main__.main:239] Processing question: what is the highest transaction  amount on date jan 6 2024
+[2025-01-07 15:18:39,293] INFO [Remit_agent.core.sql_agent.run:192] Starting workflow with question: what is the highest transaction  amount on date jan 6 2024
+[2025-01-07 15:18:39,301] INFO [Remit_agent.core.sql_agent._check_relevance:53] Checking relevance for question: what is the highest transaction  amount on date jan 6 2024
+[2025-01-07 15:18:39,301] INFO [Remit_agent.tools.tools.check_relevance:27] Checking relevance for question: what is the highest transaction  amount on date jan 6 2024
+[2025-01-07 15:18:41,820] INFO [Remit_agent.tools.tools.check_relevance:57] Relevance check completed: {'relevant': True, 'tables': ['dbo.remitTransactions'], 'breakdown': {'intent': 'aggregation', 'entities': ['transaction amount'], 'conditions': ['date = January 6, 2024'], 'timeframe': 'specific date'}, 'explanation': 'The query is about finding the highest transaction amount on a specific date, which involves aggregating transaction data.'}
+[2025-01-07 15:18:41,822] INFO [Remit_agent.core.sql_agent._check_relevance:55] Relevance check result: {'relevant': True, 'tables': ['dbo.remitTransactions'], 'breakdown': {'intent': 'aggregation', 'entities': ['transaction amount'], 'conditions': ['date = January 6, 2024'], 'timeframe': 'specific date'}, 'explanation': 'The query is about finding the highest transaction amount on a specific date, which involves aggregating transaction data.'}
+[2025-01-07 15:18:41,824] INFO [Remit_agent.tools.tools.convert_to_sql:95] Converting to SQL - Question: what is the highest transaction  amount on date jan 6 2024
+[2025-01-07 15:18:41,824] INFO [Remit_agent.tools.tools.convert_to_sql:96] Context: {'relevant': True, 'tables': ['dbo.remitTransactions'], 'breakdown': {'intent': 'aggregation', 'entities': ['transaction amount'], 'conditions': ['date = January 6, 2024'], 'timeframe': 'specific date'}, 'explanation': 'The query is about finding the highest transaction amount on a specific date, which involves aggregating transaction data.'}
+[2025-01-07 15:18:42,039] INFO [Remit_agent.database.get_database_schema:185] Retrieved schema:
+
+Table: customers
+- id: uniqueidentifier NOT NULL (Primary Key)
+- customer_id: varchar NULL
+- full_name: varchar NULL
+- customer_type: varchar NULL
+- customer_category: varchar NULL
+- country: char NULL
+- timezone: varchar NULL
+- profile_picture: varchar NULL
+- current_status: int NULL
+- mobile_no: varchar NULL
+- user_language: varchar NULL
+- create_by: uniqueidentifier NULL
+- create_date: datetime NULL
+- update_by: uniqueidentifier NULL
+- update_date: datetime NULL
+- lock_by: varchar NULL
+- lock_date: datetime NULL
+- is_active: bit NULL
+- balance: money NULL
+- referal_code: uniqueidentifier NULL
+- enable_remittance: bit NULL
+- enable_wallet: bit NULL
+- enable_online: bit NULL
+- delete_customer: bit NULL
+- suspend_customer: bit NULL
+- approve_by: uniqueidentifier NULL
+- approve_date: datetime NULL
+- create_agent_key: uniqueidentifier NULL
+- sanction_screen: bit NULL
+- sanction_status: bit NULL
+- sanction_date: datetime NULL
+- kyc_status_by: uniqueidentifier NULL
+- kyc_status_date: datetime NULL
+- kyc_approve: bit NULL
+- referal_customer_key: uniqueidentifier NULL
+- referal_own_code: varchar NULL
+- points: money NULL
+- risk_score: int NULL
+- risk_score_detail: varchar NULL
+- self_risk_score: int NULL
+- additional_risk: int NULL
+- row_version: timestamp NOT NULL
+
+Table: remitTransactions
+- id: uniqueidentifier NOT NULL (Primary Key)
+- remit_pin_number: varchar NULL
+- send_country: varchar NULL
+- send_agent_id: uniqueidentifier NULL
+- send_agent_name: varchar NULL
+- payment_method: varchar NULL
+- transaction_type: varchar NULL
+- send_amount: money NULL
+- service_fee: money NULL
+- exchange_rate: numeric NULL
+- collect_amount: money NULL
+- send_currency: varchar NULL
+- send_ccy_buy_rate: numeric NULL
+- send_ccy_sell_rate: numeric NULL
+- send_amount_usd: money NULL
+- service_fee_usd: money NULL
+- collect_amount_usd: money NULL
+- send_commission: money NULL
+- send_commission_currency: varchar NULL
+- send_forex_gain: money NULL
+- receive_country: varchar NULL
+- receive_agent_id: uniqueidentifier NULL
+- receive_agent_name: varchar NULL
+- receive_amount: money NULL
+- receive_currency: varchar NULL
+- receive_ccy_buy_rate: numeric NULL
+- receive_ccy_sell_rate: numeric NULL
+- receive_settlement_rate: numeric NULL
+- receive_settlement_currency: varchar NULL
+- receive_settlement_amount: money NULL
+- receive_commission: money NULL
+- receive_commission_currency: varchar NULL
+- receive_forex_gain: money NULL
+- sender_id: uniqueidentifier NULL
+- sender_full_name: varchar NULL
+- sender_address_1: varchar NULL
+- sender_address_2: varchar NULL
+- sender_country: char NULL
+- source_of_income: varchar NULL
+- receiver_id: uniqueidentifier NULL
+- receiver_full_name: varchar NULL
+- receiver_address_1: varchar NULL
+- receiver_address_2: varchar NULL
+- receiver_country: char NULL
+- relation: varchar NULL
+- purpose: varchar NULL
+- tax: varchar NULL
+- tax_rate: money NULL
+- tax_fee: money NULL
+- product: varchar NULL
+- current_status: varchar NULL
+- status_date: datetime NULL
+- merchant_id: uniqueidentifier NULL
+- merchant_name: varchar NULL
+- merchant_account_number: varchar NULL
+- merchant_account_branch: varchar NULL
+- remarks: varchar NULL
+- status_by: uniqueidentifier NULL
+- aml_status: int NULL
+- sanction_status: int NULL
+- aml_remarks: nvarchar NULL
+- sanction_remarks: nvarchar NULL
+- api_response_key: varchar NULL
+- forex_margin_type: varchar NULL
+- forex_margin_value: money NULL
+- collection_type: varchar NULL
+- create_by: uniqueidentifier NULL
+- create_date: datetime NOT NULL
+- lock_by: uniqueidentifier NULL
+- lock_date: datetime NULL
+- update_by: uniqueidentifier NULL
+- update_date: datetime NULL
+- approve_by: uniqueidentifier NULL
+- approve_date: datetime NULL
+- api_response_token: nvarchar NULL
+- card_transaction_key: uniqueidentifier NULL
+- card_number: varchar NULL
+- remit_card_atm_fee: money NULL
+- own_pin_number: varchar NULL
+- campaign_code: varchar NULL
+- reward_point: money NULL
+- campaign_discount: money NULL
+- reject_reason: nvarchar NULL
+- purpose2: varchar NULL
+- agent_sno: int NULL
+- remit_serial_no: int NULL
+- row_version: timestamp NOT NULL
+- campaign_benefit: money NULL
+- process_agent_id: uniqueidentifier NULL
+- process_agent_name: varchar NULL
+- process_agent_commission: money NULL
+- process_agent_commission_currency: varchar NULL
+[2025-01-07 15:18:43,703] INFO [Remit_agent.tools.tools.convert_to_sql:110] Generated SQL query: SELECT TOP 1 
+    rt.send_amount
+FROM dbo.remitTransactions rt
+WHERE CAST(rt.create_date AS DATE) = '2024-01-06'
+ORDER BY rt.send_amount DESC
+[2025-01-07 15:18:43,709] INFO [Remit_agent.core.sql_agent._convert_to_sql:84] Generated SQL query: SELECT TOP 1 
+    rt.send_amount
+FROM dbo.remitTransactions rt
+WHERE CAST(rt.create_date AS DATE) = '2024-01-06'
+ORDER BY rt.send_amount DESC
+[2025-01-07 15:18:43,711] INFO [Remit_agent.tools.tools.execute_sql_query:119] Executing SQL query: SELECT TOP 1 
+    rt.send_amount
+FROM dbo.remitTransactions rt
+WHERE CAST(rt.create_date AS DATE) = '2024-01-06'
+ORDER BY rt.send_amount DESC
+[2025-01-07 15:18:43,985] INFO [Remit_agent.core.sql_agent._execute_sql:122] SQL query executed successfully
+[2025-01-07 15:18:43,995] INFO [Remit_agent.tools.tools.generate_human_readable:153] Generating human readable response
+[2025-01-07 15:18:43,995] INFO [Remit_agent.tools.tools.generate_human_readable:154] Input SQL: SELECT TOP 1 
+    rt.send_amount
+FROM dbo.remitTransactions rt
+WHERE CAST(rt.create_date AS DATE) = '2024-01-06'
+ORDER BY rt.send_amount DESC
+[2025-01-07 15:18:45,832] INFO [Remit_agent.tools.tools.generate_human_readable:163] Generated response: On January 6, 2024, there were no recorded transactions, so there is no highest transaction amount for that date.
+[2025-01-07 15:18:45,832] INFO [Remit_agent.core.sql_agent._generate_human_readable:152] Human readable response generated successfully
+[2025-01-07 15:21:07,357] INFO [__main__.main:239] Processing question: what is the highest send amount on date jan 6 2024
+[2025-01-07 15:21:07,357] INFO [Remit_agent.core.sql_agent.run:192] Starting workflow with question: what is the highest send amount on date jan 6 2024
+[2025-01-07 15:21:07,366] INFO [Remit_agent.core.sql_agent._check_relevance:53] Checking relevance for question: what is the highest send amount on date jan 6 2024
+[2025-01-07 15:21:07,366] INFO [Remit_agent.tools.tools.check_relevance:27] Checking relevance for question: what is the highest send amount on date jan 6 2024
+[2025-01-07 15:21:10,166] INFO [Remit_agent.tools.tools.check_relevance:57] Relevance check completed: {'relevant': True, 'tables': ['dbo.remitTransactions'], 'breakdown': {'intent': 'aggregation', 'entities': ['send amount'], 'conditions': ['date = January 6, 2024'], 'timeframe': 'specific date'}, 'explanation': 'The query is asking for the maximum send amount from the remitTransactions table on a specific date, January 6, 2024.'}
+[2025-01-07 15:21:10,166] INFO [Remit_agent.core.sql_agent._check_relevance:55] Relevance check result: {'relevant': True, 'tables': ['dbo.remitTransactions'], 'breakdown': {'intent': 'aggregation', 'entities': ['send amount'], 'conditions': ['date = January 6, 2024'], 'timeframe': 'specific date'}, 'explanation': 'The query is asking for the maximum send amount from the remitTransactions table on a specific date, January 6, 2024.'}
+[2025-01-07 15:21:10,171] INFO [Remit_agent.tools.tools.convert_to_sql:95] Converting to SQL - Question: what is the highest send amount on date jan 6 2024
+[2025-01-07 15:21:10,171] INFO [Remit_agent.tools.tools.convert_to_sql:96] Context: {'relevant': True, 'tables': ['dbo.remitTransactions'], 'breakdown': {'intent': 'aggregation', 'entities': ['send amount'], 'conditions': ['date = January 6, 2024'], 'timeframe': 'specific date'}, 'explanation': 'The query is asking for the maximum send amount from the remitTransactions table on a specific date, January 6, 2024.'}
+[2025-01-07 15:21:10,371] INFO [Remit_agent.database.get_database_schema:185] Retrieved schema:
+
+Table: customers
+- id: uniqueidentifier NOT NULL (Primary Key)
+- customer_id: varchar NULL
+- full_name: varchar NULL
+- customer_type: varchar NULL
+- customer_category: varchar NULL
+- country: char NULL
+- timezone: varchar NULL
+- profile_picture: varchar NULL
+- current_status: int NULL
+- mobile_no: varchar NULL
+- user_language: varchar NULL
+- create_by: uniqueidentifier NULL
+- create_date: datetime NULL
+- update_by: uniqueidentifier NULL
+- update_date: datetime NULL
+- lock_by: varchar NULL
+- lock_date: datetime NULL
+- is_active: bit NULL
+- balance: money NULL
+- referal_code: uniqueidentifier NULL
+- enable_remittance: bit NULL
+- enable_wallet: bit NULL
+- enable_online: bit NULL
+- delete_customer: bit NULL
+- suspend_customer: bit NULL
+- approve_by: uniqueidentifier NULL
+- approve_date: datetime NULL
+- create_agent_key: uniqueidentifier NULL
+- sanction_screen: bit NULL
+- sanction_status: bit NULL
+- sanction_date: datetime NULL
+- kyc_status_by: uniqueidentifier NULL
+- kyc_status_date: datetime NULL
+- kyc_approve: bit NULL
+- referal_customer_key: uniqueidentifier NULL
+- referal_own_code: varchar NULL
+- points: money NULL
+- risk_score: int NULL
+- risk_score_detail: varchar NULL
+- self_risk_score: int NULL
+- additional_risk: int NULL
+- row_version: timestamp NOT NULL
+
+Table: remitTransactions
+- id: uniqueidentifier NOT NULL (Primary Key)
+- remit_pin_number: varchar NULL
+- send_country: varchar NULL
+- send_agent_id: uniqueidentifier NULL
+- send_agent_name: varchar NULL
+- payment_method: varchar NULL
+- transaction_type: varchar NULL
+- send_amount: money NULL
+- service_fee: money NULL
+- exchange_rate: numeric NULL
+- collect_amount: money NULL
+- send_currency: varchar NULL
+- send_ccy_buy_rate: numeric NULL
+- send_ccy_sell_rate: numeric NULL
+- send_amount_usd: money NULL
+- service_fee_usd: money NULL
+- collect_amount_usd: money NULL
+- send_commission: money NULL
+- send_commission_currency: varchar NULL
+- send_forex_gain: money NULL
+- receive_country: varchar NULL
+- receive_agent_id: uniqueidentifier NULL
+- receive_agent_name: varchar NULL
+- receive_amount: money NULL
+- receive_currency: varchar NULL
+- receive_ccy_buy_rate: numeric NULL
+- receive_ccy_sell_rate: numeric NULL
+- receive_settlement_rate: numeric NULL
+- receive_settlement_currency: varchar NULL
+- receive_settlement_amount: money NULL
+- receive_commission: money NULL
+- receive_commission_currency: varchar NULL
+- receive_forex_gain: money NULL
+- sender_id: uniqueidentifier NULL
+- sender_full_name: varchar NULL
+- sender_address_1: varchar NULL
+- sender_address_2: varchar NULL
+- sender_country: char NULL
+- source_of_income: varchar NULL
+- receiver_id: uniqueidentifier NULL
+- receiver_full_name: varchar NULL
+- receiver_address_1: varchar NULL
+- receiver_address_2: varchar NULL
+- receiver_country: char NULL
+- relation: varchar NULL
+- purpose: varchar NULL
+- tax: varchar NULL
+- tax_rate: money NULL
+- tax_fee: money NULL
+- product: varchar NULL
+- current_status: varchar NULL
+- status_date: datetime NULL
+- merchant_id: uniqueidentifier NULL
+- merchant_name: varchar NULL
+- merchant_account_number: varchar NULL
+- merchant_account_branch: varchar NULL
+- remarks: varchar NULL
+- status_by: uniqueidentifier NULL
+- aml_status: int NULL
+- sanction_status: int NULL
+- aml_remarks: nvarchar NULL
+- sanction_remarks: nvarchar NULL
+- api_response_key: varchar NULL
+- forex_margin_type: varchar NULL
+- forex_margin_value: money NULL
+- collection_type: varchar NULL
+- create_by: uniqueidentifier NULL
+- create_date: datetime NOT NULL
+- lock_by: uniqueidentifier NULL
+- lock_date: datetime NULL
+- update_by: uniqueidentifier NULL
+- update_date: datetime NULL
+- approve_by: uniqueidentifier NULL
+- approve_date: datetime NULL
+- api_response_token: nvarchar NULL
+- card_transaction_key: uniqueidentifier NULL
+- card_number: varchar NULL
+- remit_card_atm_fee: money NULL
+- own_pin_number: varchar NULL
+- campaign_code: varchar NULL
+- reward_point: money NULL
+- campaign_discount: money NULL
+- reject_reason: nvarchar NULL
+- purpose2: varchar NULL
+- agent_sno: int NULL
+- remit_serial_no: int NULL
+- row_version: timestamp NOT NULL
+- campaign_benefit: money NULL
+- process_agent_id: uniqueidentifier NULL
+- process_agent_name: varchar NULL
+- process_agent_commission: money NULL
+- process_agent_commission_currency: varchar NULL
+[2025-01-07 15:21:11,605] INFO [Remit_agent.tools.tools.convert_to_sql:110] Generated SQL query: SELECT MAX(rt.send_amount) AS highest_send_amount
+FROM dbo.remitTransactions rt
+WHERE CAST(rt.create_date AS DATE) = '2024-01-06'
+[2025-01-07 15:21:11,605] INFO [Remit_agent.core.sql_agent._convert_to_sql:84] Generated SQL query: SELECT MAX(rt.send_amount) AS highest_send_amount
+FROM dbo.remitTransactions rt
+WHERE CAST(rt.create_date AS DATE) = '2024-01-06'
+[2025-01-07 15:21:11,615] INFO [Remit_agent.tools.tools.execute_sql_query:119] Executing SQL query: SELECT MAX(rt.send_amount) AS highest_send_amount
+FROM dbo.remitTransactions rt
+WHERE CAST(rt.create_date AS DATE) = '2024-01-06'
+[2025-01-07 15:21:11,841] INFO [Remit_agent.core.sql_agent._execute_sql:122] SQL query executed successfully
+[2025-01-07 15:21:11,851] INFO [Remit_agent.tools.tools.generate_human_readable:153] Generating human readable response
+[2025-01-07 15:21:11,851] INFO [Remit_agent.tools.tools.generate_human_readable:154] Input SQL: SELECT MAX(rt.send_amount) AS highest_send_amount
+FROM dbo.remitTransactions rt
+WHERE CAST(rt.create_date AS DATE) = '2024-01-06'
+[2025-01-07 15:21:13,423] INFO [Remit_agent.tools.tools.generate_human_readable:163] Generated response: **Query Result: Highest Send Amount on January 6, 2024**
+
+- **Date of Interest:** January 6, 2024
+- **Highest Send Amount:** No transactions were recorded on this date, so there is no send amount available.
+
+**Note:** The query was executed successfully, but there were no transactions found for the specified date.
+[2025-01-07 15:21:13,423] INFO [Remit_agent.core.sql_agent._generate_human_readable:152] Human readable response generated successfully
+[2025-01-07 15:21:40,854] INFO [__main__.main:239] Processing question: how many total txn on date jan 6 2024
+[2025-01-07 15:21:40,857] INFO [Remit_agent.core.sql_agent.run:192] Starting workflow with question: how many total txn on date jan 6 2024
+[2025-01-07 15:21:40,867] INFO [Remit_agent.core.sql_agent._check_relevance:53] Checking relevance for question: how many total txn on date jan 6 2024
+[2025-01-07 15:21:40,868] INFO [Remit_agent.tools.tools.check_relevance:27] Checking relevance for question: how many total txn on date jan 6 2024
+[2025-01-07 15:21:44,760] INFO [Remit_agent.tools.tools.check_relevance:57] Relevance check completed: {'relevant': True, 'tables': ['dbo.remitTransactions'], 'breakdown': {'intent': 'aggregate', 'entities': [], 'conditions': ["transaction_date = '2024-01-06'"], 'timeframe': 'specific date'}, 'explanation': 'The query is asking for a count of transactions on a specific date, which involves aggregating data from the remitTransactions table.'}
+[2025-01-07 15:21:44,760] INFO [Remit_agent.core.sql_agent._check_relevance:55] Relevance check result: {'relevant': True, 'tables': ['dbo.remitTransactions'], 'breakdown': {'intent': 'aggregate', 'entities': [], 'conditions': ["transaction_date = '2024-01-06'"], 'timeframe': 'specific date'}, 'explanation': 'The query is asking for a count of transactions on a specific date, which involves aggregating data from the remitTransactions table.'}
+[2025-01-07 15:21:44,766] INFO [Remit_agent.tools.tools.convert_to_sql:95] Converting to SQL - Question: how many total txn on date jan 6 2024
+[2025-01-07 15:21:44,767] INFO [Remit_agent.tools.tools.convert_to_sql:96] Context: {'relevant': True, 'tables': ['dbo.remitTransactions'], 'breakdown': {'intent': 'aggregate', 'entities': [], 'conditions': ["transaction_date = '2024-01-06'"], 'timeframe': 'specific date'}, 'explanation': 'The query is asking for a count of transactions on a specific date, which involves aggregating data from the remitTransactions table.'}
+[2025-01-07 15:21:44,962] INFO [Remit_agent.database.get_database_schema:185] Retrieved schema:
+
+Table: customers
+- id: uniqueidentifier NOT NULL (Primary Key)
+- customer_id: varchar NULL
+- full_name: varchar NULL
+- customer_type: varchar NULL
+- customer_category: varchar NULL
+- country: char NULL
+- timezone: varchar NULL
+- profile_picture: varchar NULL
+- current_status: int NULL
+- mobile_no: varchar NULL
+- user_language: varchar NULL
+- create_by: uniqueidentifier NULL
+- create_date: datetime NULL
+- update_by: uniqueidentifier NULL
+- update_date: datetime NULL
+- lock_by: varchar NULL
+- lock_date: datetime NULL
+- is_active: bit NULL
+- balance: money NULL
+- referal_code: uniqueidentifier NULL
+- enable_remittance: bit NULL
+- enable_wallet: bit NULL
+- enable_online: bit NULL
+- delete_customer: bit NULL
+- suspend_customer: bit NULL
+- approve_by: uniqueidentifier NULL
+- approve_date: datetime NULL
+- create_agent_key: uniqueidentifier NULL
+- sanction_screen: bit NULL
+- sanction_status: bit NULL
+- sanction_date: datetime NULL
+- kyc_status_by: uniqueidentifier NULL
+- kyc_status_date: datetime NULL
+- kyc_approve: bit NULL
+- referal_customer_key: uniqueidentifier NULL
+- referal_own_code: varchar NULL
+- points: money NULL
+- risk_score: int NULL
+- risk_score_detail: varchar NULL
+- self_risk_score: int NULL
+- additional_risk: int NULL
+- row_version: timestamp NOT NULL
+
+Table: remitTransactions
+- id: uniqueidentifier NOT NULL (Primary Key)
+- remit_pin_number: varchar NULL
+- send_country: varchar NULL
+- send_agent_id: uniqueidentifier NULL
+- send_agent_name: varchar NULL
+- payment_method: varchar NULL
+- transaction_type: varchar NULL
+- send_amount: money NULL
+- service_fee: money NULL
+- exchange_rate: numeric NULL
+- collect_amount: money NULL
+- send_currency: varchar NULL
+- send_ccy_buy_rate: numeric NULL
+- send_ccy_sell_rate: numeric NULL
+- send_amount_usd: money NULL
+- service_fee_usd: money NULL
+- collect_amount_usd: money NULL
+- send_commission: money NULL
+- send_commission_currency: varchar NULL
+- send_forex_gain: money NULL
+- receive_country: varchar NULL
+- receive_agent_id: uniqueidentifier NULL
+- receive_agent_name: varchar NULL
+- receive_amount: money NULL
+- receive_currency: varchar NULL
+- receive_ccy_buy_rate: numeric NULL
+- receive_ccy_sell_rate: numeric NULL
+- receive_settlement_rate: numeric NULL
+- receive_settlement_currency: varchar NULL
+- receive_settlement_amount: money NULL
+- receive_commission: money NULL
+- receive_commission_currency: varchar NULL
+- receive_forex_gain: money NULL
+- sender_id: uniqueidentifier NULL
+- sender_full_name: varchar NULL
+- sender_address_1: varchar NULL
+- sender_address_2: varchar NULL
+- sender_country: char NULL
+- source_of_income: varchar NULL
+- receiver_id: uniqueidentifier NULL
+- receiver_full_name: varchar NULL
+- receiver_address_1: varchar NULL
+- receiver_address_2: varchar NULL
+- receiver_country: char NULL
+- relation: varchar NULL
+- purpose: varchar NULL
+- tax: varchar NULL
+- tax_rate: money NULL
+- tax_fee: money NULL
+- product: varchar NULL
+- current_status: varchar NULL
+- status_date: datetime NULL
+- merchant_id: uniqueidentifier NULL
+- merchant_name: varchar NULL
+- merchant_account_number: varchar NULL
+- merchant_account_branch: varchar NULL
+- remarks: varchar NULL
+- status_by: uniqueidentifier NULL
+- aml_status: int NULL
+- sanction_status: int NULL
+- aml_remarks: nvarchar NULL
+- sanction_remarks: nvarchar NULL
+- api_response_key: varchar NULL
+- forex_margin_type: varchar NULL
+- forex_margin_value: money NULL
+- collection_type: varchar NULL
+- create_by: uniqueidentifier NULL
+- create_date: datetime NOT NULL
+- lock_by: uniqueidentifier NULL
+- lock_date: datetime NULL
+- update_by: uniqueidentifier NULL
+- update_date: datetime NULL
+- approve_by: uniqueidentifier NULL
+- approve_date: datetime NULL
+- api_response_token: nvarchar NULL
+- card_transaction_key: uniqueidentifier NULL
+- card_number: varchar NULL
+- remit_card_atm_fee: money NULL
+- own_pin_number: varchar NULL
+- campaign_code: varchar NULL
+- reward_point: money NULL
+- campaign_discount: money NULL
+- reject_reason: nvarchar NULL
+- purpose2: varchar NULL
+- agent_sno: int NULL
+- remit_serial_no: int NULL
+- row_version: timestamp NOT NULL
+- campaign_benefit: money NULL
+- process_agent_id: uniqueidentifier NULL
+- process_agent_name: varchar NULL
+- process_agent_commission: money NULL
+- process_agent_commission_currency: varchar NULL
+[2025-01-07 15:21:46,162] INFO [Remit_agent.tools.tools.convert_to_sql:110] Generated SQL query: SELECT COUNT(*) as total_transactions FROM dbo.remitTransactions rt WHERE CAST(rt.create_date AS DATE) = '2024-01-06'
+[2025-01-07 15:21:46,162] INFO [Remit_agent.core.sql_agent._convert_to_sql:84] Generated SQL query: SELECT COUNT(*) as total_transactions FROM dbo.remitTransactions rt WHERE CAST(rt.create_date AS DATE) = '2024-01-06'
+[2025-01-07 15:21:46,164] INFO [Remit_agent.tools.tools.execute_sql_query:119] Executing SQL query: SELECT COUNT(*) as total_transactions FROM dbo.remitTransactions rt WHERE CAST(rt.create_date AS DATE) = '2024-01-06'
+[2025-01-07 15:21:46,392] INFO [Remit_agent.core.sql_agent._execute_sql:122] SQL query executed successfully
+[2025-01-07 15:21:46,398] INFO [Remit_agent.tools.tools.generate_human_readable:153] Generating human readable response
+[2025-01-07 15:21:46,398] INFO [Remit_agent.tools.tools.generate_human_readable:154] Input SQL: SELECT COUNT(*) as total_transactions FROM dbo.remitTransactions rt WHERE CAST(rt.create_date AS DATE) = '2024-01-06'
+[2025-01-07 15:21:47,343] INFO [Remit_agent.tools.tools.generate_human_readable:163] Generated response: On January 6, 2024, there were no transactions recorded.
+[2025-01-07 15:21:47,343] INFO [Remit_agent.core.sql_agent._generate_human_readable:152] Human readable response generated successfully
+[2025-01-07 15:22:04,024] INFO [__main__.main:239] Processing question: how many total txn on date jan 5 2024
+[2025-01-07 15:22:04,024] INFO [Remit_agent.core.sql_agent.run:192] Starting workflow with question: how many total txn on date jan 5 2024
+[2025-01-07 15:22:04,032] INFO [Remit_agent.core.sql_agent._check_relevance:53] Checking relevance for question: how many total txn on date jan 5 2024
+[2025-01-07 15:22:04,037] INFO [Remit_agent.tools.tools.check_relevance:27] Checking relevance for question: how many total txn on date jan 5 2024
+[2025-01-07 15:22:06,557] INFO [Remit_agent.tools.tools.check_relevance:57] Relevance check completed: {'relevant': True, 'tables': ['dbo.remitTransactions'], 'breakdown': {'intent': 'aggregate', 'entities': [], 'conditions': ["transaction_date = '2024-01-05'"], 'timeframe': 'specific date'}, 'explanation': 'The query is asking for the total number of transactions on a specific date, which involves counting records in the remitTransactions table for January 5, 2024.'}
+[2025-01-07 15:22:06,558] INFO [Remit_agent.core.sql_agent._check_relevance:55] Relevance check result: {'relevant': True, 'tables': ['dbo.remitTransactions'], 'breakdown': {'intent': 'aggregate', 'entities': [], 'conditions': ["transaction_date = '2024-01-05'"], 'timeframe': 'specific date'}, 'explanation': 'The query is asking for the total number of transactions on a specific date, which involves counting records in the remitTransactions table for January 5, 2024.'}
+[2025-01-07 15:22:06,563] INFO [Remit_agent.tools.tools.convert_to_sql:95] Converting to SQL - Question: how many total txn on date jan 5 2024
+[2025-01-07 15:22:06,564] INFO [Remit_agent.tools.tools.convert_to_sql:96] Context: {'relevant': True, 'tables': ['dbo.remitTransactions'], 'breakdown': {'intent': 'aggregate', 'entities': [], 'conditions': ["transaction_date = '2024-01-05'"], 'timeframe': 'specific date'}, 'explanation': 'The query is asking for the total number of transactions on a specific date, which involves counting records in the remitTransactions table for January 5, 2024.'}
+[2025-01-07 15:22:06,766] INFO [Remit_agent.database.get_database_schema:185] Retrieved schema:
+
+Table: customers
+- id: uniqueidentifier NOT NULL (Primary Key)
+- customer_id: varchar NULL
+- full_name: varchar NULL
+- customer_type: varchar NULL
+- customer_category: varchar NULL
+- country: char NULL
+- timezone: varchar NULL
+- profile_picture: varchar NULL
+- current_status: int NULL
+- mobile_no: varchar NULL
+- user_language: varchar NULL
+- create_by: uniqueidentifier NULL
+- create_date: datetime NULL
+- update_by: uniqueidentifier NULL
+- update_date: datetime NULL
+- lock_by: varchar NULL
+- lock_date: datetime NULL
+- is_active: bit NULL
+- balance: money NULL
+- referal_code: uniqueidentifier NULL
+- enable_remittance: bit NULL
+- enable_wallet: bit NULL
+- enable_online: bit NULL
+- delete_customer: bit NULL
+- suspend_customer: bit NULL
+- approve_by: uniqueidentifier NULL
+- approve_date: datetime NULL
+- create_agent_key: uniqueidentifier NULL
+- sanction_screen: bit NULL
+- sanction_status: bit NULL
+- sanction_date: datetime NULL
+- kyc_status_by: uniqueidentifier NULL
+- kyc_status_date: datetime NULL
+- kyc_approve: bit NULL
+- referal_customer_key: uniqueidentifier NULL
+- referal_own_code: varchar NULL
+- points: money NULL
+- risk_score: int NULL
+- risk_score_detail: varchar NULL
+- self_risk_score: int NULL
+- additional_risk: int NULL
+- row_version: timestamp NOT NULL
+
+Table: remitTransactions
+- id: uniqueidentifier NOT NULL (Primary Key)
+- remit_pin_number: varchar NULL
+- send_country: varchar NULL
+- send_agent_id: uniqueidentifier NULL
+- send_agent_name: varchar NULL
+- payment_method: varchar NULL
+- transaction_type: varchar NULL
+- send_amount: money NULL
+- service_fee: money NULL
+- exchange_rate: numeric NULL
+- collect_amount: money NULL
+- send_currency: varchar NULL
+- send_ccy_buy_rate: numeric NULL
+- send_ccy_sell_rate: numeric NULL
+- send_amount_usd: money NULL
+- service_fee_usd: money NULL
+- collect_amount_usd: money NULL
+- send_commission: money NULL
+- send_commission_currency: varchar NULL
+- send_forex_gain: money NULL
+- receive_country: varchar NULL
+- receive_agent_id: uniqueidentifier NULL
+- receive_agent_name: varchar NULL
+- receive_amount: money NULL
+- receive_currency: varchar NULL
+- receive_ccy_buy_rate: numeric NULL
+- receive_ccy_sell_rate: numeric NULL
+- receive_settlement_rate: numeric NULL
+- receive_settlement_currency: varchar NULL
+- receive_settlement_amount: money NULL
+- receive_commission: money NULL
+- receive_commission_currency: varchar NULL
+- receive_forex_gain: money NULL
+- sender_id: uniqueidentifier NULL
+- sender_full_name: varchar NULL
+- sender_address_1: varchar NULL
+- sender_address_2: varchar NULL
+- sender_country: char NULL
+- source_of_income: varchar NULL
+- receiver_id: uniqueidentifier NULL
+- receiver_full_name: varchar NULL
+- receiver_address_1: varchar NULL
+- receiver_address_2: varchar NULL
+- receiver_country: char NULL
+- relation: varchar NULL
+- purpose: varchar NULL
+- tax: varchar NULL
+- tax_rate: money NULL
+- tax_fee: money NULL
+- product: varchar NULL
+- current_status: varchar NULL
+- status_date: datetime NULL
+- merchant_id: uniqueidentifier NULL
+- merchant_name: varchar NULL
+- merchant_account_number: varchar NULL
+- merchant_account_branch: varchar NULL
+- remarks: varchar NULL
+- status_by: uniqueidentifier NULL
+- aml_status: int NULL
+- sanction_status: int NULL
+- aml_remarks: nvarchar NULL
+- sanction_remarks: nvarchar NULL
+- api_response_key: varchar NULL
+- forex_margin_type: varchar NULL
+- forex_margin_value: money NULL
+- collection_type: varchar NULL
+- create_by: uniqueidentifier NULL
+- create_date: datetime NOT NULL
+- lock_by: uniqueidentifier NULL
+- lock_date: datetime NULL
+- update_by: uniqueidentifier NULL
+- update_date: datetime NULL
+- approve_by: uniqueidentifier NULL
+- approve_date: datetime NULL
+- api_response_token: nvarchar NULL
+- card_transaction_key: uniqueidentifier NULL
+- card_number: varchar NULL
+- remit_card_atm_fee: money NULL
+- own_pin_number: varchar NULL
+- campaign_code: varchar NULL
+- reward_point: money NULL
+- campaign_discount: money NULL
+- reject_reason: nvarchar NULL
+- purpose2: varchar NULL
+- agent_sno: int NULL
+- remit_serial_no: int NULL
+- row_version: timestamp NOT NULL
+- campaign_benefit: money NULL
+- process_agent_id: uniqueidentifier NULL
+- process_agent_name: varchar NULL
+- process_agent_commission: money NULL
+- process_agent_commission_currency: varchar NULL
+[2025-01-07 15:22:08,204] INFO [Remit_agent.tools.tools.convert_to_sql:110] Generated SQL query: SELECT COUNT(*) as total_transactions FROM dbo.remitTransactions rt WHERE CAST(rt.create_date AS DATE) = '2024-01-05'
+[2025-01-07 15:22:08,204] INFO [Remit_agent.core.sql_agent._convert_to_sql:84] Generated SQL query: SELECT COUNT(*) as total_transactions FROM dbo.remitTransactions rt WHERE CAST(rt.create_date AS DATE) = '2024-01-05'
+[2025-01-07 15:22:08,214] INFO [Remit_agent.tools.tools.execute_sql_query:119] Executing SQL query: SELECT COUNT(*) as total_transactions FROM dbo.remitTransactions rt WHERE CAST(rt.create_date AS DATE) = '2024-01-05'
+[2025-01-07 15:22:08,443] INFO [Remit_agent.core.sql_agent._execute_sql:122] SQL query executed successfully
+[2025-01-07 15:22:08,450] INFO [Remit_agent.tools.tools.generate_human_readable:153] Generating human readable response
+[2025-01-07 15:22:08,450] INFO [Remit_agent.tools.tools.generate_human_readable:154] Input SQL: SELECT COUNT(*) as total_transactions FROM dbo.remitTransactions rt WHERE CAST(rt.create_date AS DATE) = '2024-01-05'
+[2025-01-07 15:22:09,271] INFO [Remit_agent.tools.tools.generate_human_readable:163] Generated response: On January 5, 2024, there were a total of 10 transactions recorded.
+[2025-01-07 15:22:09,275] INFO [Remit_agent.core.sql_agent._generate_human_readable:152] Human readable response generated successfully
+[2025-01-07 15:22:56,261] INFO [__main__.main:239] Processing question: what is the heightest  txn amount on date jan 5 2024
+[2025-01-07 15:22:56,262] INFO [Remit_agent.core.sql_agent.run:192] Starting workflow with question: what is the heightest  txn amount on date jan 5 2024
+[2025-01-07 15:22:56,268] INFO [Remit_agent.core.sql_agent._check_relevance:53] Checking relevance for question: what is the heightest  txn amount on date jan 5 2024
+[2025-01-07 15:22:56,270] INFO [Remit_agent.tools.tools.check_relevance:27] Checking relevance for question: what is the heightest  txn amount on date jan 5 2024
+[2025-01-07 15:22:58,170] INFO [Remit_agent.tools.tools.check_relevance:57] Relevance check completed: {'relevant': True, 'tables': ['dbo.remitTransactions'], 'breakdown': {'intent': 'aggregation', 'entities': ['txn amount'], 'conditions': ['date = January 5, 2024'], 'timeframe': 'specific date'}, 'explanation': 'The query seeks to find the highest transaction amount on a specific date, requiring analysis of transaction data.'}
+[2025-01-07 15:22:58,170] INFO [Remit_agent.core.sql_agent._check_relevance:55] Relevance check result: {'relevant': True, 'tables': ['dbo.remitTransactions'], 'breakdown': {'intent': 'aggregation', 'entities': ['txn amount'], 'conditions': ['date = January 5, 2024'], 'timeframe': 'specific date'}, 'explanation': 'The query seeks to find the highest transaction amount on a specific date, requiring analysis of transaction data.'}
+[2025-01-07 15:22:58,180] INFO [Remit_agent.tools.tools.convert_to_sql:95] Converting to SQL - Question: what is the heightest  txn amount on date jan 5 2024
+[2025-01-07 15:22:58,180] INFO [Remit_agent.tools.tools.convert_to_sql:96] Context: {'relevant': True, 'tables': ['dbo.remitTransactions'], 'breakdown': {'intent': 'aggregation', 'entities': ['txn amount'], 'conditions': ['date = January 5, 2024'], 'timeframe': 'specific date'}, 'explanation': 'The query seeks to find the highest transaction amount on a specific date, requiring analysis of transaction data.'}
+[2025-01-07 15:22:58,383] INFO [Remit_agent.database.get_database_schema:185] Retrieved schema:
+
+Table: customers
+- id: uniqueidentifier NOT NULL (Primary Key)
+- customer_id: varchar NULL
+- full_name: varchar NULL
+- customer_type: varchar NULL
+- customer_category: varchar NULL
+- country: char NULL
+- timezone: varchar NULL
+- profile_picture: varchar NULL
+- current_status: int NULL
+- mobile_no: varchar NULL
+- user_language: varchar NULL
+- create_by: uniqueidentifier NULL
+- create_date: datetime NULL
+- update_by: uniqueidentifier NULL
+- update_date: datetime NULL
+- lock_by: varchar NULL
+- lock_date: datetime NULL
+- is_active: bit NULL
+- balance: money NULL
+- referal_code: uniqueidentifier NULL
+- enable_remittance: bit NULL
+- enable_wallet: bit NULL
+- enable_online: bit NULL
+- delete_customer: bit NULL
+- suspend_customer: bit NULL
+- approve_by: uniqueidentifier NULL
+- approve_date: datetime NULL
+- create_agent_key: uniqueidentifier NULL
+- sanction_screen: bit NULL
+- sanction_status: bit NULL
+- sanction_date: datetime NULL
+- kyc_status_by: uniqueidentifier NULL
+- kyc_status_date: datetime NULL
+- kyc_approve: bit NULL
+- referal_customer_key: uniqueidentifier NULL
+- referal_own_code: varchar NULL
+- points: money NULL
+- risk_score: int NULL
+- risk_score_detail: varchar NULL
+- self_risk_score: int NULL
+- additional_risk: int NULL
+- row_version: timestamp NOT NULL
+
+Table: remitTransactions
+- id: uniqueidentifier NOT NULL (Primary Key)
+- remit_pin_number: varchar NULL
+- send_country: varchar NULL
+- send_agent_id: uniqueidentifier NULL
+- send_agent_name: varchar NULL
+- payment_method: varchar NULL
+- transaction_type: varchar NULL
+- send_amount: money NULL
+- service_fee: money NULL
+- exchange_rate: numeric NULL
+- collect_amount: money NULL
+- send_currency: varchar NULL
+- send_ccy_buy_rate: numeric NULL
+- send_ccy_sell_rate: numeric NULL
+- send_amount_usd: money NULL
+- service_fee_usd: money NULL
+- collect_amount_usd: money NULL
+- send_commission: money NULL
+- send_commission_currency: varchar NULL
+- send_forex_gain: money NULL
+- receive_country: varchar NULL
+- receive_agent_id: uniqueidentifier NULL
+- receive_agent_name: varchar NULL
+- receive_amount: money NULL
+- receive_currency: varchar NULL
+- receive_ccy_buy_rate: numeric NULL
+- receive_ccy_sell_rate: numeric NULL
+- receive_settlement_rate: numeric NULL
+- receive_settlement_currency: varchar NULL
+- receive_settlement_amount: money NULL
+- receive_commission: money NULL
+- receive_commission_currency: varchar NULL
+- receive_forex_gain: money NULL
+- sender_id: uniqueidentifier NULL
+- sender_full_name: varchar NULL
+- sender_address_1: varchar NULL
+- sender_address_2: varchar NULL
+- sender_country: char NULL
+- source_of_income: varchar NULL
+- receiver_id: uniqueidentifier NULL
+- receiver_full_name: varchar NULL
+- receiver_address_1: varchar NULL
+- receiver_address_2: varchar NULL
+- receiver_country: char NULL
+- relation: varchar NULL
+- purpose: varchar NULL
+- tax: varchar NULL
+- tax_rate: money NULL
+- tax_fee: money NULL
+- product: varchar NULL
+- current_status: varchar NULL
+- status_date: datetime NULL
+- merchant_id: uniqueidentifier NULL
+- merchant_name: varchar NULL
+- merchant_account_number: varchar NULL
+- merchant_account_branch: varchar NULL
+- remarks: varchar NULL
+- status_by: uniqueidentifier NULL
+- aml_status: int NULL
+- sanction_status: int NULL
+- aml_remarks: nvarchar NULL
+- sanction_remarks: nvarchar NULL
+- api_response_key: varchar NULL
+- forex_margin_type: varchar NULL
+- forex_margin_value: money NULL
+- collection_type: varchar NULL
+- create_by: uniqueidentifier NULL
+- create_date: datetime NOT NULL
+- lock_by: uniqueidentifier NULL
+- lock_date: datetime NULL
+- update_by: uniqueidentifier NULL
+- update_date: datetime NULL
+- approve_by: uniqueidentifier NULL
+- approve_date: datetime NULL
+- api_response_token: nvarchar NULL
+- card_transaction_key: uniqueidentifier NULL
+- card_number: varchar NULL
+- remit_card_atm_fee: money NULL
+- own_pin_number: varchar NULL
+- campaign_code: varchar NULL
+- reward_point: money NULL
+- campaign_discount: money NULL
+- reject_reason: nvarchar NULL
+- purpose2: varchar NULL
+- agent_sno: int NULL
+- remit_serial_no: int NULL
+- row_version: timestamp NOT NULL
+- campaign_benefit: money NULL
+- process_agent_id: uniqueidentifier NULL
+- process_agent_name: varchar NULL
+- process_agent_commission: money NULL
+- process_agent_commission_currency: varchar NULL
+[2025-01-07 15:23:00,413] INFO [Remit_agent.tools.tools.convert_to_sql:110] Generated SQL query: SELECT TOP 1
+    rt.send_amount
+FROM dbo.remitTransactions rt
+WHERE rt.create_date = '2024-01-05'
+ORDER BY rt.send_amount DESC
+[2025-01-07 15:23:00,413] INFO [Remit_agent.core.sql_agent._convert_to_sql:84] Generated SQL query: SELECT TOP 1
+    rt.send_amount
+FROM dbo.remitTransactions rt
+WHERE rt.create_date = '2024-01-05'
+ORDER BY rt.send_amount DESC
+[2025-01-07 15:23:00,423] INFO [Remit_agent.tools.tools.execute_sql_query:119] Executing SQL query: SELECT TOP 1
+    rt.send_amount
+FROM dbo.remitTransactions rt
+WHERE rt.create_date = '2024-01-05'
+ORDER BY rt.send_amount DESC
+[2025-01-07 15:23:00,660] INFO [Remit_agent.core.sql_agent._execute_sql:122] SQL query executed successfully
+[2025-01-07 15:23:00,664] INFO [Remit_agent.tools.tools.generate_human_readable:153] Generating human readable response
+[2025-01-07 15:23:00,665] INFO [Remit_agent.tools.tools.generate_human_readable:154] Input SQL: SELECT TOP 1
+    rt.send_amount
+FROM dbo.remitTransactions rt
+WHERE rt.create_date = '2024-01-05'
+ORDER BY rt.send_amount DESC
+[2025-01-07 15:23:01,670] INFO [Remit_agent.tools.tools.generate_human_readable:163] Generated response: On January 5, 2024, there were no transactions recorded, so there is no highest transaction amount to report for that date.
+[2025-01-07 15:23:01,670] INFO [Remit_agent.core.sql_agent._generate_human_readable:152] Human readable response generated successfully
+[2025-01-07 15:23:28,402] INFO [__main__.main:239] Processing question: what is the send txn on date jan 5 2024
+[2025-01-07 15:23:28,402] INFO [Remit_agent.core.sql_agent.run:192] Starting workflow with question: what is the send txn on date jan 5 2024
+[2025-01-07 15:23:28,411] INFO [Remit_agent.core.sql_agent._check_relevance:53] Checking relevance for question: what is the send txn on date jan 5 2024
+[2025-01-07 15:23:28,411] INFO [Remit_agent.tools.tools.check_relevance:27] Checking relevance for question: what is the send txn on date jan 5 2024
+[2025-01-07 15:23:30,676] INFO [Remit_agent.tools.tools.check_relevance:57] Relevance check completed: {'relevant': True, 'tables': ['dbo.remitTransactions'], 'breakdown': {'intent': 'lookup', 'entities': [], 'conditions': ['transaction_date = January 5, 2024'], 'timeframe': 'specific date'}, 'explanation': 'The query is looking for transactions sent on a specific date, January 5, 2024, which involves checking the remitTransactions table for that date.'}
+[2025-01-07 15:23:30,676] INFO [Remit_agent.core.sql_agent._check_relevance:55] Relevance check result: {'relevant': True, 'tables': ['dbo.remitTransactions'], 'breakdown': {'intent': 'lookup', 'entities': [], 'conditions': ['transaction_date = January 5, 2024'], 'timeframe': 'specific date'}, 'explanation': 'The query is looking for transactions sent on a specific date, January 5, 2024, which involves checking the remitTransactions table for that date.'}
+[2025-01-07 15:23:30,683] INFO [Remit_agent.tools.tools.convert_to_sql:95] Converting to SQL - Question: what is the send txn on date jan 5 2024
+[2025-01-07 15:23:30,683] INFO [Remit_agent.tools.tools.convert_to_sql:96] Context: {'relevant': True, 'tables': ['dbo.remitTransactions'], 'breakdown': {'intent': 'lookup', 'entities': [], 'conditions': ['transaction_date = January 5, 2024'], 'timeframe': 'specific date'}, 'explanation': 'The query is looking for transactions sent on a specific date, January 5, 2024, which involves checking the remitTransactions table for that date.'}
+[2025-01-07 15:23:30,885] INFO [Remit_agent.database.get_database_schema:185] Retrieved schema:
+
+Table: customers
+- id: uniqueidentifier NOT NULL (Primary Key)
+- customer_id: varchar NULL
+- full_name: varchar NULL
+- customer_type: varchar NULL
+- customer_category: varchar NULL
+- country: char NULL
+- timezone: varchar NULL
+- profile_picture: varchar NULL
+- current_status: int NULL
+- mobile_no: varchar NULL
+- user_language: varchar NULL
+- create_by: uniqueidentifier NULL
+- create_date: datetime NULL
+- update_by: uniqueidentifier NULL
+- update_date: datetime NULL
+- lock_by: varchar NULL
+- lock_date: datetime NULL
+- is_active: bit NULL
+- balance: money NULL
+- referal_code: uniqueidentifier NULL
+- enable_remittance: bit NULL
+- enable_wallet: bit NULL
+- enable_online: bit NULL
+- delete_customer: bit NULL
+- suspend_customer: bit NULL
+- approve_by: uniqueidentifier NULL
+- approve_date: datetime NULL
+- create_agent_key: uniqueidentifier NULL
+- sanction_screen: bit NULL
+- sanction_status: bit NULL
+- sanction_date: datetime NULL
+- kyc_status_by: uniqueidentifier NULL
+- kyc_status_date: datetime NULL
+- kyc_approve: bit NULL
+- referal_customer_key: uniqueidentifier NULL
+- referal_own_code: varchar NULL
+- points: money NULL
+- risk_score: int NULL
+- risk_score_detail: varchar NULL
+- self_risk_score: int NULL
+- additional_risk: int NULL
+- row_version: timestamp NOT NULL
+
+Table: remitTransactions
+- id: uniqueidentifier NOT NULL (Primary Key)
+- remit_pin_number: varchar NULL
+- send_country: varchar NULL
+- send_agent_id: uniqueidentifier NULL
+- send_agent_name: varchar NULL
+- payment_method: varchar NULL
+- transaction_type: varchar NULL
+- send_amount: money NULL
+- service_fee: money NULL
+- exchange_rate: numeric NULL
+- collect_amount: money NULL
+- send_currency: varchar NULL
+- send_ccy_buy_rate: numeric NULL
+- send_ccy_sell_rate: numeric NULL
+- send_amount_usd: money NULL
+- service_fee_usd: money NULL
+- collect_amount_usd: money NULL
+- send_commission: money NULL
+- send_commission_currency: varchar NULL
+- send_forex_gain: money NULL
+- receive_country: varchar NULL
+- receive_agent_id: uniqueidentifier NULL
+- receive_agent_name: varchar NULL
+- receive_amount: money NULL
+- receive_currency: varchar NULL
+- receive_ccy_buy_rate: numeric NULL
+- receive_ccy_sell_rate: numeric NULL
+- receive_settlement_rate: numeric NULL
+- receive_settlement_currency: varchar NULL
+- receive_settlement_amount: money NULL
+- receive_commission: money NULL
+- receive_commission_currency: varchar NULL
+- receive_forex_gain: money NULL
+- sender_id: uniqueidentifier NULL
+- sender_full_name: varchar NULL
+- sender_address_1: varchar NULL
+- sender_address_2: varchar NULL
+- sender_country: char NULL
+- source_of_income: varchar NULL
+- receiver_id: uniqueidentifier NULL
+- receiver_full_name: varchar NULL
+- receiver_address_1: varchar NULL
+- receiver_address_2: varchar NULL
+- receiver_country: char NULL
+- relation: varchar NULL
+- purpose: varchar NULL
+- tax: varchar NULL
+- tax_rate: money NULL
+- tax_fee: money NULL
+- product: varchar NULL
+- current_status: varchar NULL
+- status_date: datetime NULL
+- merchant_id: uniqueidentifier NULL
+- merchant_name: varchar NULL
+- merchant_account_number: varchar NULL
+- merchant_account_branch: varchar NULL
+- remarks: varchar NULL
+- status_by: uniqueidentifier NULL
+- aml_status: int NULL
+- sanction_status: int NULL
+- aml_remarks: nvarchar NULL
+- sanction_remarks: nvarchar NULL
+- api_response_key: varchar NULL
+- forex_margin_type: varchar NULL
+- forex_margin_value: money NULL
+- collection_type: varchar NULL
+- create_by: uniqueidentifier NULL
+- create_date: datetime NOT NULL
+- lock_by: uniqueidentifier NULL
+- lock_date: datetime NULL
+- update_by: uniqueidentifier NULL
+- update_date: datetime NULL
+- approve_by: uniqueidentifier NULL
+- approve_date: datetime NULL
+- api_response_token: nvarchar NULL
+- card_transaction_key: uniqueidentifier NULL
+- card_number: varchar NULL
+- remit_card_atm_fee: money NULL
+- own_pin_number: varchar NULL
+- campaign_code: varchar NULL
+- reward_point: money NULL
+- campaign_discount: money NULL
+- reject_reason: nvarchar NULL
+- purpose2: varchar NULL
+- agent_sno: int NULL
+- remit_serial_no: int NULL
+- row_version: timestamp NOT NULL
+- campaign_benefit: money NULL
+- process_agent_id: uniqueidentifier NULL
+- process_agent_name: varchar NULL
+- process_agent_commission: money NULL
+- process_agent_commission_currency: varchar NULL
+[2025-01-07 15:23:33,377] INFO [Remit_agent.tools.tools.convert_to_sql:110] Generated SQL query: SELECT TOP 100
+    rt.remit_pin_number,
+    rt.send_amount,
+    rt.receive_amount,
+    rt.send_currency,
+    rt.receive_currency,
+    rt.create_date,
+    c.full_name as sender_name
+FROM dbo.remitTransactions rt
+JOIN dbo.customers c ON rt.sender_id = c.id
+WHERE CAST(rt.create_date AS DATE) = '2024-01-05'
+ORDER BY rt.create_date DESC
+[2025-01-07 15:23:33,377] INFO [Remit_agent.core.sql_agent._convert_to_sql:84] Generated SQL query: SELECT TOP 100
+    rt.remit_pin_number,
+    rt.send_amount,
+    rt.receive_amount,
+    rt.send_currency,
+    rt.receive_currency,
+    rt.create_date,
+    c.full_name as sender_name
+FROM dbo.remitTransactions rt
+JOIN dbo.customers c ON rt.sender_id = c.id
+WHERE CAST(rt.create_date AS DATE) = '2024-01-05'
+ORDER BY rt.create_date DESC
+[2025-01-07 15:23:33,386] INFO [Remit_agent.tools.tools.execute_sql_query:119] Executing SQL query: SELECT TOP 100
+    rt.remit_pin_number,
+    rt.send_amount,
+    rt.receive_amount,
+    rt.send_currency,
+    rt.receive_currency,
+    rt.create_date,
+    c.full_name as sender_name
+FROM dbo.remitTransactions rt
+JOIN dbo.customers c ON rt.sender_id = c.id
+WHERE CAST(rt.create_date AS DATE) = '2024-01-05'
+ORDER BY rt.create_date DESC
+[2025-01-07 15:23:33,620] INFO [Remit_agent.core.sql_agent._execute_sql:122] SQL query executed successfully
+[2025-01-07 15:23:33,625] INFO [Remit_agent.tools.tools.generate_human_readable:153] Generating human readable response
+[2025-01-07 15:23:33,625] INFO [Remit_agent.tools.tools.generate_human_readable:154] Input SQL: SELECT TOP 100
+    rt.remit_pin_number,
+    rt.send_amount,
+    rt.receive_amount,
+    rt.send_currency,
+    rt.receive_currency,
+    rt.create_date,
+    c.full_name as sender_name
+FROM dbo.remitTransactions rt
+JOIN dbo.customers c ON rt.sender_id = c.id
+WHERE CAST(rt.create_date AS DATE) = '2024-01-05'
+ORDER BY rt.create_date DESC
+[2025-01-07 15:23:45,250] INFO [Remit_agent.tools.tools.generate_human_readable:163] Generated response: Here is a summary of the remittance transactions that occurred on January 5, 2024:
+
+### Transactions Summary for January 5, 2024
+
+#### Sender: Biraj Ghimire
+1. **Transaction ID:** CR73864319952
+   - **Sent Amount:** ¥200
+   - **Received Amount:** NPR177
+   - **Transaction Time:** 3:32 PM
+
+2. **Transaction ID:** CR15455659195
+   - **Sent Amount:** ¥900
+   - **Received Amount:** NPR798
+   - **Transaction Time:** 10:05 AM
+
+3. **Transaction ID:** CR91750108503
+   - **Sent Amount:** ¥200
+   - **Received Amount:** NPR177
+   - **Transaction Time:** 9:24 AM
+
+4. **Transaction ID:** CR17635166216
+   - **Sent Amount:** ¥200
+   - **Received Amount:** NPR177
+   - **Transaction Time:** 7:30 AM
+
+5. **Transaction ID:** CR80780864263
+   - **Sent Amount:** ¥200
+   - **Received Amount:** NPR177
+   - **Transaction Time:** 7:08 AM
+
+6. **Transaction ID:** CR47923927442
+   - **Sent Amount:** ¥200
+   - **Received Amount:** NPR177
+   - **Transaction Time:** 7:06 AM
+
+7. **Transaction ID:** CR96344331735
+   - **Sent Amount:** ¥200
+   - **Received Amount:** NPR177
+   - **Transaction Time:** 5:01 AM
+
+#### Sender: Nobel Phone KP
+1. **Transaction ID:** CR50426301599
+   - **Sent Amount:** ¥500
+   - **Received Amount:** $3.34
+   - **Transaction Time:** 10:12 AM
+
+2. **Transaction ID:** CR63657366979
+   - **Sent Amount:** ¥500
+   - **Received Amount:** $3.34
+   - **Transaction Time:** 9:53 AM
+
+3. **Transaction ID:** CR90553345513
+   - **Sent Amount:** ¥500
+   - **Received Amount:** $3.34
+   - **Transaction Time:** 9:50 AM
+
+Each transaction is listed with its unique ID, the amount sent and received, the currencies involved, and the time the transaction was created.
+[2025-01-07 15:23:45,258] INFO [Remit_agent.core.sql_agent._generate_human_readable:152] Human readable response generated successfully
+[2025-01-07 15:24:54,061] INFO [__main__.main:239] Processing question: what is the highest send txn on date jan 5 2024
+[2025-01-07 15:24:54,064] INFO [Remit_agent.core.sql_agent.run:192] Starting workflow with question: what is the highest send txn on date jan 5 2024
+[2025-01-07 15:24:54,070] INFO [Remit_agent.core.sql_agent._check_relevance:53] Checking relevance for question: what is the highest send txn on date jan 5 2024
+[2025-01-07 15:24:54,070] INFO [Remit_agent.tools.tools.check_relevance:27] Checking relevance for question: what is the highest send txn on date jan 5 2024
+[2025-01-07 15:24:57,233] INFO [Remit_agent.tools.tools.check_relevance:57] Relevance check completed: {'relevant': True, 'tables': ['dbo.remitTransactions'], 'breakdown': {'intent': 'aggregation', 'entities': ['send transaction'], 'conditions': ['date = January 5, 2024'], 'timeframe': 'specific date'}, 'explanation': 'The query seeks to find the highest send transaction on a specific date, requiring analysis of transaction data.'}
+[2025-01-07 15:24:57,233] INFO [Remit_agent.core.sql_agent._check_relevance:55] Relevance check result: {'relevant': True, 'tables': ['dbo.remitTransactions'], 'breakdown': {'intent': 'aggregation', 'entities': ['send transaction'], 'conditions': ['date = January 5, 2024'], 'timeframe': 'specific date'}, 'explanation': 'The query seeks to find the highest send transaction on a specific date, requiring analysis of transaction data.'}
+[2025-01-07 15:24:57,233] INFO [Remit_agent.tools.tools.convert_to_sql:95] Converting to SQL - Question: what is the highest send txn on date jan 5 2024
+[2025-01-07 15:24:57,233] INFO [Remit_agent.tools.tools.convert_to_sql:96] Context: {'relevant': True, 'tables': ['dbo.remitTransactions'], 'breakdown': {'intent': 'aggregation', 'entities': ['send transaction'], 'conditions': ['date = January 5, 2024'], 'timeframe': 'specific date'}, 'explanation': 'The query seeks to find the highest send transaction on a specific date, requiring analysis of transaction data.'}
+[2025-01-07 15:24:57,444] INFO [Remit_agent.database.get_database_schema:185] Retrieved schema:
+
+Table: customers
+- id: uniqueidentifier NOT NULL (Primary Key)
+- customer_id: varchar NULL
+- full_name: varchar NULL
+- customer_type: varchar NULL
+- customer_category: varchar NULL
+- country: char NULL
+- timezone: varchar NULL
+- profile_picture: varchar NULL
+- current_status: int NULL
+- mobile_no: varchar NULL
+- user_language: varchar NULL
+- create_by: uniqueidentifier NULL
+- create_date: datetime NULL
+- update_by: uniqueidentifier NULL
+- update_date: datetime NULL
+- lock_by: varchar NULL
+- lock_date: datetime NULL
+- is_active: bit NULL
+- balance: money NULL
+- referal_code: uniqueidentifier NULL
+- enable_remittance: bit NULL
+- enable_wallet: bit NULL
+- enable_online: bit NULL
+- delete_customer: bit NULL
+- suspend_customer: bit NULL
+- approve_by: uniqueidentifier NULL
+- approve_date: datetime NULL
+- create_agent_key: uniqueidentifier NULL
+- sanction_screen: bit NULL
+- sanction_status: bit NULL
+- sanction_date: datetime NULL
+- kyc_status_by: uniqueidentifier NULL
+- kyc_status_date: datetime NULL
+- kyc_approve: bit NULL
+- referal_customer_key: uniqueidentifier NULL
+- referal_own_code: varchar NULL
+- points: money NULL
+- risk_score: int NULL
+- risk_score_detail: varchar NULL
+- self_risk_score: int NULL
+- additional_risk: int NULL
+- row_version: timestamp NOT NULL
+
+Table: remitTransactions
+- id: uniqueidentifier NOT NULL (Primary Key)
+- remit_pin_number: varchar NULL
+- send_country: varchar NULL
+- send_agent_id: uniqueidentifier NULL
+- send_agent_name: varchar NULL
+- payment_method: varchar NULL
+- transaction_type: varchar NULL
+- send_amount: money NULL
+- service_fee: money NULL
+- exchange_rate: numeric NULL
+- collect_amount: money NULL
+- send_currency: varchar NULL
+- send_ccy_buy_rate: numeric NULL
+- send_ccy_sell_rate: numeric NULL
+- send_amount_usd: money NULL
+- service_fee_usd: money NULL
+- collect_amount_usd: money NULL
+- send_commission: money NULL
+- send_commission_currency: varchar NULL
+- send_forex_gain: money NULL
+- receive_country: varchar NULL
+- receive_agent_id: uniqueidentifier NULL
+- receive_agent_name: varchar NULL
+- receive_amount: money NULL
+- receive_currency: varchar NULL
+- receive_ccy_buy_rate: numeric NULL
+- receive_ccy_sell_rate: numeric NULL
+- receive_settlement_rate: numeric NULL
+- receive_settlement_currency: varchar NULL
+- receive_settlement_amount: money NULL
+- receive_commission: money NULL
+- receive_commission_currency: varchar NULL
+- receive_forex_gain: money NULL
+- sender_id: uniqueidentifier NULL
+- sender_full_name: varchar NULL
+- sender_address_1: varchar NULL
+- sender_address_2: varchar NULL
+- sender_country: char NULL
+- source_of_income: varchar NULL
+- receiver_id: uniqueidentifier NULL
+- receiver_full_name: varchar NULL
+- receiver_address_1: varchar NULL
+- receiver_address_2: varchar NULL
+- receiver_country: char NULL
+- relation: varchar NULL
+- purpose: varchar NULL
+- tax: varchar NULL
+- tax_rate: money NULL
+- tax_fee: money NULL
+- product: varchar NULL
+- current_status: varchar NULL
+- status_date: datetime NULL
+- merchant_id: uniqueidentifier NULL
+- merchant_name: varchar NULL
+- merchant_account_number: varchar NULL
+- merchant_account_branch: varchar NULL
+- remarks: varchar NULL
+- status_by: uniqueidentifier NULL
+- aml_status: int NULL
+- sanction_status: int NULL
+- aml_remarks: nvarchar NULL
+- sanction_remarks: nvarchar NULL
+- api_response_key: varchar NULL
+- forex_margin_type: varchar NULL
+- forex_margin_value: money NULL
+- collection_type: varchar NULL
+- create_by: uniqueidentifier NULL
+- create_date: datetime NOT NULL
+- lock_by: uniqueidentifier NULL
+- lock_date: datetime NULL
+- update_by: uniqueidentifier NULL
+- update_date: datetime NULL
+- approve_by: uniqueidentifier NULL
+- approve_date: datetime NULL
+- api_response_token: nvarchar NULL
+- card_transaction_key: uniqueidentifier NULL
+- card_number: varchar NULL
+- remit_card_atm_fee: money NULL
+- own_pin_number: varchar NULL
+- campaign_code: varchar NULL
+- reward_point: money NULL
+- campaign_discount: money NULL
+- reject_reason: nvarchar NULL
+- purpose2: varchar NULL
+- agent_sno: int NULL
+- remit_serial_no: int NULL
+- row_version: timestamp NOT NULL
+- campaign_benefit: money NULL
+- process_agent_id: uniqueidentifier NULL
+- process_agent_name: varchar NULL
+- process_agent_commission: money NULL
+- process_agent_commission_currency: varchar NULL
+[2025-01-07 15:24:59,096] INFO [Remit_agent.tools.tools.convert_to_sql:110] Generated SQL query: SELECT TOP 1
+    rt.remit_pin_number,
+    rt.send_amount,
+    rt.send_currency,
+    rt.create_date
+FROM dbo.remitTransactions rt
+WHERE rt.create_date = '2024-01-05'
+ORDER BY rt.send_amount DESC
+[2025-01-07 15:24:59,096] INFO [Remit_agent.core.sql_agent._convert_to_sql:84] Generated SQL query: SELECT TOP 1
+    rt.remit_pin_number,
+    rt.send_amount,
+    rt.send_currency,
+    rt.create_date
+FROM dbo.remitTransactions rt
+WHERE rt.create_date = '2024-01-05'
+ORDER BY rt.send_amount DESC
+[2025-01-07 15:24:59,104] INFO [Remit_agent.tools.tools.execute_sql_query:119] Executing SQL query: SELECT TOP 1
+    rt.remit_pin_number,
+    rt.send_amount,
+    rt.send_currency,
+    rt.create_date
+FROM dbo.remitTransactions rt
+WHERE rt.create_date = '2024-01-05'
+ORDER BY rt.send_amount DESC
+[2025-01-07 15:24:59,336] INFO [Remit_agent.core.sql_agent._execute_sql:122] SQL query executed successfully
+[2025-01-07 15:24:59,339] INFO [Remit_agent.tools.tools.generate_human_readable:153] Generating human readable response
+[2025-01-07 15:24:59,339] INFO [Remit_agent.tools.tools.generate_human_readable:154] Input SQL: SELECT TOP 1
+    rt.remit_pin_number,
+    rt.send_amount,
+    rt.send_currency,
+    rt.create_date
+FROM dbo.remitTransactions rt
+WHERE rt.create_date = '2024-01-05'
+ORDER BY rt.send_amount DESC
+[2025-01-07 15:25:00,833] INFO [Remit_agent.tools.tools.generate_human_readable:163] Generated response: On January 5, 2024, there were no transactions recorded. Therefore, there is no information available regarding the highest send transaction for that date. If you have any other queries or need further assistance, feel free to ask!
+[2025-01-07 15:25:00,833] INFO [Remit_agent.core.sql_agent._generate_human_readable:152] Human readable response generated successfully
+[2025-01-07 15:25:34,119] INFO [__main__.main:239] Processing question: what is the highest send amount on date jan 5 2024
+[2025-01-07 15:25:34,119] INFO [Remit_agent.core.sql_agent.run:192] Starting workflow with question: what is the highest send amount on date jan 5 2024
+[2025-01-07 15:25:34,130] INFO [Remit_agent.core.sql_agent._check_relevance:53] Checking relevance for question: what is the highest send amount on date jan 5 2024
+[2025-01-07 15:25:34,130] INFO [Remit_agent.tools.tools.check_relevance:27] Checking relevance for question: what is the highest send amount on date jan 5 2024
+[2025-01-07 15:25:37,992] INFO [Remit_agent.tools.tools.check_relevance:57] Relevance check completed: {'relevant': True, 'tables': ['dbo.remitTransactions'], 'breakdown': {'intent': 'aggregation', 'entities': [], 'conditions': ['date = January 5, 2024'], 'timeframe': 'specific date'}, 'explanation': 'The query is about finding the highest transaction amount on a specific date, which involves aggregating transaction data.'}
+[2025-01-07 15:25:37,992] INFO [Remit_agent.core.sql_agent._check_relevance:55] Relevance check result: {'relevant': True, 'tables': ['dbo.remitTransactions'], 'breakdown': {'intent': 'aggregation', 'entities': [], 'conditions': ['date = January 5, 2024'], 'timeframe': 'specific date'}, 'explanation': 'The query is about finding the highest transaction amount on a specific date, which involves aggregating transaction data.'}
+[2025-01-07 15:25:38,001] INFO [Remit_agent.tools.tools.convert_to_sql:95] Converting to SQL - Question: what is the highest send amount on date jan 5 2024
+[2025-01-07 15:25:38,001] INFO [Remit_agent.tools.tools.convert_to_sql:96] Context: {'relevant': True, 'tables': ['dbo.remitTransactions'], 'breakdown': {'intent': 'aggregation', 'entities': [], 'conditions': ['date = January 5, 2024'], 'timeframe': 'specific date'}, 'explanation': 'The query is about finding the highest transaction amount on a specific date, which involves aggregating transaction data.'}
+[2025-01-07 15:25:38,229] INFO [Remit_agent.database.get_database_schema:185] Retrieved schema:
+
+Table: customers
+- id: uniqueidentifier NOT NULL (Primary Key)
+- customer_id: varchar NULL
+- full_name: varchar NULL
+- customer_type: varchar NULL
+- customer_category: varchar NULL
+- country: char NULL
+- timezone: varchar NULL
+- profile_picture: varchar NULL
+- current_status: int NULL
+- mobile_no: varchar NULL
+- user_language: varchar NULL
+- create_by: uniqueidentifier NULL
+- create_date: datetime NULL
+- update_by: uniqueidentifier NULL
+- update_date: datetime NULL
+- lock_by: varchar NULL
+- lock_date: datetime NULL
+- is_active: bit NULL
+- balance: money NULL
+- referal_code: uniqueidentifier NULL
+- enable_remittance: bit NULL
+- enable_wallet: bit NULL
+- enable_online: bit NULL
+- delete_customer: bit NULL
+- suspend_customer: bit NULL
+- approve_by: uniqueidentifier NULL
+- approve_date: datetime NULL
+- create_agent_key: uniqueidentifier NULL
+- sanction_screen: bit NULL
+- sanction_status: bit NULL
+- sanction_date: datetime NULL
+- kyc_status_by: uniqueidentifier NULL
+- kyc_status_date: datetime NULL
+- kyc_approve: bit NULL
+- referal_customer_key: uniqueidentifier NULL
+- referal_own_code: varchar NULL
+- points: money NULL
+- risk_score: int NULL
+- risk_score_detail: varchar NULL
+- self_risk_score: int NULL
+- additional_risk: int NULL
+- row_version: timestamp NOT NULL
+
+Table: remitTransactions
+- id: uniqueidentifier NOT NULL (Primary Key)
+- remit_pin_number: varchar NULL
+- send_country: varchar NULL
+- send_agent_id: uniqueidentifier NULL
+- send_agent_name: varchar NULL
+- payment_method: varchar NULL
+- transaction_type: varchar NULL
+- send_amount: money NULL
+- service_fee: money NULL
+- exchange_rate: numeric NULL
+- collect_amount: money NULL
+- send_currency: varchar NULL
+- send_ccy_buy_rate: numeric NULL
+- send_ccy_sell_rate: numeric NULL
+- send_amount_usd: money NULL
+- service_fee_usd: money NULL
+- collect_amount_usd: money NULL
+- send_commission: money NULL
+- send_commission_currency: varchar NULL
+- send_forex_gain: money NULL
+- receive_country: varchar NULL
+- receive_agent_id: uniqueidentifier NULL
+- receive_agent_name: varchar NULL
+- receive_amount: money NULL
+- receive_currency: varchar NULL
+- receive_ccy_buy_rate: numeric NULL
+- receive_ccy_sell_rate: numeric NULL
+- receive_settlement_rate: numeric NULL
+- receive_settlement_currency: varchar NULL
+- receive_settlement_amount: money NULL
+- receive_commission: money NULL
+- receive_commission_currency: varchar NULL
+- receive_forex_gain: money NULL
+- sender_id: uniqueidentifier NULL
+- sender_full_name: varchar NULL
+- sender_address_1: varchar NULL
+- sender_address_2: varchar NULL
+- sender_country: char NULL
+- source_of_income: varchar NULL
+- receiver_id: uniqueidentifier NULL
+- receiver_full_name: varchar NULL
+- receiver_address_1: varchar NULL
+- receiver_address_2: varchar NULL
+- receiver_country: char NULL
+- relation: varchar NULL
+- purpose: varchar NULL
+- tax: varchar NULL
+- tax_rate: money NULL
+- tax_fee: money NULL
+- product: varchar NULL
+- current_status: varchar NULL
+- status_date: datetime NULL
+- merchant_id: uniqueidentifier NULL
+- merchant_name: varchar NULL
+- merchant_account_number: varchar NULL
+- merchant_account_branch: varchar NULL
+- remarks: varchar NULL
+- status_by: uniqueidentifier NULL
+- aml_status: int NULL
+- sanction_status: int NULL
+- aml_remarks: nvarchar NULL
+- sanction_remarks: nvarchar NULL
+- api_response_key: varchar NULL
+- forex_margin_type: varchar NULL
+- forex_margin_value: money NULL
+- collection_type: varchar NULL
+- create_by: uniqueidentifier NULL
+- create_date: datetime NOT NULL
+- lock_by: uniqueidentifier NULL
+- lock_date: datetime NULL
+- update_by: uniqueidentifier NULL
+- update_date: datetime NULL
+- approve_by: uniqueidentifier NULL
+- approve_date: datetime NULL
+- api_response_token: nvarchar NULL
+- card_transaction_key: uniqueidentifier NULL
+- card_number: varchar NULL
+- remit_card_atm_fee: money NULL
+- own_pin_number: varchar NULL
+- campaign_code: varchar NULL
+- reward_point: money NULL
+- campaign_discount: money NULL
+- reject_reason: nvarchar NULL
+- purpose2: varchar NULL
+- agent_sno: int NULL
+- remit_serial_no: int NULL
+- row_version: timestamp NOT NULL
+- campaign_benefit: money NULL
+- process_agent_id: uniqueidentifier NULL
+- process_agent_name: varchar NULL
+- process_agent_commission: money NULL
+- process_agent_commission_currency: varchar NULL
+[2025-01-07 15:25:39,709] INFO [Remit_agent.tools.tools.convert_to_sql:110] Generated SQL query: SELECT TOP 1 
+    rt.send_amount
+FROM dbo.remitTransactions rt
+WHERE CAST(rt.create_date AS DATE) = '2024-01-05'
+ORDER BY rt.send_amount DESC
+[2025-01-07 15:25:39,709] INFO [Remit_agent.core.sql_agent._convert_to_sql:84] Generated SQL query: SELECT TOP 1 
+    rt.send_amount
+FROM dbo.remitTransactions rt
+WHERE CAST(rt.create_date AS DATE) = '2024-01-05'
+ORDER BY rt.send_amount DESC
+[2025-01-07 15:25:39,715] INFO [Remit_agent.tools.tools.execute_sql_query:119] Executing SQL query: SELECT TOP 1 
+    rt.send_amount
+FROM dbo.remitTransactions rt
+WHERE CAST(rt.create_date AS DATE) = '2024-01-05'
+ORDER BY rt.send_amount DESC
+[2025-01-07 15:25:39,953] INFO [Remit_agent.core.sql_agent._execute_sql:122] SQL query executed successfully
+[2025-01-07 15:25:39,959] INFO [Remit_agent.tools.tools.generate_human_readable:153] Generating human readable response
+[2025-01-07 15:25:39,959] INFO [Remit_agent.tools.tools.generate_human_readable:154] Input SQL: SELECT TOP 1 
+    rt.send_amount
+FROM dbo.remitTransactions rt
+WHERE CAST(rt.create_date AS DATE) = '2024-01-05'
+ORDER BY rt.send_amount DESC
+[2025-01-07 15:25:40,840] INFO [Remit_agent.tools.tools.generate_human_readable:163] Generated response: On January 5, 2024, the highest send amount recorded was $900.00.
+[2025-01-07 15:25:40,840] INFO [Remit_agent.core.sql_agent._generate_human_readable:152] Human readable response generated successfully
+[2025-01-07 15:26:39,535] INFO [__main__.main:239] Processing question: who send the maximum number of trasnacation in 2024
+[2025-01-07 15:26:39,535] INFO [Remit_agent.core.sql_agent.run:192] Starting workflow with question: who send the maximum number of trasnacation in 2024
+[2025-01-07 15:26:39,541] INFO [Remit_agent.core.sql_agent._check_relevance:53] Checking relevance for question: who send the maximum number of trasnacation in 2024
+[2025-01-07 15:26:39,541] INFO [Remit_agent.tools.tools.check_relevance:27] Checking relevance for question: who send the maximum number of trasnacation in 2024
+[2025-01-07 15:26:43,481] INFO [Remit_agent.tools.tools.check_relevance:57] Relevance check completed: {'relevant': True, 'tables': ['dbo.remitTransactions', 'dbo.customers'], 'breakdown': {'intent': 'aggregation', 'entities': [], 'conditions': ['year = 2024'], 'timeframe': '2024'}, 'explanation': 'The query aims to find the customer who sent the maximum number of transactions in 2024, requiring aggregation of transaction data and possibly joining with customer data.'}
+[2025-01-07 15:26:43,481] INFO [Remit_agent.core.sql_agent._check_relevance:55] Relevance check result: {'relevant': True, 'tables': ['dbo.remitTransactions', 'dbo.customers'], 'breakdown': {'intent': 'aggregation', 'entities': [], 'conditions': ['year = 2024'], 'timeframe': '2024'}, 'explanation': 'The query aims to find the customer who sent the maximum number of transactions in 2024, requiring aggregation of transaction data and possibly joining with customer data.'}
+[2025-01-07 15:26:43,481] INFO [Remit_agent.tools.tools.convert_to_sql:95] Converting to SQL - Question: who send the maximum number of trasnacation in 2024
+[2025-01-07 15:26:43,481] INFO [Remit_agent.tools.tools.convert_to_sql:96] Context: {'relevant': True, 'tables': ['dbo.remitTransactions', 'dbo.customers'], 'breakdown': {'intent': 'aggregation', 'entities': [], 'conditions': ['year = 2024'], 'timeframe': '2024'}, 'explanation': 'The query aims to find the customer who sent the maximum number of transactions in 2024, requiring aggregation of transaction data and possibly joining with customer data.'}
+[2025-01-07 15:26:43,685] INFO [Remit_agent.database.get_database_schema:185] Retrieved schema:
+
+Table: customers
+- id: uniqueidentifier NOT NULL (Primary Key)
+- customer_id: varchar NULL
+- full_name: varchar NULL
+- customer_type: varchar NULL
+- customer_category: varchar NULL
+- country: char NULL
+- timezone: varchar NULL
+- profile_picture: varchar NULL
+- current_status: int NULL
+- mobile_no: varchar NULL
+- user_language: varchar NULL
+- create_by: uniqueidentifier NULL
+- create_date: datetime NULL
+- update_by: uniqueidentifier NULL
+- update_date: datetime NULL
+- lock_by: varchar NULL
+- lock_date: datetime NULL
+- is_active: bit NULL
+- balance: money NULL
+- referal_code: uniqueidentifier NULL
+- enable_remittance: bit NULL
+- enable_wallet: bit NULL
+- enable_online: bit NULL
+- delete_customer: bit NULL
+- suspend_customer: bit NULL
+- approve_by: uniqueidentifier NULL
+- approve_date: datetime NULL
+- create_agent_key: uniqueidentifier NULL
+- sanction_screen: bit NULL
+- sanction_status: bit NULL
+- sanction_date: datetime NULL
+- kyc_status_by: uniqueidentifier NULL
+- kyc_status_date: datetime NULL
+- kyc_approve: bit NULL
+- referal_customer_key: uniqueidentifier NULL
+- referal_own_code: varchar NULL
+- points: money NULL
+- risk_score: int NULL
+- risk_score_detail: varchar NULL
+- self_risk_score: int NULL
+- additional_risk: int NULL
+- row_version: timestamp NOT NULL
+
+Table: remitTransactions
+- id: uniqueidentifier NOT NULL (Primary Key)
+- remit_pin_number: varchar NULL
+- send_country: varchar NULL
+- send_agent_id: uniqueidentifier NULL
+- send_agent_name: varchar NULL
+- payment_method: varchar NULL
+- transaction_type: varchar NULL
+- send_amount: money NULL
+- service_fee: money NULL
+- exchange_rate: numeric NULL
+- collect_amount: money NULL
+- send_currency: varchar NULL
+- send_ccy_buy_rate: numeric NULL
+- send_ccy_sell_rate: numeric NULL
+- send_amount_usd: money NULL
+- service_fee_usd: money NULL
+- collect_amount_usd: money NULL
+- send_commission: money NULL
+- send_commission_currency: varchar NULL
+- send_forex_gain: money NULL
+- receive_country: varchar NULL
+- receive_agent_id: uniqueidentifier NULL
+- receive_agent_name: varchar NULL
+- receive_amount: money NULL
+- receive_currency: varchar NULL
+- receive_ccy_buy_rate: numeric NULL
+- receive_ccy_sell_rate: numeric NULL
+- receive_settlement_rate: numeric NULL
+- receive_settlement_currency: varchar NULL
+- receive_settlement_amount: money NULL
+- receive_commission: money NULL
+- receive_commission_currency: varchar NULL
+- receive_forex_gain: money NULL
+- sender_id: uniqueidentifier NULL
+- sender_full_name: varchar NULL
+- sender_address_1: varchar NULL
+- sender_address_2: varchar NULL
+- sender_country: char NULL
+- source_of_income: varchar NULL
+- receiver_id: uniqueidentifier NULL
+- receiver_full_name: varchar NULL
+- receiver_address_1: varchar NULL
+- receiver_address_2: varchar NULL
+- receiver_country: char NULL
+- relation: varchar NULL
+- purpose: varchar NULL
+- tax: varchar NULL
+- tax_rate: money NULL
+- tax_fee: money NULL
+- product: varchar NULL
+- current_status: varchar NULL
+- status_date: datetime NULL
+- merchant_id: uniqueidentifier NULL
+- merchant_name: varchar NULL
+- merchant_account_number: varchar NULL
+- merchant_account_branch: varchar NULL
+- remarks: varchar NULL
+- status_by: uniqueidentifier NULL
+- aml_status: int NULL
+- sanction_status: int NULL
+- aml_remarks: nvarchar NULL
+- sanction_remarks: nvarchar NULL
+- api_response_key: varchar NULL
+- forex_margin_type: varchar NULL
+- forex_margin_value: money NULL
+- collection_type: varchar NULL
+- create_by: uniqueidentifier NULL
+- create_date: datetime NOT NULL
+- lock_by: uniqueidentifier NULL
+- lock_date: datetime NULL
+- update_by: uniqueidentifier NULL
+- update_date: datetime NULL
+- approve_by: uniqueidentifier NULL
+- approve_date: datetime NULL
+- api_response_token: nvarchar NULL
+- card_transaction_key: uniqueidentifier NULL
+- card_number: varchar NULL
+- remit_card_atm_fee: money NULL
+- own_pin_number: varchar NULL
+- campaign_code: varchar NULL
+- reward_point: money NULL
+- campaign_discount: money NULL
+- reject_reason: nvarchar NULL
+- purpose2: varchar NULL
+- agent_sno: int NULL
+- remit_serial_no: int NULL
+- row_version: timestamp NOT NULL
+- campaign_benefit: money NULL
+- process_agent_id: uniqueidentifier NULL
+- process_agent_name: varchar NULL
+- process_agent_commission: money NULL
+- process_agent_commission_currency: varchar NULL
+[2025-01-07 15:26:45,447] INFO [Remit_agent.tools.tools.convert_to_sql:110] Generated SQL query: SELECT TOP 1 
+    c.full_name, 
+    COUNT(rt.id) AS transaction_count
+FROM dbo.remitTransactions rt
+JOIN dbo.customers c ON rt.sender_id = c.id
+WHERE YEAR(rt.create_date) = 2024
+GROUP BY c.full_name
+ORDER BY transaction_count DESC
+[2025-01-07 15:26:45,447] INFO [Remit_agent.core.sql_agent._convert_to_sql:84] Generated SQL query: SELECT TOP 1 
+    c.full_name, 
+    COUNT(rt.id) AS transaction_count
+FROM dbo.remitTransactions rt
+JOIN dbo.customers c ON rt.sender_id = c.id
+WHERE YEAR(rt.create_date) = 2024
+GROUP BY c.full_name
+ORDER BY transaction_count DESC
+[2025-01-07 15:26:45,447] INFO [Remit_agent.tools.tools.execute_sql_query:119] Executing SQL query: SELECT TOP 1 
+    c.full_name, 
+    COUNT(rt.id) AS transaction_count
+FROM dbo.remitTransactions rt
+JOIN dbo.customers c ON rt.sender_id = c.id
+WHERE YEAR(rt.create_date) = 2024
+GROUP BY c.full_name
+ORDER BY transaction_count DESC
+[2025-01-07 15:26:45,701] INFO [Remit_agent.core.sql_agent._execute_sql:122] SQL query executed successfully
+[2025-01-07 15:26:45,701] INFO [Remit_agent.tools.tools.generate_human_readable:153] Generating human readable response
+[2025-01-07 15:26:45,701] INFO [Remit_agent.tools.tools.generate_human_readable:154] Input SQL: SELECT TOP 1 
+    c.full_name, 
+    COUNT(rt.id) AS transaction_count
+FROM dbo.remitTransactions rt
+JOIN dbo.customers c ON rt.sender_id = c.id
+WHERE YEAR(rt.create_date) = 2024
+GROUP BY c.full_name
+ORDER BY transaction_count DESC
+[2025-01-07 15:26:46,895] INFO [Remit_agent.tools.tools.generate_human_readable:163] Generated response: **Top Customer by Transaction Count in 2024**
+
+- **Customer Name:** Mausam Shrestha
+- **Number of Transactions:** 1,254
+
+This data represents the customer who sent the maximum number of transactions in the year 2024.
+[2025-01-07 15:26:46,895] INFO [Remit_agent.core.sql_agent._generate_human_readable:152] Human readable response generated successfully
+[2025-01-07 15:27:54,064] INFO [__main__.main:239] Processing question: whose customers id is going to expire soon .
+[2025-01-07 15:27:54,064] INFO [Remit_agent.core.sql_agent.run:192] Starting workflow with question: whose customers id is going to expire soon .
+[2025-01-07 15:27:54,073] INFO [Remit_agent.core.sql_agent._check_relevance:53] Checking relevance for question: whose customers id is going to expire soon .
+[2025-01-07 15:27:54,075] INFO [Remit_agent.tools.tools.check_relevance:27] Checking relevance for question: whose customers id is going to expire soon .
+[2025-01-07 15:27:57,487] INFO [Remit_agent.tools.tools.check_relevance:57] Relevance check completed: {'relevant': True, 'tables': ['dbo.customers'], 'breakdown': {'intent': 'lookup', 'entities': [], 'conditions': ['ID expiration date approaching'], 'timeframe': 'soon'}, 'explanation': 'The query is about identifying customers whose ID expiration date is approaching, which requires checking the customer data for expiration dates.'}
+[2025-01-07 15:27:57,487] INFO [Remit_agent.core.sql_agent._check_relevance:55] Relevance check result: {'relevant': True, 'tables': ['dbo.customers'], 'breakdown': {'intent': 'lookup', 'entities': [], 'conditions': ['ID expiration date approaching'], 'timeframe': 'soon'}, 'explanation': 'The query is about identifying customers whose ID expiration date is approaching, which requires checking the customer data for expiration dates.'}
+[2025-01-07 15:27:57,487] INFO [Remit_agent.tools.tools.convert_to_sql:95] Converting to SQL - Question: whose customers id is going to expire soon .
+[2025-01-07 15:27:57,487] INFO [Remit_agent.tools.tools.convert_to_sql:96] Context: {'relevant': True, 'tables': ['dbo.customers'], 'breakdown': {'intent': 'lookup', 'entities': [], 'conditions': ['ID expiration date approaching'], 'timeframe': 'soon'}, 'explanation': 'The query is about identifying customers whose ID expiration date is approaching, which requires checking the customer data for expiration dates.'}
+[2025-01-07 15:27:57,693] INFO [Remit_agent.database.get_database_schema:185] Retrieved schema:
+
+Table: customers
+- id: uniqueidentifier NOT NULL (Primary Key)
+- customer_id: varchar NULL
+- full_name: varchar NULL
+- customer_type: varchar NULL
+- customer_category: varchar NULL
+- country: char NULL
+- timezone: varchar NULL
+- profile_picture: varchar NULL
+- current_status: int NULL
+- mobile_no: varchar NULL
+- user_language: varchar NULL
+- create_by: uniqueidentifier NULL
+- create_date: datetime NULL
+- update_by: uniqueidentifier NULL
+- update_date: datetime NULL
+- lock_by: varchar NULL
+- lock_date: datetime NULL
+- is_active: bit NULL
+- balance: money NULL
+- referal_code: uniqueidentifier NULL
+- enable_remittance: bit NULL
+- enable_wallet: bit NULL
+- enable_online: bit NULL
+- delete_customer: bit NULL
+- suspend_customer: bit NULL
+- approve_by: uniqueidentifier NULL
+- approve_date: datetime NULL
+- create_agent_key: uniqueidentifier NULL
+- sanction_screen: bit NULL
+- sanction_status: bit NULL
+- sanction_date: datetime NULL
+- kyc_status_by: uniqueidentifier NULL
+- kyc_status_date: datetime NULL
+- kyc_approve: bit NULL
+- referal_customer_key: uniqueidentifier NULL
+- referal_own_code: varchar NULL
+- points: money NULL
+- risk_score: int NULL
+- risk_score_detail: varchar NULL
+- self_risk_score: int NULL
+- additional_risk: int NULL
+- row_version: timestamp NOT NULL
+
+Table: remitTransactions
+- id: uniqueidentifier NOT NULL (Primary Key)
+- remit_pin_number: varchar NULL
+- send_country: varchar NULL
+- send_agent_id: uniqueidentifier NULL
+- send_agent_name: varchar NULL
+- payment_method: varchar NULL
+- transaction_type: varchar NULL
+- send_amount: money NULL
+- service_fee: money NULL
+- exchange_rate: numeric NULL
+- collect_amount: money NULL
+- send_currency: varchar NULL
+- send_ccy_buy_rate: numeric NULL
+- send_ccy_sell_rate: numeric NULL
+- send_amount_usd: money NULL
+- service_fee_usd: money NULL
+- collect_amount_usd: money NULL
+- send_commission: money NULL
+- send_commission_currency: varchar NULL
+- send_forex_gain: money NULL
+- receive_country: varchar NULL
+- receive_agent_id: uniqueidentifier NULL
+- receive_agent_name: varchar NULL
+- receive_amount: money NULL
+- receive_currency: varchar NULL
+- receive_ccy_buy_rate: numeric NULL
+- receive_ccy_sell_rate: numeric NULL
+- receive_settlement_rate: numeric NULL
+- receive_settlement_currency: varchar NULL
+- receive_settlement_amount: money NULL
+- receive_commission: money NULL
+- receive_commission_currency: varchar NULL
+- receive_forex_gain: money NULL
+- sender_id: uniqueidentifier NULL
+- sender_full_name: varchar NULL
+- sender_address_1: varchar NULL
+- sender_address_2: varchar NULL
+- sender_country: char NULL
+- source_of_income: varchar NULL
+- receiver_id: uniqueidentifier NULL
+- receiver_full_name: varchar NULL
+- receiver_address_1: varchar NULL
+- receiver_address_2: varchar NULL
+- receiver_country: char NULL
+- relation: varchar NULL
+- purpose: varchar NULL
+- tax: varchar NULL
+- tax_rate: money NULL
+- tax_fee: money NULL
+- product: varchar NULL
+- current_status: varchar NULL
+- status_date: datetime NULL
+- merchant_id: uniqueidentifier NULL
+- merchant_name: varchar NULL
+- merchant_account_number: varchar NULL
+- merchant_account_branch: varchar NULL
+- remarks: varchar NULL
+- status_by: uniqueidentifier NULL
+- aml_status: int NULL
+- sanction_status: int NULL
+- aml_remarks: nvarchar NULL
+- sanction_remarks: nvarchar NULL
+- api_response_key: varchar NULL
+- forex_margin_type: varchar NULL
+- forex_margin_value: money NULL
+- collection_type: varchar NULL
+- create_by: uniqueidentifier NULL
+- create_date: datetime NOT NULL
+- lock_by: uniqueidentifier NULL
+- lock_date: datetime NULL
+- update_by: uniqueidentifier NULL
+- update_date: datetime NULL
+- approve_by: uniqueidentifier NULL
+- approve_date: datetime NULL
+- api_response_token: nvarchar NULL
+- card_transaction_key: uniqueidentifier NULL
+- card_number: varchar NULL
+- remit_card_atm_fee: money NULL
+- own_pin_number: varchar NULL
+- campaign_code: varchar NULL
+- reward_point: money NULL
+- campaign_discount: money NULL
+- reject_reason: nvarchar NULL
+- purpose2: varchar NULL
+- agent_sno: int NULL
+- remit_serial_no: int NULL
+- row_version: timestamp NOT NULL
+- campaign_benefit: money NULL
+- process_agent_id: uniqueidentifier NULL
+- process_agent_name: varchar NULL
+- process_agent_commission: money NULL
+- process_agent_commission_currency: varchar NULL
+[2025-01-07 15:27:59,436] INFO [Remit_agent.tools.tools.convert_to_sql:110] Generated SQL query: SELECT 
+    c.id,
+    c.customer_id,
+    c.full_name,
+    c.country,
+    c.create_date
+FROM dbo.customers c
+WHERE c.lock_date IS NOT NULL
+AND c.lock_date < DATEADD(day, 30, GETDATE())
+[2025-01-07 15:27:59,436] INFO [Remit_agent.core.sql_agent._convert_to_sql:84] Generated SQL query: SELECT 
+    c.id,
+    c.customer_id,
+    c.full_name,
+    c.country,
+    c.create_date
+FROM dbo.customers c
+WHERE c.lock_date IS NOT NULL
+AND c.lock_date < DATEADD(day, 30, GETDATE())
+[2025-01-07 15:27:59,436] INFO [Remit_agent.tools.tools.execute_sql_query:119] Executing SQL query: SELECT 
+    c.id,
+    c.customer_id,
+    c.full_name,
+    c.country,
+    c.create_date
+FROM dbo.customers c
+WHERE c.lock_date IS NOT NULL
+AND c.lock_date < DATEADD(day, 30, GETDATE())
+[2025-01-07 15:27:59,810] INFO [Remit_agent.core.sql_agent._execute_sql:122] SQL query executed successfully
+[2025-01-07 15:27:59,820] INFO [Remit_agent.tools.tools.generate_human_readable:153] Generating human readable response
+[2025-01-07 15:27:59,820] INFO [Remit_agent.tools.tools.generate_human_readable:154] Input SQL: SELECT 
+    c.id,
+    c.customer_id,
+    c.full_name,
+    c.country,
+    c.create_date
+FROM dbo.customers c
+WHERE c.lock_date IS NOT NULL
+AND c.lock_date < DATEADD(day, 30, GETDATE())
+[2025-01-07 15:28:03,102] ERROR [Remit_agent.tools.tools.generate_human_readable:167] Error generating readable response: Error code: 429 - {'error': {'message': 'Request too large for gpt-4o in organization org-aTMS7MjxSvfdz4jwm2g3y1VP on tokens per min (TPM): Limit 30000, Requested 71833. The input or output tokens must be reduced in order to run successfully. Visit https://platform.openai.com/account/rate-limits to learn more.', 'type': 'tokens', 'param': None, 'code': 'rate_limit_exceeded'}}
+[2025-01-07 15:28:03,102] INFO [Remit_agent.core.sql_agent._generate_human_readable:152] Human readable response generated successfully
+[2025-01-07 15:29:30,409] INFO [__main__.main:239] Processing question: whose customers id is going to expire soon top 10 only
+[2025-01-07 15:29:30,409] INFO [Remit_agent.core.sql_agent.run:192] Starting workflow with question: whose customers id is going to expire soon top 10 only
+[2025-01-07 15:29:30,423] INFO [Remit_agent.core.sql_agent._check_relevance:53] Checking relevance for question: whose customers id is going to expire soon top 10 only
+[2025-01-07 15:29:30,423] INFO [Remit_agent.tools.tools.check_relevance:27] Checking relevance for question: whose customers id is going to expire soon top 10 only
+[2025-01-07 15:29:32,948] INFO [Remit_agent.tools.tools.check_relevance:57] Relevance check completed: {'relevant': True, 'tables': ['dbo.customers'], 'breakdown': {'intent': 'lookup', 'entities': [], 'conditions': ['ID expiration date approaching'], 'timeframe': 'soon'}, 'explanation': 'The query is about finding customers whose ID is nearing expiration, requiring access to customer data with a focus on expiration dates.'}
+[2025-01-07 15:29:32,950] INFO [Remit_agent.core.sql_agent._check_relevance:55] Relevance check result: {'relevant': True, 'tables': ['dbo.customers'], 'breakdown': {'intent': 'lookup', 'entities': [], 'conditions': ['ID expiration date approaching'], 'timeframe': 'soon'}, 'explanation': 'The query is about finding customers whose ID is nearing expiration, requiring access to customer data with a focus on expiration dates.'}
+[2025-01-07 15:29:32,954] INFO [Remit_agent.tools.tools.convert_to_sql:95] Converting to SQL - Question: whose customers id is going to expire soon top 10 only
+[2025-01-07 15:29:32,954] INFO [Remit_agent.tools.tools.convert_to_sql:96] Context: {'relevant': True, 'tables': ['dbo.customers'], 'breakdown': {'intent': 'lookup', 'entities': [], 'conditions': ['ID expiration date approaching'], 'timeframe': 'soon'}, 'explanation': 'The query is about finding customers whose ID is nearing expiration, requiring access to customer data with a focus on expiration dates.'}
+[2025-01-07 15:29:33,155] INFO [Remit_agent.database.get_database_schema:185] Retrieved schema:
+
+Table: customers
+- id: uniqueidentifier NOT NULL (Primary Key)
+- customer_id: varchar NULL
+- full_name: varchar NULL
+- customer_type: varchar NULL
+- customer_category: varchar NULL
+- country: char NULL
+- timezone: varchar NULL
+- profile_picture: varchar NULL
+- current_status: int NULL
+- mobile_no: varchar NULL
+- user_language: varchar NULL
+- create_by: uniqueidentifier NULL
+- create_date: datetime NULL
+- update_by: uniqueidentifier NULL
+- update_date: datetime NULL
+- lock_by: varchar NULL
+- lock_date: datetime NULL
+- is_active: bit NULL
+- balance: money NULL
+- referal_code: uniqueidentifier NULL
+- enable_remittance: bit NULL
+- enable_wallet: bit NULL
+- enable_online: bit NULL
+- delete_customer: bit NULL
+- suspend_customer: bit NULL
+- approve_by: uniqueidentifier NULL
+- approve_date: datetime NULL
+- create_agent_key: uniqueidentifier NULL
+- sanction_screen: bit NULL
+- sanction_status: bit NULL
+- sanction_date: datetime NULL
+- kyc_status_by: uniqueidentifier NULL
+- kyc_status_date: datetime NULL
+- kyc_approve: bit NULL
+- referal_customer_key: uniqueidentifier NULL
+- referal_own_code: varchar NULL
+- points: money NULL
+- risk_score: int NULL
+- risk_score_detail: varchar NULL
+- self_risk_score: int NULL
+- additional_risk: int NULL
+- row_version: timestamp NOT NULL
+
+Table: remitTransactions
+- id: uniqueidentifier NOT NULL (Primary Key)
+- remit_pin_number: varchar NULL
+- send_country: varchar NULL
+- send_agent_id: uniqueidentifier NULL
+- send_agent_name: varchar NULL
+- payment_method: varchar NULL
+- transaction_type: varchar NULL
+- send_amount: money NULL
+- service_fee: money NULL
+- exchange_rate: numeric NULL
+- collect_amount: money NULL
+- send_currency: varchar NULL
+- send_ccy_buy_rate: numeric NULL
+- send_ccy_sell_rate: numeric NULL
+- send_amount_usd: money NULL
+- service_fee_usd: money NULL
+- collect_amount_usd: money NULL
+- send_commission: money NULL
+- send_commission_currency: varchar NULL
+- send_forex_gain: money NULL
+- receive_country: varchar NULL
+- receive_agent_id: uniqueidentifier NULL
+- receive_agent_name: varchar NULL
+- receive_amount: money NULL
+- receive_currency: varchar NULL
+- receive_ccy_buy_rate: numeric NULL
+- receive_ccy_sell_rate: numeric NULL
+- receive_settlement_rate: numeric NULL
+- receive_settlement_currency: varchar NULL
+- receive_settlement_amount: money NULL
+- receive_commission: money NULL
+- receive_commission_currency: varchar NULL
+- receive_forex_gain: money NULL
+- sender_id: uniqueidentifier NULL
+- sender_full_name: varchar NULL
+- sender_address_1: varchar NULL
+- sender_address_2: varchar NULL
+- sender_country: char NULL
+- source_of_income: varchar NULL
+- receiver_id: uniqueidentifier NULL
+- receiver_full_name: varchar NULL
+- receiver_address_1: varchar NULL
+- receiver_address_2: varchar NULL
+- receiver_country: char NULL
+- relation: varchar NULL
+- purpose: varchar NULL
+- tax: varchar NULL
+- tax_rate: money NULL
+- tax_fee: money NULL
+- product: varchar NULL
+- current_status: varchar NULL
+- status_date: datetime NULL
+- merchant_id: uniqueidentifier NULL
+- merchant_name: varchar NULL
+- merchant_account_number: varchar NULL
+- merchant_account_branch: varchar NULL
+- remarks: varchar NULL
+- status_by: uniqueidentifier NULL
+- aml_status: int NULL
+- sanction_status: int NULL
+- aml_remarks: nvarchar NULL
+- sanction_remarks: nvarchar NULL
+- api_response_key: varchar NULL
+- forex_margin_type: varchar NULL
+- forex_margin_value: money NULL
+- collection_type: varchar NULL
+- create_by: uniqueidentifier NULL
+- create_date: datetime NOT NULL
+- lock_by: uniqueidentifier NULL
+- lock_date: datetime NULL
+- update_by: uniqueidentifier NULL
+- update_date: datetime NULL
+- approve_by: uniqueidentifier NULL
+- approve_date: datetime NULL
+- api_response_token: nvarchar NULL
+- card_transaction_key: uniqueidentifier NULL
+- card_number: varchar NULL
+- remit_card_atm_fee: money NULL
+- own_pin_number: varchar NULL
+- campaign_code: varchar NULL
+- reward_point: money NULL
+- campaign_discount: money NULL
+- reject_reason: nvarchar NULL
+- purpose2: varchar NULL
+- agent_sno: int NULL
+- remit_serial_no: int NULL
+- row_version: timestamp NOT NULL
+- campaign_benefit: money NULL
+- process_agent_id: uniqueidentifier NULL
+- process_agent_name: varchar NULL
+- process_agent_commission: money NULL
+- process_agent_commission_currency: varchar NULL
+[2025-01-07 15:29:35,084] INFO [Remit_agent.tools.tools.convert_to_sql:110] Generated SQL query: SELECT TOP 10 
+    c.id,
+    c.customer_id,
+    c.full_name,
+    c.country,
+    c.create_date
+FROM dbo.customers c
+WHERE c.lock_date IS NOT NULL AND c.lock_date < DATEADD(day, 30, GETDATE())
+ORDER BY c.lock_date ASC
+[2025-01-07 15:29:35,084] INFO [Remit_agent.core.sql_agent._convert_to_sql:84] Generated SQL query: SELECT TOP 10 
+    c.id,
+    c.customer_id,
+    c.full_name,
+    c.country,
+    c.create_date
+FROM dbo.customers c
+WHERE c.lock_date IS NOT NULL AND c.lock_date < DATEADD(day, 30, GETDATE())
+ORDER BY c.lock_date ASC
+[2025-01-07 15:29:35,089] INFO [Remit_agent.tools.tools.execute_sql_query:119] Executing SQL query: SELECT TOP 10 
+    c.id,
+    c.customer_id,
+    c.full_name,
+    c.country,
+    c.create_date
+FROM dbo.customers c
+WHERE c.lock_date IS NOT NULL AND c.lock_date < DATEADD(day, 30, GETDATE())
+ORDER BY c.lock_date ASC
+[2025-01-07 15:29:35,388] INFO [Remit_agent.core.sql_agent._execute_sql:122] SQL query executed successfully
+[2025-01-07 15:29:35,392] INFO [Remit_agent.tools.tools.generate_human_readable:153] Generating human readable response
+[2025-01-07 15:29:35,392] INFO [Remit_agent.tools.tools.generate_human_readable:154] Input SQL: SELECT TOP 10 
+    c.id,
+    c.customer_id,
+    c.full_name,
+    c.country,
+    c.create_date
+FROM dbo.customers c
+WHERE c.lock_date IS NOT NULL AND c.lock_date < DATEADD(day, 30, GETDATE())
+ORDER BY c.lock_date ASC
+[2025-01-07 15:29:43,349] INFO [Remit_agent.tools.tools.generate_human_readable:163] Generated response: Here is a list of customers whose accounts are set to expire soon. The information is presented in order of their lock date:
+
+1. **Customer ID:** CL00000035
+   - **Name:** Sbi Remit
+   - **Country:** Japan (JP)
+   - **Account Created On:** December 5, 2021
+
+2. **Customer ID:** CL00000021
+   - **Name:** Rabi Kishan Shrestha
+   - **Country:** Japan (JP)
+   - **Account Created On:** February 14, 2022
+
+3. **Customer ID:** CL00000045
+   - **Name:** Robin Shrestha
+   - **Country:** Japan (JP)
+   - **Account Created On:** December 6, 2021
+
+4. **Customer ID:** CL00000018
+   - **Name:** Ekta Last
+   - **Country:** Japan (JP)
+   - **Account Created On:** February 14, 2022
+
+5. **Customer ID:** CL00000019
+   - **Name:** Ekta Last
+   - **Country:** Japan (JP)
+   - **Account Created On:** February 14, 2022
+
+6. **Customer ID:** CL00000047
+   - **Name:** Sir John Fatslob
+   - **Country:** Japan (JP)
+   - **Account Created On:** December 6, 2021
+
+7. **Customer ID:** CL00000022
+   - **Name:** Dipen Shrestha
+   - **Country:** Japan (JP)
+   - **Account Created On:** February 14, 2022
+
+8. **Customer ID:** RL00000051
+   - **Name:** Nepal
+   - **Country:** Nepal (NP)
+   - **Account Created On:** December 9, 2021
+
+9. **Customer ID:** CL00000063
+   - **Name:** Cat Paws
+   - **Country:** Japan (JP)
+   - **Account Created On:** December 13, 2021
+
+10. **Customer ID:** CL00000017
+    - **Name:** Ekta Last
+    - **Country:** Japan (JP)
+    - **Account Created On:** February 14, 2022
+
+These customers have accounts that are set to expire soon, and it is advisable to take necessary actions to address this.
+[2025-01-07 15:29:43,355] INFO [Remit_agent.core.sql_agent._generate_human_readable:152] Human readable response generated successfully

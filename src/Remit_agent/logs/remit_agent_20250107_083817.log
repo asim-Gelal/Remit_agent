@@ -1,0 +1,12 @@
+[2025-01-07 08:38:17,874] INFO [Remit_agent.database.get_logger:77] Logger initialized: Remit_agent.database
+[2025-01-07 08:38:20,780] INFO [Remit_agent.tools.tool_monitoring.get_logger:77] Logger initialized: Remit_agent.tools.tool_monitoring
+[2025-01-07 08:38:20,781] INFO [Remit_agent.tools.tools.get_logger:77] Logger initialized: Remit_agent.tools.tools
+[2025-01-07 08:38:21,751] INFO [Remit_agent.core.sql_agent.get_logger:77] Logger initialized: Remit_agent.core.sql_agent
+[2025-01-07 08:38:21,753] INFO [__main__.get_logger:77] Logger initialized: __main__
+[2025-01-07 08:38:22,796] INFO [Remit_agent.core.sql_agent.__init__:61] Initializing SQL Agent...
+[2025-01-07 08:38:24,153] INFO [Remit_agent.database.receive_connect:37] New database connection established
+[2025-01-07 08:38:24,238] INFO [Remit_agent.core.sql_agent.__init__:68] Database connection successful
+[2025-01-07 08:38:24,313] INFO [Remit_agent.core.sql_agent.__init__:73] SQL Agent initialized successfully
+[2025-01-07 08:38:51,614] INFO [__main__.main:249] Processing question: Show me the list of top 20 customers
+[2025-01-07 08:38:51,614] INFO [Remit_agent.core.sql_agent.run:337] Starting workflow with question: Show me the list of top 20 customers
+[2025-01-07 08:38:51,775] ERROR [Remit_agent.core.sql_agent.run:365] Error running workflow: Must write to at least one of []
